@@ -1,0 +1,133 @@
+name: botox_deals
+description: Deals in a city.
+
+# The following line prevents the package from being accidentally published to
+# pub.dev using `pub publish`. This is preferred for private packages.
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+# The following defines the version and build number for your application.
+# A version number is three numbers separated by dots, like 1.2.43
+# followed by an optional build number separated by a +.
+# Both the version and the builder number may be overridden in flutter
+# build by specifying --build-name and --build-number, respectively.
+# In Android, build-name is used as versionName while build-number used as versionCode.
+# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
+# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
+# Read more about iOS versioning at
+# https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.12.0 <3.0.0'
+
+dependencies:
+  flutter_web_plugins:
+    sdk: flutter
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  cupertino_icons: ^1.0.3
+
+  async: ^2.5.0
+
+  # GetX
+  get: ^4.1.4
+
+  # google_sign_in
+  google_sign_in: ^5.0.2
+
+  # network image
+  cached_network_image: ^3.0.0
+  
+  # Firestore
+  firebase_auth: ^1.1.3
+  firebase_core: ^1.1.0
+  cloud_firestore: ^2.0.0
+  firebase_messaging: ^9.1.3
+
+  cross_connectivity: ^3.0.2
+
+  # Maps dependencies for web
+  google_maps: ^5.1.0
+
+  # Search Bar dependencies
+  flutter_staggered_grid_view: ^0.4.0
+
+  # Share
+  share: ^2.0.1
+
+  # Auto Size Text Widget
+  auto_size_text: ^3.0.0-nullsafety.0
+
+  # Location Dependency
+  js: ^0.6.3
+
+  # Device Details
+  device_info_plus: ^1.0.1
+
+  # Alert
+  rflutter_alert: ^2.0.2
+
+  # Animated icon button
+  animated_icon_button: ^1.0.0
+  
+  # Path
+  path: ^1.8.0
+
+  # Lottie animation
+  lottie: ^1.0.1
+
+  # Fonts Package
+  google_fonts: ^2.0.0
+
+  # Pin Code Fields
+  pin_code_fields: ^7.0.0
+
+  # Dotted Borrder
+  dotted_border: ^2.0.0
+
+  flutter_multi_formatter: ^2.0.3
+  
+  url_launcher: ^6.0.3
+  flutter_sms: ^2.3.1
+  
+  path_drawing: ^0.5.1
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+# For information on the generic Dart part of this file, see the
+# following page: https://dart.dev/tools/pub/pubspec
+
+# The following section is specific to Flutter.
+flutter:
+
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
+
+  assets:
+    - assets/Images/ModelImage.jpg
+    - assets/Images/ModelImageThumb.jpg
+    - assets/Images/DealsLogo.jpg
+    - assets/Images/Facebook.png
+    - assets/Images/Instagram.png
+    - assets/Images/Twitter.png
+    - assets/Images/Youtube.png
+    - assets/Images/GoogleLogo.png
+    - assets/Images/GoogleSigninBtn.png
+    - assets/Images/SalonsPlaceHolderIcon.png
+    - assets/Images/SalonsPlaceHolder.png
+    - assets/Images/PhoneSigninBtn.png
+    - assets/Images/GoogleLogoWithClearBackGround.png
+    - assets/Images/refer.png
+    - assets/Images/MessageImage.png
+    - assets/Images/WhatsappIconImage.png
+    
+    - assets/CongratsAnimation.json
+    - assets/BackgroundSplash.json
+    
+    - assets/data.json
