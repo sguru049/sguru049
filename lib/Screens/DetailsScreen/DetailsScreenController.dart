@@ -16,9 +16,7 @@ class DetailsScreenController extends GetxController {
   RxBool hasDeals = false.obs;
   List<DealModel> deals = [];
 
-  final CurrentLocationController currentLocationController =
-      Get.put(CurrentLocationController());
-
+  final CurrentLocationController currentLocationController = Get.find();
   final UserProfileScreenController userController = Get.find();
 
   @override

@@ -6,7 +6,7 @@ import 'package:js/js.dart';
 import 'dart:math';
 
 class CurrentLocationController extends GetxController {
-  late LatLng currentLatLong;
+  LatLng currentLatLong = LatLng(0.0, 0.0);
   RxBool hasCurrentLatLong = false.obs;
 
   @override

@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Screens/Notifications/NotificationItemTile/NotificationItemTile.dart';
-import 'package:botox_deals/Screens/Notifications/NotificationsController.dart';
+import 'package:botox_deals/Screens/NotificationsScreen/NotificationItemTile/NotificationItemTile.dart';
+import 'package:botox_deals/Screens/NotificationsScreen/NotificationsController.dart';
 import 'package:botox_deals/Screens/OfflineScreen/OfflineScreen.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
@@ -10,8 +10,7 @@ import 'package:get/get.dart';
 // ignore: must_be_immutable
 class NotificationsScreen extends StatelessWidget {
   NotificationsScreen({Key? key}) : super(key: key);
-  NotificationsScreenController controller =
-      Get.put(NotificationsScreenController());
+  NotificationsScreenController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -19,24 +19,16 @@ import 'package:botox_deals/Utilities/Toast/Toast.dart';
 // ignore: must_be_immutable
 class HomScreenItemTile extends StatelessWidget {
   HomScreenItemTile(
-      {Key? key,
-      required this.model,
-      required this.currentDataType,
-      required this.homeController})
+      {Key? key, required this.model, required this.currentDataType})
       : super(key: key);
 
-  static create(AppDataModel model, TopBarButtonType type) => HomScreenItemTile(
-        model: model,
-        currentDataType: type,
-        homeController: Get.find(),
-      );
+  static create(AppDataModel model, TopBarButtonType type) =>
+      HomScreenItemTile(model: model, currentDataType: type);
 
   RxInt deals = 0.obs;
   final AppDataModel? model;
   final TopBarButtonType currentDataType;
-  final HomeScreenController? homeController;
-  final CurrentLocationController currentLocationController =
-      Get.put(CurrentLocationController());
+  final CurrentLocationController currentLocationController = Get.find();
   final UserProfileScreenController userController = Get.find();
 
   @override
@@ -118,7 +110,8 @@ class HomScreenItemTile extends StatelessWidget {
               userController.onFavButtonWhenNotLoggedIn(
                 context,
                 () {
-                  homeController!.currentNavigationBarIndex.value = 2;
+                  final HomeScreenController homeScreenController = Get.find();
+                  homeScreenController.currentNavigationBarIndex.value = 2;
                   Navigator.pop(context);
                 },
               ).show();

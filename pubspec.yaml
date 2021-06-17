@@ -128,6 +128,9 @@ flutter:
     - assets/Images/refer.png
     - assets/Images/MessageImage.png
     - assets/Images/WhatsappIconImage.png
+    - assets/Images/Sprinkles.png
+    - assets/Images/Coins.png
+    - assets/Images/BackgroundShine.png
     
     - assets/CongratsAnimation.json
     - assets/BackgroundSplash.json

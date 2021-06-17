@@ -3,7 +3,8 @@ import 'package:botox_deals/Screens/ReferralsScreen/Referrals.dart';
 import 'package:botox_deals/Screens/UserProfile/UserProfileController.dart';
 import 'package:botox_deals/Screens/DetailsScreen/DetailsScreen.dart';
 import 'package:botox_deals/Screens/HomeScreen/HomeScreen.dart';
-import 'package:botox_deals/Utilities/FortuneWheel/FortuneWheel.dart';
+import 'package:botox_deals/Services/CurrentLocationController.dart';
+import 'package:botox_deals/Screens/FortuneWheel/FortuneWheelScreen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Get.put(UserProfileScreenController());
+  Get.put(CurrentLocationController());
   runApp(MyApp());
 }
 
@@ -36,7 +38,9 @@ class MyMaterialApp extends StatelessWidget {
       initialRoute: HomeScreen.routeName,
       // initialRoute: '/', // FOR TESTING FORTUNE WHEEL
       getPages: [
-        // GetPage(name: '/', page: () => FortuneWheelScreen()), // FOR TESTING FORTUNE WHEEL
+        GetPage(
+            name: '/',
+            page: () => FortuneWheelScreen()), // FOR TESTING FORTUNE WHEEL
         HomeScreen.getPage(),
         DetailsScreen.getPage(),
         Referrals.getPage(),

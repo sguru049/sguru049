@@ -4,13 +4,14 @@ import 'package:botox_deals/Constants/StringConstants.dart';
 import 'package:botox_deals/Models/AppDataModel.dart';
 import 'package:botox_deals/Models/CityDataModel.dart';
 import 'package:botox_deals/Models/PromotionDataModel.dart';
-import 'package:botox_deals/Screens/Notifications/NotificationsController.dart';
+import 'package:botox_deals/Screens/NotificationsScreen/NotificationsController.dart';
 import 'package:botox_deals/Screens/UserProfile/UserProfileController.dart';
 import 'package:botox_deals/Services/CookieManager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:get/get.dart';
 import 'package:google_maps/google_maps.dart';
+import 'package:flutter/material.dart';
 
 enum HomePageType { list, map }
 
@@ -87,6 +88,8 @@ class HomeScreenController extends GetxController {
 
   RxBool isGettingData = true.obs;
   RxList<dynamic> homePageData = [].obs;
+  // RxInt homePageDataLength = 0.obs;
+  // ScrollController listViewController = ScrollController();
 
   Rx<AppDataModel> promotionQueueItem = AppDataModel().obs;
 
@@ -113,6 +116,10 @@ class HomeScreenController extends GetxController {
   void onInit() {
     onMessage();
     addCitiesInList();
+    // listViewController.addListener(() {
+    //   if (listViewController.position.pixels ==
+    //       listViewController.position.maxScrollExtent) {}
+    // });
     super.onInit();
   }
 
@@ -249,10 +256,13 @@ class HomeScreenController extends GetxController {
   }
 
   void getHomePageData() {
+    // getHomePageDataLength();
     FirebaseFirestore.instance
         .collection(TopBarBTFunctions.getCollectionStringValue(
             currentDataViewType.value))
         .where(kCityState, isEqualTo: selectedCityState.value)
+        //.startAfter(kName : [lastDataName])
+        // .limit(15)
         .get()
         .then((snapshot) {
       final data = snapshot.docs.map((e) => AppDataModel.fromJson(e, e.data()));
@@ -263,6 +273,18 @@ class HomeScreenController extends GetxController {
           .then((value) => isGettingData.value = false);
     });
   }
+
+  // getHomePageDataLength() {
+  //   homePageDataLength.value = 0;
+  //   FirebaseFirestore.instance
+  //       .collection(TopBarBTFunctions.getCollectionStringValue(
+  //           currentDataViewType.value))
+  //       .where(kCityState, isEqualTo: selectedCityState.value)
+  //       .get()
+  //       .then((value) {
+  //     homePageDataLength.value = value.size;
+  //   });
+  // }
 
   // Search City Screen Data
   void addCitiesInList() {

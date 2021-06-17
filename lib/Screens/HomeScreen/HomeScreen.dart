@@ -5,8 +5,8 @@ import 'package:botox_deals/Constants/ColorConstants.dart';
 import 'package:botox_deals/Constants/StringConstants.dart';
 import 'package:botox_deals/Models/NotificationsModel.dart';
 import 'package:botox_deals/Screens/HomeScreen/CitySelector/CitySelector.dart';
-import 'package:botox_deals/Screens/Notifications/NotificationItemTile/NotificationItemTile.dart';
-import 'package:botox_deals/Screens/Notifications/Notifications.dart';
+import 'package:botox_deals/Screens/NotificationsScreen/NotificationItemTile/NotificationItemTile.dart';
+import 'package:botox_deals/Screens/NotificationsScreen/Notifications.dart';
 import 'package:botox_deals/Screens/OfflineScreen/OfflineScreen.dart';
 import 'package:botox_deals/Screens/SearchScreen/SearchScreen.dart';
 import 'package:botox_deals/Screens/UserProfile/UserProfile.dart';
@@ -33,8 +33,8 @@ class HomeScreen extends StatelessWidget {
 
   static create() => HomeScreen(controller: Get.put(HomeScreenController()));
 
-  final HomeScreenController? controller;
-  const HomeScreen({Key? key, @required this.controller}) : super(key: key);
+  final HomeScreenController controller;
+  const HomeScreen({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,17 +48,17 @@ class HomeScreen extends StatelessWidget {
                 icon: Stack(children: [
                   Icon(Icons.notifications),
                   Obx(() {
-                    final hasNotification = (controller!
+                    final hasNotification = (controller
                             .notificationsScreenController
                             .hasNotifications
                             .value &&
-                        controller!.notificationsScreenController.notifications
+                        controller.notificationsScreenController.notifications
                                 .length !=
                             0);
 
                     int unReadNotificationsCount = 0;
 
-                    for (var n in controller!
+                    for (var n in controller
                         .notificationsScreenController.notifications) {
                       if (!n.isRead!.value) {
                         unReadNotificationsCount++;
@@ -96,39 +96,39 @@ class HomeScreen extends StatelessWidget {
           unselectedItemColor: cDarkGrayColor,
           showSelectedLabels: true,
           showUnselectedLabels: false,
-          currentIndex: controller!.currentNavigationBarIndex.value,
+          currentIndex: controller.currentNavigationBarIndex.value,
 
           // /// When Profile has multiple Login Type
           // onTap: (value) => controller.currentNavigationBarIndex.value = value,
 
           /// When Profile has only one Login Type
           onTap: (value) {
-            controller!.currentNavigationBarIndex.value = value;
+            controller.currentNavigationBarIndex.value = value;
             if (value == 2) {
-              controller!.userController.phoneNumberFocusNode.requestFocus();
+              controller.userController.phoneNumberFocusNode.requestFocus();
             } else {
-              controller!.userController.emptyLoginScreenControllers();
+              controller.userController.emptyLoginScreenControllers();
             }
           },
         ),
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-              (controller!.currentNavigationBarIndex.value == 0)
+              (controller.currentNavigationBarIndex.value == 0)
                   ? sHomePageTitle
-                  : (controller!.currentNavigationBarIndex.value == 1)
+                  : (controller.currentNavigationBarIndex.value == 1)
                       ? sNotificationsTitle
                       : sMyProfileTitle,
               style: GoogleFonts.comfortaa()),
           actions: [
-            (controller!.currentNavigationBarIndex.value == 0)
+            (controller.currentNavigationBarIndex.value == 0)
                 ? AnimatedIconButton(icons: [
                     AnimatedIconItem(
                         icon: Icon(Icons.pin_drop, color: cWhiteColor),
-                        onPressed: () => controller!.changeHomePageType()),
+                        onPressed: () => controller.changeHomePageType()),
                     AnimatedIconItem(
                         icon: Icon(Icons.list, color: cWhiteColor),
-                        onPressed: () => controller!.changeHomePageType())
+                        onPressed: () => controller.changeHomePageType())
                   ])
                 : SizedBox.shrink()
           ],
@@ -154,17 +154,16 @@ class HomeScreen extends StatelessWidget {
                   return Stack(
                     children: [
                       Positioned.fill(
-                        child: (controller!.currentNavigationBarIndex.value ==
-                                0)
+                        child: (controller.currentNavigationBarIndex.value == 0)
                             ? _buildMain(context)
-                            : (controller!.currentNavigationBarIndex.value == 1)
+                            : (controller.currentNavigationBarIndex.value == 1)
                                 ? NotificationsScreen()
                                 : UserProfileScreen(),
                       ),
                       _build100thUserNotification(context),
                       _buildBottomSlideNotification(
                         context,
-                        'You’re ${controller!.userController.ordinal(controller!.userController.currentUserCount)} visitor',
+                        'You’re ${controller.userController.ordinal(controller.userController.currentUserCount)} visitor',
                       )
                     ],
                   );
@@ -179,21 +178,20 @@ class HomeScreen extends StatelessWidget {
       alignment: Alignment(0.0, 0.0),
       child: AnimatedContainer(
           duration: 400.milliseconds,
-          width: controller!.userController.show100thUserNotificationInApp.value
+          width: controller.userController.show100thUserNotificationInApp.value
               ? MediaQuery.of(context).size.width - 10
               : 0,
-          height:
-              controller!.userController.show100thUserNotificationInApp.value
-                  ? MediaQuery.of(context).size.height - 120
-                  : 0,
+          height: controller.userController.show100thUserNotificationInApp.value
+              ? MediaQuery.of(context).size.height - 120
+              : 0,
           decoration: BoxDecoration(
             color: cWhiteColor,
-            boxShadow: (controller!
-                    .userController.show100thUserNotificationInApp.value)
-                ? [BoxShadow(spreadRadius: 2.0, blurRadius: 2.0)]
-                : [],
+            boxShadow:
+                (controller.userController.show100thUserNotificationInApp.value)
+                    ? [BoxShadow(spreadRadius: 2.0, blurRadius: 2.0)]
+                    : [],
           ),
-          child: controller!.userController.startAnimation.value
+          child: controller.userController.startAnimation.value
               ? Stack(
                   alignment: Alignment.topCenter,
                   children: [
@@ -201,7 +199,7 @@ class HomeScreen extends StatelessWidget {
                     Lottie.asset(jcBackgroundSplash),
                     Center(
                       child: Text(
-                        'You are the ${controller!.userController.ordinal(controller!.userController.currentUserCount)} visitor',
+                        'You are the ${controller.userController.ordinal(controller.userController.currentUserCount)} visitor',
                         style: GoogleFonts.caveat(
                           fontWeight: FontWeight.w600,
                           fontSize: 24,
@@ -251,7 +249,7 @@ class HomeScreen extends StatelessWidget {
       child: AnimatedAlign(
         duration: 1.seconds,
         alignment:
-            controller!.userController.showUserCountNotificationInApp.value
+            controller.userController.showUserCountNotificationInApp.value
                 ? Alignment(0.0, 0.98)
                 : Alignment(0.0, 1.4),
         child: Stack(
@@ -287,7 +285,7 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       onTap: () {
-        controller!.userController.showUserCountNotificationInApp.value = false;
+        controller.userController.showUserCountNotificationInApp.value = false;
       },
     );
   }
@@ -299,19 +297,19 @@ class HomeScreen extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Obx(() {
-            return (controller!.userController.user.value.bookmarked != null)
+            return (controller.userController.user.value.bookmarked != null)
                 ? GestureDetector(
                     child: TopBarButton(
                         text: sTbFavTitle,
-                        isSelected: (controller!.currentDataViewType.value ==
+                        isSelected: (controller.currentDataViewType.value ==
                                 TopBarButtonType.fav)
                             .obs),
                     onTap: () {
-                      controller!.currentDataViewType.value =
+                      controller.currentDataViewType.value =
                           TopBarButtonType.fav;
-                      if (controller!.previousDataViewType.value !=
-                          controller!.currentDataViewType.value) {
-                        controller!.getFavData();
+                      if (controller.previousDataViewType.value !=
+                          controller.currentDataViewType.value) {
+                        controller.getFavData();
                       }
                     })
                 : SizedBox.shrink();
@@ -319,71 +317,71 @@ class HomeScreen extends StatelessWidget {
           GestureDetector(
             child: TopBarButton(
                 text: sSbBotoxTitle,
-                isSelected: (controller!.currentDataViewType.value ==
+                isSelected: (controller.currentDataViewType.value ==
                         TopBarButtonType.botox)
                     .obs),
             onTap: () {
-              controller!.changeTopBarViewType(TopBarButtonType.botox);
+              controller.changeTopBarViewType(TopBarButtonType.botox);
             },
           ),
           GestureDetector(
             child: TopBarButton(
                 text: sSbWaxTitle,
-                isSelected: (controller!.currentDataViewType.value ==
+                isSelected: (controller.currentDataViewType.value ==
                         TopBarButtonType.wax)
                     .obs),
             onTap: () {
-              controller!.changeTopBarViewType(TopBarButtonType.wax);
+              controller.changeTopBarViewType(TopBarButtonType.wax);
             },
           ),
           GestureDetector(
             child: TopBarButton(
                 text: sSbTanTitle,
-                isSelected: (controller!.currentDataViewType.value ==
+                isSelected: (controller.currentDataViewType.value ==
                         TopBarButtonType.tan)
                     .obs),
             onTap: () {
-              controller!.changeTopBarViewType(TopBarButtonType.tan);
+              controller.changeTopBarViewType(TopBarButtonType.tan);
             },
           ),
           GestureDetector(
             child: TopBarButton(
                 text: sSbNailsTitle,
-                isSelected: (controller!.currentDataViewType.value ==
+                isSelected: (controller.currentDataViewType.value ==
                         TopBarButtonType.nails)
                     .obs),
             onTap: () {
-              controller!.changeTopBarViewType(TopBarButtonType.nails);
+              controller.changeTopBarViewType(TopBarButtonType.nails);
             },
           ),
           GestureDetector(
             child: TopBarButton(
                 text: sSbLashesTitle,
-                isSelected: (controller!.currentDataViewType.value ==
+                isSelected: (controller.currentDataViewType.value ==
                         TopBarButtonType.lashes)
                     .obs),
             onTap: () {
-              controller!.changeTopBarViewType(TopBarButtonType.lashes);
+              controller.changeTopBarViewType(TopBarButtonType.lashes);
             },
           ),
           GestureDetector(
             child: TopBarButton(
                 text: sSbBrowTitle,
-                isSelected: (controller!.currentDataViewType.value ==
+                isSelected: (controller.currentDataViewType.value ==
                         TopBarButtonType.brow)
                     .obs),
             onTap: () {
-              controller!.changeTopBarViewType(TopBarButtonType.brow);
+              controller.changeTopBarViewType(TopBarButtonType.brow);
             },
           ),
           GestureDetector(
             child: TopBarButton(
                 text: sSbBlowoutTitle,
-                isSelected: (controller!.currentDataViewType.value ==
+                isSelected: (controller.currentDataViewType.value ==
                         TopBarButtonType.blowout)
                     .obs),
             onTap: () {
-              controller!.changeTopBarViewType(TopBarButtonType.blowout);
+              controller.changeTopBarViewType(TopBarButtonType.blowout);
             },
           ),
         ]),
@@ -408,60 +406,58 @@ class HomeScreen extends StatelessWidget {
             onTap: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return SearchScreen(
-                    currentDataType: controller!.currentDataViewType.value);
+                    currentDataType: controller.currentDataViewType.value);
               }));
             }),
         Spacer(),
-        if (controller!.currentDataViewType.value != TopBarButtonType.fav)
+        if (controller.currentDataViewType.value != TopBarButtonType.fav)
           Container(
-              alignment: Alignment.center,
-              height: 30,
-              padding: EdgeInsets.only(left: 20),
-              child: AutoSizeText(
-                  // ignore: invalid_use_of_protected_member
-                  '${controller!.homePageData.length} ${TopBarBTFunctions.getTopBarTitleText(controller!.currentDataViewType.value)} in ')),
-        if (controller!.currentDataViewType.value != TopBarButtonType.fav)
+            alignment: Alignment.center,
+            height: 30,
+            padding: EdgeInsets.only(left: 20),
+            child: AutoSizeText(
+                '${controller.homePageData.length} ${TopBarBTFunctions.getTopBarTitleText(controller.currentDataViewType.value)} in '),
+          ),
+        if (controller.currentDataViewType.value != TopBarButtonType.fav)
           Container(
             alignment: Alignment.center,
             height: 30,
             padding: EdgeInsets.only(right: 20),
             child: GestureDetector(
-              child: AutoSizeText(controller!.selectedCityState.value,
+              child: AutoSizeText(controller.selectedCityState.value,
                   style: kBlueTextTheme.copyWith(
                       fontWeight: FontWeight.w600,
                       decoration: TextDecoration.underline)),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => CitySelector.create()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CitySelector()));
               },
             ),
           )
       ]),
 
       // Main View
-      (controller!.isGettingData.value)
+      (controller.isGettingData.value)
           ? Expanded(child: Center(child: CircularProgressIndicator()))
           : Expanded(
               child: AnimatedSwitcher(
               duration: Duration(milliseconds: 333),
               switchInCurve: Curves.easeIn,
               switchOutCurve: Curves.easeInOut,
-              child: (controller!.homePageType.value == HomePageType.list)
-                  ? HomeScreenList.create()
-                  : HomeScreenMap.create(),
+              child: (controller.homePageType.value == HomePageType.list)
+                  ? HomeScreenList()
+                  : HomeScreenMap(),
             ))
     ]);
   }
 
   void onCliamTapped(BuildContext context) {
-    controller!.userController.show100thUserNotificationInApp.value = false;
-    controller!.userController.startAnimation.value = false;
-    controller!.addInWinnerList();
-    if (controller!.userController.hasUser.value) {
+    controller.userController.show100thUserNotificationInApp.value = false;
+    controller.userController.startAnimation.value = false;
+    controller.addInWinnerList();
+    if (controller.userController.hasUser.value) {
       HttpServices().sendSms(
-        to: controller!.userController.user.value.phoneNo,
+        to: controller.userController.user.value.phoneNo,
         message: sClaimButtonSmsMessage,
       );
     } else {
@@ -493,7 +489,7 @@ class HomeScreen extends StatelessWidget {
                         child: Text(sCancel,
                             style: kWhiteTextTheme.copyWith(fontSize: 14)),
                         onPressed: () {
-                          controller!.currentNavigationBarIndex.value = 2;
+                          controller.currentNavigationBarIndex.value = 2;
                           Navigator.pop(context);
                         }),
                     DialogButton(
@@ -507,7 +503,7 @@ class HomeScreen extends StatelessWidget {
           DialogButton(
               child: Text(sOk, style: kWhiteTextTheme.copyWith(fontSize: 14)),
               onPressed: () {
-                controller!.currentNavigationBarIndex.value = 2;
+                controller.currentNavigationBarIndex.value = 2;
                 Navigator.pop(context);
               }),
         ],

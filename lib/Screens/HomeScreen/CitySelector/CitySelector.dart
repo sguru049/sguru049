@@ -9,11 +9,7 @@ import 'package:get/get.dart';
 import '../HomeScreenController.dart';
 
 class CitySelector extends StatelessWidget {
-  final HomeScreenController? controller;
-
-  const CitySelector({Key? key, @required this.controller}) : super(key: key);
-
-  static create() => CitySelector(controller: Get.find());
+  final HomeScreenController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +18,7 @@ class CitySelector extends StatelessWidget {
             leading: IconButton(
                 icon: Icon(Icons.arrow_back),
                 onPressed: () {
-                  controller!.searchedText.value = '';
+                  controller.searchedText.value = '';
                   Get.back();
                 }),
             centerTitle: true,
@@ -36,10 +32,10 @@ class CitySelector extends StatelessWidget {
               return Center(child: Text(sPleaseTryAgain));
             },
             onCancelled: () {
-              controller!.searchedText.value = '';
+              controller.searchedText.value = '';
             },
             onSearch: (text) async {
-              controller!.searchedText.value = text ?? '';
+              controller.searchedText.value = text ?? '';
               return FirebaseFirestore.instance
                   .collection(kUsCitiesCollectionkey)
                   .where(kCityState, isGreaterThan: text!.toUpperCase())
@@ -59,24 +55,24 @@ class CitySelector extends StatelessWidget {
                       padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                       child: Text(value,
                           style: kBlueTextTheme.copyWith(fontSize: 16))),
-                  onTap: () => controller!.updateSelectedCity(value));
+                  onTap: () => controller.updateSelectedCity(value));
             },
             emptyWidget: Obx(() {
-              return (controller!.searchedText.value.length == 0)
-                  ? (controller!.hasEmptyCitiesData.value)
+              return (controller.searchedText.value.length == 0)
+                  ? (controller.hasEmptyCitiesData.value)
                       ? ListView.builder(
-                          itemCount: controller!.emptyCitiesData.length,
+                          itemCount: controller.emptyCitiesData.length,
                           itemBuilder: (buildContext, index) {
                             return GestureDetector(
                                 child: Padding(
                                     padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
                                     child: Text(
-                                        controller!
+                                        controller
                                             .emptyCitiesData[index].cityState!,
                                         style: kBlueTextTheme.copyWith(
                                             fontSize: 16))),
-                                onTap: () => controller!.updateSelectedCity(
-                                    controller!
+                                onTap: () => controller.updateSelectedCity(
+                                    controller
                                         .emptyCitiesData[index].cityState!));
                           },
                         )

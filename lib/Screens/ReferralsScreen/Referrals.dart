@@ -22,8 +22,8 @@ class Referrals extends StatelessWidget {
 
   static create() => Referrals(controller: Get.put(ReferralsController()));
 
-  final ReferralsController? controller;
-  const Referrals({Key? key, this.controller}) : super(key: key);
+  final ReferralsController controller;
+  const Referrals({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +88,7 @@ class Referrals extends StatelessWidget {
           dashPattern: const <double>[5, 3],
           child: TextField(
             textAlign: TextAlign.center,
-            controller: controller!.referralCodeController,
+            controller: controller.referralCodeController,
             readOnly: true,
             decoration: new InputDecoration(
               suffixIcon: IconButton(
@@ -96,7 +96,7 @@ class Referrals extends StatelessWidget {
                 splashRadius: 20,
                 onPressed: () {
                   Clipboard.setData(
-                      ClipboardData(text: controller!.referralCode));
+                      ClipboardData(text: controller.referralCode));
                   showToast(context, sCodeCopied, gravity: Toast.bottom);
                 },
               ),
@@ -118,7 +118,7 @@ class Referrals extends StatelessWidget {
               child: Image.asset(icWhatsappIconImage), width: 40, height: 40),
           onTap: () async {
             await launch(
-                'https://api.whatsapp.com/send?text=${controller!.msg}');
+                'https://api.whatsapp.com/send?text=${controller.msg}');
           },
         ),
         Spacer(),
@@ -128,7 +128,7 @@ class Referrals extends StatelessWidget {
           child: Container(
               child: Image.asset(icMessageImage), width: 40, height: 40),
           onTap: () {
-            sendSMS(message: controller!.msg, recipients: ['']);
+            sendSMS(message: controller.msg, recipients: ['']);
           },
         ),
         Spacer(flex: 2),

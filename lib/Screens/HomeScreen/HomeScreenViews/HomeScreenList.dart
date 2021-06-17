@@ -8,21 +8,19 @@ import 'package:get/get.dart';
 import '../HomeScreenController.dart';
 
 class HomeScreenList extends StatelessWidget {
-  final HomeScreenController? controller;
-  const HomeScreenList({Key? key, @required this.controller}) : super(key: key);
+  final HomeScreenController controller = Get.find();
 
-  static create() => HomeScreenList(controller: Get.find());
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return (controller!.homePageData.isEmpty)
+      return (controller.homePageData.isEmpty)
           ? placeHolderWidget(context)
           : listViewWidget(context);
     });
   }
 
   Widget placeHolderWidget(BuildContext context) {
-    final currentDataType = controller!.currentDataViewType.value;
+    final currentDataType = controller.currentDataViewType.value;
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -65,11 +63,12 @@ class HomeScreenList extends StatelessWidget {
   }
 
   Widget listViewWidget(BuildContext context) {
-    final currentDataType = controller!.currentDataViewType.value;
+    final currentDataType = controller.currentDataViewType.value;
     return Scrollbar(
       child: RefreshIndicator(
         child: ListView.builder(
-            itemCount: controller!.homePageData.length,
+            // controller: controller.listViewController,
+            itemCount: controller.homePageData.length,
             itemBuilder: (context, index) {
               return Container(
                 color: cBackGroundColor,
@@ -80,12 +79,12 @@ class HomeScreenList extends StatelessWidget {
                           return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                if (controller!.promotionQueueItem.value.name !=
+                                if (controller.promotionQueueItem.value.name !=
                                     null)
                                   Stack(
                                     children: [
                                       HomScreenItemTile.create(
-                                        controller!.promotionQueueItem.value,
+                                        controller.promotionQueueItem.value,
                                         currentDataType,
                                       ),
                                       Positioned(
@@ -102,25 +101,25 @@ class HomeScreenList extends StatelessWidget {
                                     ],
                                   ),
                                 HomScreenItemTile.create(
-                                  controller!.homePageData[index],
+                                  controller.homePageData[index],
                                   currentDataType,
                                 ),
                               ]);
                         }),
                       )
                     : HomScreenItemTile.create(
-                        controller!.homePageData[index],
+                        controller.homePageData[index],
                         currentDataType,
                       ),
               );
             }),
         onRefresh: () {
-          if (controller!.currentDataViewType.value == TopBarButtonType.fav) {
+          if (controller.currentDataViewType.value == TopBarButtonType.fav) {
             return Future.delayed(Duration(milliseconds: 300)).then((value) {
-              controller!.getFavData();
+              controller.getFavData();
             });
           } else {
-            return controller!.updatePromotionQueueItem();
+            return controller.updatePromotionQueueItem();
           }
         },
       ),

@@ -17,6 +17,9 @@ const icPhoneLoginBtn = 'assets/Images/PhoneLoginBtn.png';
 const icRefer = 'assets/Images/refer.png';
 const icMessageImage = 'assets/Images/MessageImage.png';
 const icWhatsappIconImage = 'assets/Images/WhatsappIconImage.png';
+const icSprinkle = 'assets/Images/Sprinkles.png';
+const icCoins = 'assets/Images/Coins.png';
+const icBackgroundShine = 'assets/Images/BackgroundShine.png';
 
 const jcCongratsAnimation = 'assets/CongratsAnimation.json';
 const jcBackgroundSplash = 'assets/BackgroundSplash.json';

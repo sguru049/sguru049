@@ -27,23 +27,18 @@ class DetailsScreen extends StatelessWidget {
       title: 'details',
       transition: Transition.cupertino);
 
-  static create() => DetailsScreen(
-        controller: Get.put(DetailsScreenController()),
-        homeController: Get.find(),
-      );
-  final DetailsScreenController? controller;
-  final HomeScreenController? homeController;
+  static create() =>
+      DetailsScreen(controller: Get.put(DetailsScreenController()));
+  final DetailsScreenController controller;
 
-  DetailsScreen({Key? key, this.controller, @required this.homeController})
-      : super(key: key);
+  DetailsScreen({Key? key, required this.controller}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: Obx(
-            () =>
-                Text((controller!.hasData.value) ? controller!.data.name! : ''),
+            () => Text((controller.hasData.value) ? controller.data.name! : ''),
           ),
           centerTitle: true,
           actions: [
@@ -60,7 +55,7 @@ class DetailsScreen extends StatelessWidget {
         body: Container(
           height: max(500, MediaQuery.of(context).size.height),
           child: SingleChildScrollView(child: Obx(() {
-            return (controller!.hasData.value)
+            return (controller.hasData.value)
                 ? Column(children: [
                     _buildMain(context),
                     _buildDeals(context),
@@ -85,10 +80,10 @@ class DetailsScreen extends StatelessWidget {
                   right: 10,
                   bottom: 10,
                   top: 10,
-                  child: Image.network(controller!.data.imageUrl!,
+                  child: Image.network(controller.data.imageUrl!,
                       errorBuilder: (context, error, stackTrace) {
                     return Image.asset(
-                        (controller!.dataType == kBotoxCollectionKey)
+                        (controller.dataType == kBotoxCollectionKey)
                             ? icModelImage
                             : icSalonsPlaceHolder,
                         fit: BoxFit.fitWidth,
@@ -129,22 +124,23 @@ class DetailsScreen extends StatelessWidget {
           return IconButton(
             padding: EdgeInsets.all(2),
             icon: Icon(
-              (controller!.userController.user.value.bookmarked != null)
-                  ? (controller!.userController.user.value.bookmarked!
-                          .contains(controller!.data.docRef))
+              (controller.userController.user.value.bookmarked != null)
+                  ? (controller.userController.user.value.bookmarked!
+                          .contains(controller.data.docRef))
                       ? Icons.favorite
                       : Icons.favorite_border
                   : Icons.favorite_border,
               color: cPinkColor,
             ),
             onPressed: () {
-              if (controller!.userController.user.value.bookmarked != null) {
-                controller!.userController
-                    .onFavButtonWhenLoggedIn(controller!.data.docRef);
+              if (controller.userController.user.value.bookmarked != null) {
+                controller.userController
+                    .onFavButtonWhenLoggedIn(controller.data.docRef);
               } else {
-                controller!.userController.onFavButtonWhenNotLoggedIn(context,
+                controller.userController.onFavButtonWhenNotLoggedIn(context,
                     () {
-                  homeController!.currentNavigationBarIndex.value = 2;
+                  final HomeScreenController homeController = Get.find();
+                  homeController.currentNavigationBarIndex.value = 2;
                   // For Alert Pop
                   Navigator.pop(context);
 
@@ -165,14 +161,14 @@ class DetailsScreen extends StatelessWidget {
       children: [
         Expanded(
           flex: 3,
-          child: AutoSizeText(controller!.data.name!,
+          child: AutoSizeText(controller.data.name!,
               maxFontSize: kTextFieldFontSize,
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 16.0),
               maxLines: 1),
         ),
         Expanded(
           flex: 2,
-          child: AutoSizeText(controller!.data.address!,
+          child: AutoSizeText(controller.data.address!,
               maxFontSize: 14.0,
               style: TextStyle(color: cDarkGrayColor),
               maxLines: 1),
@@ -181,8 +177,8 @@ class DetailsScreen extends StatelessWidget {
           flex: 2,
           child: Obx(() {
             return AutoSizeText(
-                (controller!.currentLocationController.hasCurrentLatLong.value)
-                    ? "${double.parse((SphericalUtil.computeDistanceBetween(controller!.currentLocationController.currentLatLong, LatLng(controller!.data.latitude as double?, controller!.data.longitude as double?)) * 0.000621372).toStringAsFixed(2))} miles away"
+                (controller.currentLocationController.hasCurrentLatLong.value)
+                    ? "${double.parse((SphericalUtil.computeDistanceBetween(controller.currentLocationController.currentLatLong, LatLng(controller.data.latitude as double?, controller.data.longitude as double?)) * 0.000621372).toStringAsFixed(2))} miles away"
                     : '',
                 maxFontSize: 14.0,
                 style: TextStyle(color: cDarkGrayColor));
@@ -199,14 +195,14 @@ class DetailsScreen extends StatelessWidget {
               ),
             ),
             Obx(() {
-              return (controller!.hasDeals.value)
+              return (controller.hasDeals.value)
                   ? Expanded(
                       child: Container(
                           alignment: Alignment.centerLeft,
                           child: AutoSizeText(
-                            (controller!.deals.length == 1)
-                                ? "${controller!.deals.length} deal available"
-                                : "${controller!.deals.length} deals available",
+                            (controller.deals.length == 1)
+                                ? "${controller.deals.length} deal available"
+                                : "${controller.deals.length} deals available",
                             textAlign: TextAlign.start,
                             maxFontSize: 14.0,
                             style: TextStyle(color: cAppThemeColor),
@@ -226,7 +222,7 @@ class DetailsScreen extends StatelessWidget {
     return ButtonBar(
       buttonPadding: EdgeInsets.all(0),
       children: [
-        if (controller!.data.socialLinks![kFb].isNotEmpty)
+        if (controller.data.socialLinks![kFb].isNotEmpty)
           IconButton(
             splashRadius: 20,
             iconSize: 20,
@@ -234,42 +230,42 @@ class DetailsScreen extends StatelessWidget {
             icon: Image.asset(icFacebookLogo),
             onPressed: () {
               Get.to(
-                Facebook(controller!.data.socialLinks![kFb][0]),
+                Facebook(controller.data.socialLinks![kFb][0]),
                 fullscreenDialog: true,
                 transition: Transition.cupertino,
               );
             },
           ),
-        if (controller!.data.socialLinks![kInsta].isNotEmpty)
+        if (controller.data.socialLinks![kInsta].isNotEmpty)
           IconButton(
             splashRadius: 20,
             iconSize: 20,
             padding: EdgeInsets.all(4),
             icon: Image.asset(icInstagramLogo),
             onPressed: () {
-              window.open(controller!.data.socialLinks![kInsta][0], kInsta);
+              window.open(controller.data.socialLinks![kInsta][0], kInsta);
             },
           ),
-        if (controller!.data.socialLinks![kTwitter].isNotEmpty)
+        if (controller.data.socialLinks![kTwitter].isNotEmpty)
           IconButton(
             splashRadius: 20,
             iconSize: 20,
             padding: EdgeInsets.all(4),
             icon: Image.asset(icTwitterLogo),
             onPressed: () => Get.to(
-              Twitter(controller!.data.socialLinks![kTwitter][0]),
+              Twitter(controller.data.socialLinks![kTwitter][0]),
               fullscreenDialog: true,
               transition: Transition.cupertino,
             ),
           ),
-        if ((controller!.data.socialLinks![kYoutube].isNotEmpty))
+        if ((controller.data.socialLinks![kYoutube].isNotEmpty))
           IconButton(
             splashRadius: 20,
             iconSize: 20,
             padding: EdgeInsets.all(4),
             icon: Image.asset(icYoutubeLogo),
             onPressed: () {
-              window.open(controller!.data.socialLinks![kYoutube][0], kYoutube);
+              window.open(controller.data.socialLinks![kYoutube][0], kYoutube);
             },
           ),
       ],
@@ -280,11 +276,11 @@ class DetailsScreen extends StatelessWidget {
     return Container(
       height: max(250, (MediaQuery.of(context).size.height * 0.5) - 60),
       child: Obx(() {
-        return (controller!.hasDeals.value)
+        return (controller.hasDeals.value)
             ? ListView.builder(
-                itemCount: controller!.deals.length,
+                itemCount: controller.deals.length,
                 itemBuilder: (context, index) =>
-                    DealTileWidget(deal: controller!.deals[index]),
+                    DealTileWidget(deal: controller.deals[index]),
               )
             : Center(child: CircularProgressIndicator());
       }),
