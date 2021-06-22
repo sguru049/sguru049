@@ -2,22 +2,22 @@
 import 'dart:html';
 import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:botox_deals/Assets/DataConstants.dart';
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Constants/KeysConstants.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
-import 'package:botox_deals/Screens/DetailsScreen/DealTile/dealTile.dart';
-import 'package:botox_deals/Screens/HomeScreen/HomeScreenController.dart';
-import 'package:botox_deals/Utilities/AppTheme.dart';
-import 'package:botox_deals/Utilities/LatLng/LatLng.dart';
-import 'package:botox_deals/Utilities/SphericalUtil/SphericalUtil.dart';
+import 'package:beauty_spin/Assets/DataConstants.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Screens/DetailsScreen/DealTile/dealTile.dart';
+import 'package:beauty_spin/Screens/HomeScreen/HomeScreenController.dart';
+import 'package:beauty_spin/Utilities/AppTheme.dart';
+import 'package:beauty_spin/Utilities/LatLng/LatLng.dart';
+import 'package:beauty_spin/Utilities/SphericalUtil/SphericalUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'DetailsScreenController.dart';
 import 'SocialScreens/facebook.dart';
 import 'SocialScreens/twitter.dart';
-import 'package:botox_deals/Utilities/Toast/Toast.dart';
+import 'package:beauty_spin/Utilities/Toast/Toast.dart';
 
 class DetailsScreen extends StatelessWidget {
   static const routeName = '/:dataType/details/:user';

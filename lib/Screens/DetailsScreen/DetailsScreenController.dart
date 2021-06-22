@@ -1,9 +1,9 @@
-import 'package:botox_deals/Constants/KeysConstants.dart';
-import 'package:botox_deals/Models/AppDataModel.dart';
-import 'package:botox_deals/Models/DealsModel.dart';
-import 'package:botox_deals/Screens/PageNotFond/PageNotFound.dart';
-import 'package:botox_deals/Screens/UserProfile/UserProfileController.dart';
-import 'package:botox_deals/Services/CurrentLocationController.dart';
+import 'package:beauty_spin/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Models/AppDataModel.dart';
+import 'package:beauty_spin/Models/DealsModel.dart';
+import 'package:beauty_spin/Screens/PageNotFond/PageNotFound.dart';
+import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
+import 'package:beauty_spin/Services/CurrentLocationController.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 

@@ -1,11 +1,11 @@
 import 'dart:html';
 import 'dart:math';
-import 'package:botox_deals/Assets/DataConstants.dart';
-import 'package:botox_deals/Constants/KeysConstants.dart';
-import 'package:botox_deals/Models/AppDataModel.dart';
-import 'package:botox_deals/Screens/HomeScreen/HomeScreenItemTile/HomScreenItemTile.dart';
-import 'package:botox_deals/Services/HtmlEmbed.dart';
-import 'package:botox_deals/Utilities/GeoPointsHash/point.dart';
+import 'package:beauty_spin/Assets/DataConstants.dart';
+import 'package:beauty_spin/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Models/AppDataModel.dart';
+import 'package:beauty_spin/Screens/HomeScreen/HomeScreenItemTile/HomScreenItemTile.dart';
+import 'package:beauty_spin/Services/HtmlEmbed.dart';
+import 'package:beauty_spin/Utilities/GeoPointsHash/point.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

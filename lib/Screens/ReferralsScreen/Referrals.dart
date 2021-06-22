@@ -7,10 +7,10 @@ import 'package:flutter_sms/flutter_sms.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:botox_deals/Assets/DataConstants.dart';
-import 'package:botox_deals/Utilities/Toast/Toast.dart';
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
+import 'package:beauty_spin/Assets/DataConstants.dart';
+import 'package:beauty_spin/Utilities/Toast/Toast.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
 
 class Referrals extends StatelessWidget {
   static const routeName = '/referral';

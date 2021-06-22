@@ -1,10 +1,10 @@
 import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:botox_deals/Assets/DataConstants.dart';
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Screens/DailyStreakAlert/DailyStreakAlert.dart';
-import 'package:botox_deals/Screens/FortuneWheel/FortuneWheelController.dart';
-import 'package:botox_deals/Services/HtmlEmbed.dart';
+import 'package:beauty_spin/Assets/DataConstants.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Screens/DailyStreakAlert/DailyStreakAlert.dart';
+import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelController.dart';
+import 'package:beauty_spin/Services/HtmlEmbed.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,5 @@
-import 'package:botox_deals/Services/location_js.dart';
-import 'package:botox_deals/Utilities/LatLng/LatLng.dart';
+import 'package:beauty_spin/Services/location_js.dart';
+import 'package:beauty_spin/Utilities/LatLng/LatLng.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:js/js.dart';

@@ -1,6 +1,6 @@
 // ignore: avoid_web_libraries_in_flutter
 import 'dart:html' as html;
-import 'package:botox_deals/Constants/StringConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
 
 class CookieManager {
   static addToCookie(String key, String value) {

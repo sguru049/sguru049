@@ -1,8 +1,8 @@
-import 'package:botox_deals/Constants/KeysConstants.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
-import 'package:botox_deals/Models/UserModel.dart';
-import 'package:botox_deals/Screens/UserProfile/UserProfileController.dart';
-import 'package:botox_deals/Services/CookieManager.dart';
+import 'package:beauty_spin/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Models/UserModel.dart';
+import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
+import 'package:beauty_spin/Services/CookieManager.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -94,10 +94,11 @@ class LogInSignUpScreenController extends GetxController {
   void verifyPhoneAndGetUser() {
     final result = confirmationResult;
     if (userController.isNoEntered.value &&
-        userController.otpController.text.length == 6) {
+        userController.otpController.text.length == 6 &&
+        result != null) {
       showLoader.value = true;
       final credentials = PhoneAuthProvider.credential(
-          verificationId: result!.verificationId,
+          verificationId: result.verificationId,
           smsCode: userController.otpController.text);
       auth.signInWithCredential(credentials).then((value) {
         CookieManager.addToCookie(skUserAccessToken, value.user!.uid);

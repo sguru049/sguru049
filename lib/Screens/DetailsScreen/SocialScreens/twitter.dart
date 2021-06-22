@@ -1,7 +1,7 @@
 import 'dart:html';
 import 'package:flutter/material.dart';
-import 'package:botox_deals/Services/HtmlEmbed.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
+import 'package:beauty_spin/Services/HtmlEmbed.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
 
 // ignore: must_be_immutable
 class Twitter extends StatefulWidget {

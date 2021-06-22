@@ -1,9 +1,9 @@
 import 'dart:math';
 import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:botox_deals/Assets/DataConstants.dart';
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Utilities/BorderText/BorderText.dart';
+import 'package:beauty_spin/Assets/DataConstants.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Utilities/BorderText/BorderText.dart';
 import 'package:flutter/material.dart';
 
 class DailyStreakAlert extends StatelessWidget {
@@ -21,7 +21,7 @@ class DailyStreakAlert extends StatelessWidget {
                 border: Border.all(color: Colors.yellow, width: 2.5),
                 borderRadius: BorderRadius.circular(10),
                 gradient: LinearGradient(
-                  colors: [Colors.blue.shade800, Colors.blue.shade400],
+                  colors: [cAppThemeColor, cPinkColor],
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                 ),
@@ -41,7 +41,7 @@ class DailyStreakAlert extends StatelessWidget {
                         children: List.generate(9, (index) {
                           return DailyStreakItem(
                             dayCount: index + 1,
-                            selectedIndex: 2,
+                            selectedIndex: 7,
                           );
                         }),
                       ),
@@ -60,15 +60,12 @@ class DailyStreakAlert extends StatelessWidget {
                       child: MaterialButton(
                         child: Container(
                           decoration: BoxDecoration(
-                              color: Colors.blue.shade800,
+                              color: cPinkColor,
                               border:
                                   Border.all(color: Colors.yellow, width: 2.5),
                               borderRadius: BorderRadius.circular(10),
                               gradient: LinearGradient(
-                                colors: [
-                                  Colors.blue.shade800,
-                                  Colors.blue.shade400
-                                ],
+                                colors: [cAppThemeColor, cPinkColor],
                                 begin: Alignment.bottomCenter,
                                 end: Alignment.topCenter,
                               ),
@@ -102,10 +99,10 @@ class DailyStreakAlert extends StatelessWidget {
               top: -20,
               child: Container(
                   decoration: BoxDecoration(
-                      color: Colors.blue.shade800,
+                      color: cPinkColor,
                       border: Border.all(color: Colors.yellow, width: 2.5),
                       gradient: LinearGradient(
-                        colors: [Colors.blue.shade800, Colors.blue.shade400],
+                        colors: [cAppThemeColor, cPinkColor],
                         begin: Alignment.bottomCenter,
                         end: Alignment.topCenter,
                       ),
@@ -149,7 +146,7 @@ class DailyStreakItem extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border.all(color: Colors.yellow, width: 2.5),
         borderRadius: BorderRadius.circular(10),
-        color: (selectedIndex == dayCount) ? Colors.purple : Colors.transparent,
+        color: (selectedIndex == dayCount) ? Colors.teal : Colors.transparent,
       ),
       child: Column(
         children: [
@@ -159,7 +156,6 @@ class DailyStreakItem extends StatelessWidget {
             margin: EdgeInsets.symmetric(horizontal: 10),
             padding: EdgeInsets.all(4),
             decoration: BoxDecoration(
-                color: Colors.blue.shade400,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black45,
@@ -167,7 +163,9 @@ class DailyStreakItem extends StatelessWidget {
                   )
                 ],
                 gradient: LinearGradient(
-                  colors: [Colors.blue.shade500, Colors.blue.shade700],
+                  colors: (selectedIndex == dayCount)
+                      ? [Colors.teal.shade200, Colors.teal]
+                      : [cAppThemeColor, cPinkColor],
                   end: Alignment.topCenter,
                   begin: Alignment.bottomCenter,
                 )),
@@ -205,13 +203,15 @@ class DailyStreakItem extends StatelessWidget {
                 )
               ],
               gradient: LinearGradient(
-                colors: [Colors.blue.shade500, Colors.blue.shade700],
+                colors: (selectedIndex == dayCount)
+                    ? [Colors.teal.shade200, Colors.teal]
+                    : [cAppThemeColor, cPinkColor],
                 end: Alignment.centerLeft,
                 begin: Alignment.centerRight,
               ),
             ),
             child: AutoSizeText(
-              ' +${dayCount * 100} BC ',
+              ' +${dayCount * 100} ',
               maxLines: 1,
               style: TextStyle(
                 color: Colors.white,

@@ -1,20 +1,20 @@
 import 'dart:math';
-import 'package:botox_deals/Assets/DataConstants.dart';
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Models/AppDataModel.dart';
-import 'package:botox_deals/Screens/UserProfile/UserProfileController.dart';
-import 'package:botox_deals/Services/CurrentLocationController.dart';
-import 'package:botox_deals/Utilities/AppTheme.dart';
-import 'package:botox_deals/Utilities/LatLng/LatLng.dart';
-import 'package:botox_deals/Utilities/SphericalUtil/SphericalUtil.dart';
+import 'package:beauty_spin/Assets/DataConstants.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Models/AppDataModel.dart';
+import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
+import 'package:beauty_spin/Services/CurrentLocationController.dart';
+import 'package:beauty_spin/Utilities/AppTheme.dart';
+import 'package:beauty_spin/Utilities/LatLng/LatLng.dart';
+import 'package:beauty_spin/Utilities/SphericalUtil/SphericalUtil.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:botox_deals/Constants/KeysConstants.dart';
-import 'package:botox_deals/Models/DealsModel.dart';
+import 'package:beauty_spin/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Models/DealsModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import '../HomeScreenController.dart';
-import 'package:botox_deals/Utilities/Toast/Toast.dart';
+import 'package:beauty_spin/Utilities/Toast/Toast.dart';
 
 // ignore: must_be_immutable
 class HomScreenItemTile extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:botox_deals/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Constants/KeysConstants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class PromotionDataModel {

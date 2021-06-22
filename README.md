@@ -1,4 +1,4 @@
-# botox_deals
+# beauty_spin
 
 A new Flutter project.
 

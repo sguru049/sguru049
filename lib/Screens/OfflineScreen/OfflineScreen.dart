@@ -1,5 +1,5 @@
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
 import 'package:flutter/material.dart';
 
 class OfflineScreen extends StatelessWidget {

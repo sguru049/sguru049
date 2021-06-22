@@ -1,8 +1,8 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Screens/NotificationsScreen/NotificationItemTile/NotificationItemTile.dart';
-import 'package:botox_deals/Screens/NotificationsScreen/NotificationsController.dart';
-import 'package:botox_deals/Screens/OfflineScreen/OfflineScreen.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Screens/NotificationsScreen/NotificationItemTile/NotificationItemTile.dart';
+import 'package:beauty_spin/Screens/NotificationsScreen/NotificationsController.dart';
+import 'package:beauty_spin/Screens/OfflineScreen/OfflineScreen.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:botox_deals/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:flutter/material.dart';
 
 final double kNormalFontSize = 12;

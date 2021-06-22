@@ -1,7 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
-import 'package:botox_deals/Screens/LoginScreen/LogInSignUpScreenController.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Screens/LoginScreen/LogInSignUpScreenController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:get/get.dart';

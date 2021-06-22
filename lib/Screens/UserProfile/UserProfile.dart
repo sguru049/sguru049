@@ -1,15 +1,15 @@
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
-import 'package:botox_deals/Screens/HomeScreen/HomeScreenController.dart';
-import 'package:botox_deals/Screens/LoginScreen/PhoneLoginScreen/PhoneLoginAndSignupScreen.dart';
-import 'package:botox_deals/Screens/OfflineScreen/OfflineScreen.dart';
-import 'package:botox_deals/Screens/UserProfile/UserProfileController.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Screens/HomeScreen/HomeScreenController.dart';
+import 'package:beauty_spin/Screens/LoginScreen/PhoneLoginScreen/PhoneLoginAndSignupScreen.dart';
+import 'package:beauty_spin/Screens/OfflineScreen/OfflineScreen.dart';
+import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:botox_deals/Utilities/Toast/Toast.dart';
+import 'package:beauty_spin/Utilities/Toast/Toast.dart';
 // import 'package:botox_deals/Screens/LoginScreen/LogInSignUpScreen.dart';
 
 class UserProfileScreen extends StatelessWidget {

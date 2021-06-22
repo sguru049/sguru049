@@ -1,8 +1,8 @@
-import 'package:botox_deals/Constants/KeysConstants.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
-import 'package:botox_deals/Models/CityDataModel.dart';
-import 'package:botox_deals/Utilities/AppTheme.dart';
-import 'package:botox_deals/Utilities/SearchBar/SearchBar.dart';
+import 'package:beauty_spin/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Models/CityDataModel.dart';
+import 'package:beauty_spin/Utilities/AppTheme.dart';
+import 'package:beauty_spin/Utilities/SearchBar/SearchBar.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

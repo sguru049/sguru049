@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:get/get_connect/connect.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
 
 class HttpServices extends GetConnect {
   // Send Notifications in app using firebase rest api

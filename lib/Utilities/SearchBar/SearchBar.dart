@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:async/async.dart';
-import 'package:botox_deals/Utilities/SearchBar/ScaledTile.dart';
+import 'package:beauty_spin/Utilities/SearchBar/ScaledTile.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/material.dart';
 

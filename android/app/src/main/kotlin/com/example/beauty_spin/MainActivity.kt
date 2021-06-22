@@ -1,4 +1,4 @@
-package com.example.botox_deals
+package com.example.beauty_spin
 
 import io.flutter.embedding.android.FlutterActivity
 

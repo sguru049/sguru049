@@ -1,6 +1,10 @@
 {
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  },
   "hosting": {
-    "site": "devbeautideals",
+    "site": "beautyspin",
     "public": "build/web",
     "ignore": [
       "firebase.json",

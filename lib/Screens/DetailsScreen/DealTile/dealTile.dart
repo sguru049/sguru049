@@ -1,10 +1,10 @@
-import 'package:botox_deals/Constants/ColorConstants.dart';
-import 'package:botox_deals/Constants/StringConstants.dart';
-import 'package:botox_deals/Models/DealsModel.dart';
-import 'package:botox_deals/Utilities/AppTheme.dart';
+import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Models/DealsModel.dart';
+import 'package:beauty_spin/Utilities/AppTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:botox_deals/Utilities/Toast/Toast.dart';
+import 'package:beauty_spin/Utilities/Toast/Toast.dart';
 
 class DealTileWidget extends StatelessWidget {
   final DealModel deal;
