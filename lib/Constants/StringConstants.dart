@@ -10,7 +10,7 @@ const sSbBlowoutTitle = 'Blowouts';
 const sTbFavTitle = 'Favourites';
 
 // Screens Titles
-const sHomePageTitle = 'Beauty Spin';
+const sHomePageTitle = 'BeautySpin';
 const sMyProfileTitle = 'My Profile';
 const sSearchScreenTitle = 'Search';
 const sFacebookScreenTitle = 'Facebook';
@@ -21,6 +21,7 @@ const sNotificationsTitle = 'Notifications';
 const sPhoneSignUpScreenTitle = 'Connect with Phone';
 const sPhoneLoginScreenTitle = 'Login with Phone No';
 const sReferScreenTitle = 'Refer & Earn';
+const sSpin2WinTitle = 'Spin and Win';
 
 // Search screen
 const sSearchScreenHintText = 'Search by name';
@@ -58,6 +59,7 @@ const sAllowButtonText = 'Allow ';
 const sHomeButtonLabel = 'Home';
 const sNotificationsLabel = 'Notifications';
 const sProfileButtonLabel = 'Profile';
+const sSpin2WinLabel = 'Spin2Win';
 
 // Http
 const sContentType = 'Content-Type';

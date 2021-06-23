@@ -63,28 +63,28 @@ class FortuneWheelScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  left: 20,
-                  right: 20,
-                  top: 10,
-                  child: Row(
-                    children: [
-                      AutoSizeText(
-                        'Spin and Win',
-                        style: TextStyle(
-                          fontWeight: FontWeight.w600,
-                          backgroundColor: Colors.white.withOpacity(0.6),
-                        ),
-                      ),
-                      Spacer(),
-                      IconButton(
-                          icon: Icon(
-                            Icons.close,
-                          ),
-                          onPressed: () {}),
-                    ],
-                  ),
-                ),
+                // Positioned(
+                //   left: 20,
+                //   right: 20,
+                //   top: 10,
+                //   child: Row(
+                //     children: [
+                //       AutoSizeText(
+                //         'Spin and Win',
+                //         style: TextStyle(
+                //           fontWeight: FontWeight.w600,
+                //           backgroundColor: Colors.white.withOpacity(0.6),
+                //         ),
+                //       ),
+                //       Spacer(),
+                //       IconButton(
+                //           icon: Icon(
+                //             Icons.close,
+                //           ),
+                //           onPressed: () {}),
+                //     ],
+                //   ),
+                // ),
               ],
             ),
           ),

@@ -20,6 +20,7 @@ const icWhatsappIconImage = 'assets/Images/WhatsappIconImage.png';
 const icSprinkle = 'assets/Images/Sprinkles.png';
 const icCoins = 'assets/Images/Coins.png';
 const icBackgroundShine = 'assets/Images/BackgroundShine.png';
+const icSpin2Win = 'assets/Images/Spin2Win.png';
 
 const jcCongratsAnimation = 'assets/CongratsAnimation.json';
 const jcBackgroundSplash = 'assets/BackgroundSplash.json';

@@ -132,6 +132,7 @@ flutter:
     - assets/Images/Sprinkles.png
     - assets/Images/Coins.png
     - assets/Images/BackgroundShine.png
+    - assets/Images/Spin2Win.png
     
     - assets/CongratsAnimation.json
     - assets/BackgroundSplash.json

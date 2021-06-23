@@ -4,15 +4,14 @@ import 'package:beauty_spin/Assets/DataConstants.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Constants/StringConstants.dart';
 import 'package:beauty_spin/Models/NotificationsModel.dart';
+import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelScreen.dart';
 import 'package:beauty_spin/Screens/HomeScreen/CitySelector/CitySelector.dart';
-import 'package:beauty_spin/Screens/NotificationsScreen/NotificationItemTile/NotificationItemTile.dart';
 import 'package:beauty_spin/Screens/NotificationsScreen/Notifications.dart';
 import 'package:beauty_spin/Screens/OfflineScreen/OfflineScreen.dart';
 import 'package:beauty_spin/Screens/SearchScreen/SearchScreen.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfile.dart';
 import 'package:beauty_spin/Services/HttpServices/HttpServices.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -44,6 +43,10 @@ class HomeScreen extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home), label: sHomeButtonLabel),
+            BottomNavigationBarItem(
+                icon: Image.asset(icSpin2Win, width: 24, height: 24),
+                // icon: Icon(Icons.card_giftcard),
+                label: sSpin2WinLabel),
             BottomNavigationBarItem(
                 icon: Stack(children: [
                   Icon(Icons.notifications),
@@ -91,6 +94,7 @@ class HomeScreen extends StatelessWidget {
             BottomNavigationBarItem(
                 icon: Icon(Icons.person), label: sProfileButtonLabel)
           ],
+          type: BottomNavigationBarType.fixed,
           backgroundColor: cAppThemeColor,
           selectedItemColor: cWhiteColor,
           unselectedItemColor: cDarkGrayColor,
@@ -104,7 +108,7 @@ class HomeScreen extends StatelessWidget {
           /// When Profile has only one Login Type
           onTap: (value) {
             controller.currentNavigationBarIndex.value = value;
-            if (value == 2) {
+            if (value == 3) {
               controller.userController.phoneNumberFocusNode.requestFocus();
             } else {
               controller.userController.emptyLoginScreenControllers();
@@ -117,8 +121,10 @@ class HomeScreen extends StatelessWidget {
               (controller.currentNavigationBarIndex.value == 0)
                   ? sHomePageTitle
                   : (controller.currentNavigationBarIndex.value == 1)
-                      ? sNotificationsTitle
-                      : sMyProfileTitle,
+                      ? sSpin2WinTitle
+                      : (controller.currentNavigationBarIndex.value == 2)
+                          ? sNotificationsTitle
+                          : sMyProfileTitle,
               style: GoogleFonts.comfortaa()),
           actions: [
             (controller.currentNavigationBarIndex.value == 0)
@@ -157,14 +163,17 @@ class HomeScreen extends StatelessWidget {
                         child: (controller.currentNavigationBarIndex.value == 0)
                             ? _buildMain(context)
                             : (controller.currentNavigationBarIndex.value == 1)
-                                ? NotificationsScreen()
-                                : UserProfileScreen(),
+                                ? FortuneWheelScreen()
+                                : (controller.currentNavigationBarIndex.value ==
+                                        2)
+                                    ? NotificationsScreen()
+                                    : UserProfileScreen(),
                       ),
                       _build100thUserNotification(context),
-                      _buildBottomSlideNotification(
-                        context,
-                        'You’re ${controller.userController.ordinal(controller.userController.currentUserCount)} visitor',
-                      )
+                      // _buildBottomSlideNotification(
+                      //   context,
+                      //   'You’re ${controller.userController.ordinal(controller.userController.currentUserCount)} visitor',
+                      // )
                     ],
                   );
                 });
@@ -178,16 +187,16 @@ class HomeScreen extends StatelessWidget {
       alignment: Alignment(0.0, 0.0),
       child: AnimatedContainer(
           duration: 400.milliseconds,
-          width: controller.userController.show100thUserNotificationInApp.value
+          width: controller.userController.showWinnerNotificationInApp.value
               ? MediaQuery.of(context).size.width - 10
               : 0,
-          height: controller.userController.show100thUserNotificationInApp.value
+          height: controller.userController.showWinnerNotificationInApp.value
               ? MediaQuery.of(context).size.height - 120
               : 0,
           decoration: BoxDecoration(
             color: cWhiteColor,
             boxShadow:
-                (controller.userController.show100thUserNotificationInApp.value)
+                (controller.userController.showWinnerNotificationInApp.value)
                     ? [BoxShadow(spreadRadius: 2.0, blurRadius: 2.0)]
                     : [],
           ),
@@ -243,52 +252,52 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildBottomSlideNotification(BuildContext context,
-      [String title = '', String body = sKeepVisitingUs]) {
-    return GestureDetector(
-      child: AnimatedAlign(
-        duration: 1.seconds,
-        alignment:
-            controller.userController.showUserCountNotificationInApp.value
-                ? Alignment(0.0, 0.98)
-                : Alignment(0.0, 1.4),
-        child: Stack(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.95,
-              decoration: BoxDecoration(
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey[400]!,
-                    spreadRadius: 1.5,
-                    blurRadius: 0.75,
-                  )
-                ],
-              ),
-              child: NotificationItemTile(
-                  notification: NotificationModel(
-                    title: title,
-                    body: body,
-                    isRead: false.obs,
-                    creationTS: Timestamp.now(),
-                  ),
-                  isRead: false.obs),
-            ),
-            Positioned.fill(
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.95,
-                height: 50,
-                color: Colors.transparent,
-              ),
-            ),
-          ],
-        ),
-      ),
-      onTap: () {
-        controller.userController.showUserCountNotificationInApp.value = false;
-      },
-    );
-  }
+  // Widget _buildBottomSlideNotification(BuildContext context,
+  //     [String title = '', String body = sKeepVisitingUs]) {
+  //   return GestureDetector(
+  //     child: AnimatedAlign(
+  //       duration: 1.seconds,
+  //       alignment:
+  //           controller.userController.showUserCountNotificationInApp.value
+  //               ? Alignment(0.0, 0.98)
+  //               : Alignment(0.0, 1.4),
+  //       child: Stack(
+  //         children: [
+  //           Container(
+  //             width: MediaQuery.of(context).size.width * 0.95,
+  //             decoration: BoxDecoration(
+  //               boxShadow: [
+  //                 BoxShadow(
+  //                   color: Colors.grey[400]!,
+  //                   spreadRadius: 1.5,
+  //                   blurRadius: 0.75,
+  //                 )
+  //               ],
+  //             ),
+  //             child: NotificationItemTile(
+  //                 notification: NotificationModel(
+  //                   title: title,
+  //                   body: body,
+  //                   isRead: false.obs,
+  //                   creationTS: Timestamp.now(),
+  //                 ),
+  //                 isRead: false.obs),
+  //           ),
+  //           Positioned.fill(
+  //             child: Container(
+  //               width: MediaQuery.of(context).size.width * 0.95,
+  //               height: 50,
+  //               color: Colors.transparent,
+  //             ),
+  //           ),
+  //         ],
+  //       ),
+  //     ),
+  //     onTap: () {
+  //       controller.userController.showUserCountNotificationInApp.value = false;
+  //     },
+  //   );
+  // }
 
   Widget _buildMain(BuildContext context) {
     return Column(children: [
@@ -452,7 +461,7 @@ class HomeScreen extends StatelessWidget {
   }
 
   void onCliamTapped(BuildContext context) {
-    controller.userController.show100thUserNotificationInApp.value = false;
+    controller.userController.showWinnerNotificationInApp.value = false;
     controller.userController.startAnimation.value = false;
     controller.addInWinnerList();
     if (controller.userController.hasUser.value) {

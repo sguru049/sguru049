@@ -31,13 +31,11 @@ class MyMaterialApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       theme: ThemeData(appBarTheme: AppBarTheme(color: cAppThemeColor)),
-      title: 'Beauty Spin',
+      title: 'BeautySpin',
       enableLog: false,
       popGesture: true,
       initialRoute: HomeScreen.routeName,
-      // initialRoute: '/', // FOR TESTING FORTUNE WHEEL
       getPages: [
-        // GetPage(name: '/', page: () => FortuneWheelScreen()), // FOR TESTING FORTUNE WHEEL
         HomeScreen.getPage(),
         DetailsScreen.getPage(),
         Referrals.getPage(),

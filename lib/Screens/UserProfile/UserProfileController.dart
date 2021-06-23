@@ -39,9 +39,9 @@ class UserProfileScreenController extends GetxController {
   Map<String, dynamic> deviceData = <String, dynamic>{};
 
   // Show Notification In App
-  RxBool show100thUserNotificationInApp = false.obs;
+  RxBool showWinnerNotificationInApp = false.obs;
   RxBool startAnimation = false.obs;
-  RxBool showUserCountNotificationInApp = false.obs;
+  // RxBool showUserCountNotificationInApp = false.obs;
   int currentUserCount = 0;
 
   RxBool showToast = false.obs;
@@ -92,7 +92,7 @@ class UserProfileScreenController extends GetxController {
           if (docs.isNotEmpty) {
             final SessionModel requierdSession = docs.first;
             // // Show 100th User Notifications in app
-            show100thUserNotificationInApp.value = true;
+            showWinnerNotificationInApp.value = true;
             Future.delayed(800.milliseconds).then((value) {
               startAnimation.value = true;
             });
@@ -122,13 +122,14 @@ class UserProfileScreenController extends GetxController {
             );
           }
         });
-      } else {
-        // // Show Notifications in app
-        showUserCountNotificationInApp.value = true;
-        Future.delayed(10.seconds).then((value) {
-          showUserCountNotificationInApp.value = false;
-        });
       }
+      // else {
+      // // Show Notifications in app
+      // showUserCountNotificationInApp.value = true;
+      // Future.delayed(10.seconds).then((value) {
+      //   showUserCountNotificationInApp.value = false;
+      // });
+      // }
     });
   }
 
