@@ -26,7 +26,7 @@ class CurrentLocationController extends GetxController {
     return ((value * mod).round().toDouble() / mod);
   }
 
-  success(GeolocationPosition pos) {
+  Function success(GeolocationPosition pos) {
     try {
       final double lat = roundDouble(pos.coords.latitude, 7);
       final double long = roundDouble(pos.coords.longitude, 7);
@@ -35,5 +35,6 @@ class CurrentLocationController extends GetxController {
     } catch (ex) {
       print("Exception thrown : " + ex.toString());
     }
+    return () {};
   }
 }

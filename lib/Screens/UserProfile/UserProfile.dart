@@ -5,6 +5,7 @@ import 'package:beauty_spin/Screens/HomeScreen/HomeScreenController.dart';
 import 'package:beauty_spin/Screens/LoginScreen/PhoneLoginScreen/PhoneLoginAndSignupScreen.dart';
 import 'package:beauty_spin/Screens/OfflineScreen/OfflineScreen.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
+import 'package:beauty_spin/Screens/UserProfile/WalletScreen/WalletScreen.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -116,19 +117,35 @@ class UserProfileScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Spacer(),
-        Padding(
-          padding: EdgeInsets.all(20),
-          child: (controller.user.value.photoUrl == null)
-              ? buildImageOnError(context)
-              : ClipOval(
-                  child: Image.network(
-                  controller.user.value.photoUrl!,
-                  width: 100,
-                  height: 100,
-                  fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) =>
-                      buildImageOnError(context),
-                )),
+        GestureDetector(
+          child: Container(
+            decoration: BoxDecoration(
+              border: Border.all(width: 2, color: cAppThemeColor),
+              borderRadius: BorderRadius.circular(50),
+              boxShadow: [
+                BoxShadow(
+                  color: cAppThemeColor,
+                  blurRadius: 1,
+                )
+              ],
+            ),
+            margin: EdgeInsets.all(20),
+            child: (controller.user.value.photoUrl == null)
+                ? buildImageOnError(context)
+                : ClipOval(
+                    child: Image.network(
+                    controller.user.value.photoUrl!,
+                    width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) =>
+                        buildImageOnError(context),
+                  )),
+          ),
+          onTap: () => Get.toNamed(WalletScreen.routeName, arguments: {
+            'accountBal': controller.user.value.accountBal!.value,
+            'docId': controller.user.value.walletId,
+          }),
         ),
         AutoSizeText(controller.user.value.name!,
             textAlign: TextAlign.center,
@@ -189,13 +206,7 @@ class UserProfileScreen extends StatelessWidget {
   Widget buildImageOnError(BuildContext context) {
     return ClipOval(
       child: Container(
-        decoration: BoxDecoration(color: cWhiteColor, boxShadow: [
-          BoxShadow(
-            color: cAppThemeColor,
-            spreadRadius: 3,
-            blurRadius: 1.5,
-          )
-        ]),
+        color: cWhiteColor,
         width: 100,
         height: 100,
         alignment: Alignment.center,

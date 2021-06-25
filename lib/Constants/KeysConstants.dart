@@ -24,6 +24,8 @@ const kVisitorsCounterDocKey = 'visitorsDoc';
 const kVisitors = 'visitors';
 const kNotifyOnCount = 'notifyOnCount';
 
+const kWalletListKey = 'usersWallets';
+
 // Promotion Queue FireBaseKeys
 const kpId = 'id';
 const kpQueued = 'queued';
@@ -82,6 +84,18 @@ const kUCreationTS = 'creationTS';
 const kUBookmarked = 'bookmarked';
 const kUPhoneNo = 'phoneNo';
 const kUCountryCode = 'countryCode';
+const kUWalletId = 'walletId';
+const kUWalletBalance = 'walletBalance';
+
+// Wallet Keys
+const kWalletCreationTS = 'creationTS';
+const kWalletBalance = 'balance';
+const kWalletLinkedWith = 'linkedWith';
+const kWalletTransactions = 'transactions';
+
+const kWalletTransactionOn = 'transactionOn';
+const kWalletTransactionType = 'transactionType';
+const kWalletTransactionAmount = 'transactionAmount';
 
 // Session Keys
 const kSAccessToken = 'accessToken';

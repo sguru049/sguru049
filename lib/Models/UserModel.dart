@@ -12,6 +12,8 @@ class UserModel {
   String? countryCode;
   String? phoneNo;
   RxList<dynamic>? bookmarked;
+  RxDouble? accountBal;
+  String? walletId;
 
   UserModel({
     this.docId,
@@ -23,6 +25,8 @@ class UserModel {
     this.bookmarked,
     this.countryCode,
     this.phoneNo,
+    this.accountBal,
+    this.walletId,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -35,6 +39,8 @@ class UserModel {
         photoUrl: json[kUPhotoUrl],
         createdAt: json[kUCreationTS],
         bookmarked: (json[kUBookmarked] as List).obs,
+        accountBal: (json[kUWalletBalance] as double).obs,
+        walletId: json[kUWalletId],
       );
 
   Map<String, dynamic> toJson() => {

@@ -18,7 +18,7 @@ class FortuneWheelScreenController extends GetxController {
 
   List<FortuneWheelListItem> wheelScreenOptions = [
     FortuneWheelListItem(name: 'How to play', onTap: () {}),
-    FortuneWheelListItem(name: 'Daily streak', onTap: () {}),
+    FortuneWheelListItem(name: 'Terms & conditions', onTap: () {}),
     FortuneWheelListItem(name: 'View ad to get another chance', onTap: () {}),
   ];
 

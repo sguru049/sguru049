@@ -114,11 +114,11 @@ class FortuneWheelScreen extends StatelessWidget {
                             //         ),
                             //       );
                             //     });
-                            showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return DailyStreakAlert();
-                                });
+                            // showDialog(
+                            //     context: context,
+                            //     builder: (BuildContext context) {
+                            //       return DailyStreakAlert();
+                            //     });
                           }),
                     );
                   },

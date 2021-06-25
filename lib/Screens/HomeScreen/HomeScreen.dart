@@ -3,8 +3,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:beauty_spin/Assets/DataConstants.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Constants/StringConstants.dart';
-import 'package:beauty_spin/Models/NotificationsModel.dart';
-import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelScreen.dart';
+// import 'package:beauty_spin/Models/NotificationsModel.dart';
+// import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelScreen.dart';
 import 'package:beauty_spin/Screens/HomeScreen/CitySelector/CitySelector.dart';
 import 'package:beauty_spin/Screens/NotificationsScreen/Notifications.dart';
 import 'package:beauty_spin/Screens/OfflineScreen/OfflineScreen.dart';
@@ -43,10 +43,10 @@ class HomeScreen extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
                 icon: Icon(Icons.home), label: sHomeButtonLabel),
-            BottomNavigationBarItem(
-                icon: Image.asset(icSpin2Win, width: 24, height: 24),
-                // icon: Icon(Icons.card_giftcard),
-                label: sSpin2WinLabel),
+            // BottomNavigationBarItem(
+            //     icon: Image.asset(icSpin2Win, width: 24, height: 24),
+            //     // icon: Icon(Icons.card_giftcard),
+            //     label: sSpin2WinLabel),
             BottomNavigationBarItem(
                 icon: Stack(children: [
                   Icon(Icons.notifications),
@@ -121,10 +121,10 @@ class HomeScreen extends StatelessWidget {
               (controller.currentNavigationBarIndex.value == 0)
                   ? sHomePageTitle
                   : (controller.currentNavigationBarIndex.value == 1)
-                      ? sSpin2WinTitle
-                      : (controller.currentNavigationBarIndex.value == 2)
-                          ? sNotificationsTitle
-                          : sMyProfileTitle,
+                      // ? sSpin2WinTitle
+                      // : (controller.currentNavigationBarIndex.value == 2)
+                      ? sNotificationsTitle
+                      : sMyProfileTitle,
               style: GoogleFonts.comfortaa()),
           actions: [
             (controller.currentNavigationBarIndex.value == 0)
@@ -163,11 +163,11 @@ class HomeScreen extends StatelessWidget {
                         child: (controller.currentNavigationBarIndex.value == 0)
                             ? _buildMain(context)
                             : (controller.currentNavigationBarIndex.value == 1)
-                                ? FortuneWheelScreen()
-                                : (controller.currentNavigationBarIndex.value ==
-                                        2)
-                                    ? NotificationsScreen()
-                                    : UserProfileScreen(),
+                                // ? FortuneWheelScreen()
+                                // : (controller.currentNavigationBarIndex.value ==
+                                //         2)
+                                ? NotificationsScreen()
+                                : UserProfileScreen(),
                       ),
                       _build100thUserNotification(context),
                       // _buildBottomSlideNotification(

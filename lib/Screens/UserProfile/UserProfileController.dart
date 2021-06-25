@@ -203,10 +203,11 @@ class UserProfileScreenController extends GetxController {
         if (user.value.name == null) {
           nameFocusNode.requestFocus();
           hasUserName.value = false;
-        }
-        if (user.value.name!.length >= 3) {
-          hasUserName.value = true;
-          checkIsWinnerListHasUser();
+        } else {
+          if (user.value.name!.length >= 3) {
+            hasUserName.value = true;
+            checkIsWinnerListHasUser();
+          }
         }
       }
     });
@@ -244,6 +245,14 @@ class UserProfileScreenController extends GetxController {
     FirebaseFirestore.instance
         .collection(kUserCollectionKey)
         .add({}).then((value) {
+      // adding wallet
+      FirebaseFirestore.instance.collection(kWalletListKey).doc(value.id).set({
+        kWalletLinkedWith: value.id,
+        kWalletBalance: 0.0,
+        kWalletTransactions: [],
+        kWalletCreationTS: Timestamp.now(),
+      });
+      //
       switch (type) {
         case UserType.Google:
           updateSessionToGoogle(value.id);
@@ -256,7 +265,9 @@ class UserProfileScreenController extends GetxController {
             kUCreationTS: Timestamp.now(),
             kUBookmarked: [],
             kUPhoneNo: null,
-            kUCountryCode: null
+            kUCountryCode: null,
+            kUWalletId: value.id,
+            kUWalletBalance: 0.0,
           }).then((value) {
             getUser(CookieManager.getCookie(skUserAccessToken));
             isUserSignedIn.value = true;
@@ -275,6 +286,8 @@ class UserProfileScreenController extends GetxController {
             kUName: null,
             kUPhoneNo: phoneSignInNo,
             kUCountryCode: sCountryCode,
+            kUWalletId: value.id,
+            kUWalletBalance: 0.0,
           }).then((value) {
             getUser(CookieManager.getCookie(skUserAccessToken));
             isUserSignedIn.value = true;

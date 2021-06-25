@@ -13,7 +13,8 @@ class DailyStreakAlert extends StatelessWidget {
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
         child: Stack(
-          overflow: Overflow.visible,
+          // overflow: Overflow.visible,
+          clipBehavior: Clip.none,
           alignment: Alignment.topCenter,
           children: [
             Container(

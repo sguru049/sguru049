@@ -148,8 +148,8 @@ const sEnterName = 'Enter your name';
 const sLogOut = 'Log out';
 const sYes = 'Yes';
 const sNo = 'No';
-// Contry Code For prod
-const sCountryCode = '+1';
+// // Contry Code For prod
+// const sCountryCode = '+1';
 
-// // Contry Code For Dev
-// const sCountryCode = '+91';
+// Contry Code For Dev
+const sCountryCode = '+91';

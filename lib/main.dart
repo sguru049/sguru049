@@ -3,6 +3,7 @@ import 'package:beauty_spin/Screens/ReferralsScreen/Referrals.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
 import 'package:beauty_spin/Screens/DetailsScreen/DetailsScreen.dart';
 import 'package:beauty_spin/Screens/HomeScreen/HomeScreen.dart';
+import 'package:beauty_spin/Screens/UserProfile/WalletScreen/WalletScreen.dart';
 import 'package:beauty_spin/Services/CurrentLocationController.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -35,8 +36,10 @@ class MyMaterialApp extends StatelessWidget {
       enableLog: false,
       popGesture: true,
       initialRoute: HomeScreen.routeName,
+      // initialRoute: WalletScreen.routeName,
       getPages: [
         HomeScreen.getPage(),
+        WalletScreen.getPage(),
         DetailsScreen.getPage(),
         Referrals.getPage(),
         PageNotFound.getPage(),
