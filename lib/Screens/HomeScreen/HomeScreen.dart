@@ -12,6 +12,7 @@ import 'package:beauty_spin/Screens/SearchScreen/SearchScreen.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfile.dart';
 import 'package:beauty_spin/Services/HttpServices/HttpServices.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
+import 'package:beauty_spin/Utilities/CommonFunctions.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -504,7 +505,7 @@ class HomeScreen extends StatelessWidget {
                     DialogButton(
                       child: Text(sOk,
                           style: kWhiteTextTheme.copyWith(fontSize: 14)),
-                      onPressed: () => navigator!.pop(),
+                      onPressed: () => Navigator.pop(context),
                     ),
                   ],
                 ).show();

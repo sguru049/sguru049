@@ -6,6 +6,7 @@ import 'package:beauty_spin/Screens/LoginScreen/PhoneLoginScreen/PhoneLoginAndSi
 import 'package:beauty_spin/Screens/OfflineScreen/OfflineScreen.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
 import 'package:beauty_spin/Screens/UserProfile/WalletScreen/WalletScreen.dart';
+import 'package:beauty_spin/Utilities/BorderText/BorderText.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -117,36 +118,37 @@ class UserProfileScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Spacer(),
-        GestureDetector(
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(width: 2, color: cAppThemeColor),
-              borderRadius: BorderRadius.circular(50),
-              boxShadow: [
-                BoxShadow(
-                  color: cAppThemeColor,
-                  blurRadius: 1,
-                )
-              ],
-            ),
-            margin: EdgeInsets.all(20),
-            child: (controller.user.value.photoUrl == null)
-                ? buildImageOnError(context)
-                : ClipOval(
-                    child: Image.network(
-                    controller.user.value.photoUrl!,
-                    width: 100,
-                    height: 100,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        buildImageOnError(context),
-                  )),
+        // GestureDetector(
+        //   child:
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(width: 2, color: cAppThemeColor),
+            borderRadius: BorderRadius.circular(50),
+            boxShadow: [
+              BoxShadow(
+                color: cAppThemeColor,
+                blurRadius: 1,
+              )
+            ],
           ),
-          onTap: () => Get.toNamed(WalletScreen.routeName, arguments: {
-            'accountBal': controller.user.value.accountBal!.value,
-            'docId': controller.user.value.walletId,
-          }),
+          margin: EdgeInsets.all(20),
+          child: (controller.user.value.photoUrl == null)
+              ? buildImageOnError(context)
+              : ClipOval(
+                  child: Image.network(
+                  controller.user.value.photoUrl!,
+                  width: 100,
+                  height: 100,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      buildImageOnError(context),
+                )),
         ),
+        //   onTap: () => Get.toNamed(WalletScreen.routeName, arguments: {
+        //     'accountBal': controller.user.value.accountBal!.value,
+        //     'docId': controller.user.value.walletId,
+        //   }),
+        // ),
         AutoSizeText(controller.user.value.name!,
             textAlign: TextAlign.center,
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25)),
@@ -156,6 +158,22 @@ class UserProfileScreen extends StatelessWidget {
                 ? controller.user.value.phoneNo!
                 : controller.user.value.email!,
             textAlign: TextAlign.center),
+        Spacer(),
+        // Row(
+        //   mainAxisAlignment: MainAxisAlignment.center,
+        //   crossAxisAlignment: CrossAxisAlignment.center,
+        //   children: [
+        BorderedText(
+          child: AutoSizeText(
+            'Beauty Coins : ${controller.user.value.accountBal}',
+            style: TextStyle(
+              fontSize: 20,
+              color: cWhiteColor,
+            ),
+          ),
+        ),
+        //   ],
+        // ),
         Spacer(),
         GestureDetector(
             child: Container(
@@ -210,12 +228,15 @@ class UserProfileScreen extends StatelessWidget {
         width: 100,
         height: 100,
         alignment: Alignment.center,
-        child: Text(
-          controller.user.value.name!.characters.first,
-          style: TextStyle(
-            color: cAppThemeColor,
-            fontSize: 30,
-            fontWeight: FontWeight.w800,
+        child: BorderedText(
+          strokeColor: cAppThemeColor,
+          child: AutoSizeText(
+            controller.user.value.name!.characters.first,
+            style: TextStyle(
+              color: cWhiteColor,
+              fontSize: 30,
+              fontWeight: FontWeight.w800,
+            ),
           ),
         ),
       ),

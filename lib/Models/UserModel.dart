@@ -14,6 +14,9 @@ class UserModel {
   RxList<dynamic>? bookmarked;
   RxDouble? accountBal;
   String? walletId;
+  // it can be null
+  int streakValue;
+  Timestamp? lastStreakAddedOn;
 
   UserModel({
     this.docId,
@@ -27,6 +30,8 @@ class UserModel {
     this.phoneNo,
     this.accountBal,
     this.walletId,
+    required this.streakValue,
+    this.lastStreakAddedOn,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -41,6 +46,8 @@ class UserModel {
         bookmarked: (json[kUBookmarked] as List).obs,
         accountBal: (json[kUWalletBalance] as double).obs,
         walletId: json[kUWalletId],
+        streakValue: json[kUStreakValue] ?? 0,
+        lastStreakAddedOn: json[kULastStreakAddedOn] ?? DateTime.now(),
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,5 +60,9 @@ class UserModel {
         kUPhotoUrl: photoUrl,
         kUCreationTS: createdAt,
         kUBookmarked: bookmarked,
+        kUWalletBalance: accountBal,
+        kUWalletId: walletId,
+        kUStreakValue: streakValue,
+        kULastStreakAddedOn: lastStreakAddedOn,
       };
 }

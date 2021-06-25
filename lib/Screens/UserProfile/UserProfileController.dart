@@ -4,8 +4,10 @@ import 'package:beauty_spin/Constants/StringConstants.dart';
 import 'package:beauty_spin/Models/SessionModel.dart';
 import 'package:beauty_spin/Models/UserModel.dart';
 import 'package:beauty_spin/Models/WinnerDBModel.dart';
+import 'package:beauty_spin/Screens/DailyStreakAlert/DailyStreakAlert.dart';
 import 'package:beauty_spin/Services/CookieManager.dart';
 import 'package:beauty_spin/Services/HttpServices/HttpServices.dart';
+import 'package:beauty_spin/Utilities/CommonFunctions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -33,7 +35,7 @@ class UserProfileScreenController extends GetxController {
   RxBool isUserSignedIn = false.obs;
   RxBool hasUser = false.obs;
   RxBool hasUserName = false.obs;
-  Rx<UserModel> user = UserModel().obs;
+  Rx<UserModel> user = UserModel(streakValue: 0).obs;
 
   static final DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
   Map<String, dynamic> deviceData = <String, dynamic>{};
@@ -53,6 +55,9 @@ class UserProfileScreenController extends GetxController {
   FocusNode otpFocusNode = FocusNode();
 
   RxBool isNoEntered = false.obs;
+  bool isAlertOpened = false;
+
+  int dailyPrizeIncrement = 100;
   //
 
   @override
@@ -61,7 +66,108 @@ class UserProfileScreenController extends GetxController {
     getDeviceDetails();
     if (isUserSignedIn.value)
       getUser(CookieManager.getCookie(skUserAccessToken));
+    hasToShowStreakAlert();
     super.onInit();
+  }
+
+  hasToShowStreakAlert() {
+    final lastShown = CookieManager.getCookie(kULastStreakAddedOn);
+    if (lastShown.isNotEmpty) {
+      final DateTime streakDate = DateTime.parse(lastShown);
+      if (streakDate.day == DateTime.now().day &&
+          streakDate.month == DateTime.now().month &&
+          streakDate.year == DateTime.now().year) {
+        print('Today\'s streak already done');
+      } else {
+        showAlert();
+      }
+    } else {
+      showAlert();
+    }
+  }
+
+  showAlert() {
+    for (var i = 3; i >= 1; i--) {
+      Future.delayed(5.seconds).then((value) {
+        if (Get.context != null && !isAlertOpened) {
+          showDialog(
+              context: Get.context!,
+              builder: (BuildContext context) {
+                return DailyStreakAlert(
+                  dailyPrizeMultiplier: dailyPrizeIncrement,
+                  currentPosition:
+                      CurrentStreakPostion.values[user.value.streakValue],
+                  onClaim: () {
+                    Navigator.pop(context);
+                    if (hasUser.value) {
+                      addStreak();
+                      addTransaction();
+                    } else {
+                      CommonFunctions.onClaimIfUserNotLoggedIn(context);
+                    }
+                  },
+                );
+              });
+          isAlertOpened = true;
+        }
+      });
+    }
+  }
+
+  void addStreak() {
+    final doc = FirebaseFirestore.instance
+        .collection(kUserCollectionKey)
+        .doc(user.value.docId);
+    doc.get().then((value) {
+      if (value.data() != null) {
+        final currentCount = value.data()![kUStreakValue];
+        if (currentCount != null) {
+          doc.update({
+            kUStreakValue: currentCount + 1,
+            kULastStreakAddedOn: Timestamp.now(),
+          });
+          CookieManager.addToCookie(
+              kULastStreakAddedOn, DateTime.now().toString());
+        }
+      }
+    });
+  }
+
+  void addTransaction() {
+    final amount = (user.value.streakValue + 1) * dailyPrizeIncrement;
+    // Updating user bal
+    final currentUser = user.value;
+    final userRef = FirebaseFirestore.instance
+        .collection(kUserCollectionKey)
+        .doc(currentUser.docId);
+    userRef.get().then((user) {
+      if (user.data() != null) {
+        final double currentBal = user.data()![kUWalletBalance];
+        currentUser.accountBal!.value = currentBal + amount;
+        userRef.update({kUWalletBalance: currentBal + amount});
+      }
+    });
+
+    // Updating transaction history
+    final docRef = FirebaseFirestore.instance
+        .collection(kWalletListKey)
+        .doc(currentUser.walletId);
+    docRef.get().then((doc) {
+      if (doc.data() != null) {
+        List<dynamic> list = doc.data()![kWalletTransactions];
+
+        list.add({
+          kWalletTransactionAmount: amount,
+          kWalletTransactionType: 0,
+          kWalletTransactionOn: Timestamp.now()
+        });
+        final double currentBal = doc.data()![kWalletBalance];
+        docRef.update({
+          kWalletTransactions: list,
+          kWalletBalance: currentBal + amount,
+        });
+      }
+    });
   }
 
   // Temp
@@ -248,8 +354,14 @@ class UserProfileScreenController extends GetxController {
       // adding wallet
       FirebaseFirestore.instance.collection(kWalletListKey).doc(value.id).set({
         kWalletLinkedWith: value.id,
-        kWalletBalance: 0.0,
-        kWalletTransactions: [],
+        kWalletBalance: dailyPrizeIncrement,
+        kWalletTransactions: [
+          {
+            kWalletTransactionAmount: dailyPrizeIncrement,
+            kWalletTransactionType: 0,
+            kWalletTransactionOn: Timestamp.now()
+          }
+        ],
         kWalletCreationTS: Timestamp.now(),
       });
       //
@@ -267,7 +379,9 @@ class UserProfileScreenController extends GetxController {
             kUPhoneNo: null,
             kUCountryCode: null,
             kUWalletId: value.id,
-            kUWalletBalance: 0.0,
+            kUWalletBalance: dailyPrizeIncrement,
+            kUStreakValue: 0,
+            kULastStreakAddedOn: Timestamp.now(),
           }).then((value) {
             getUser(CookieManager.getCookie(skUserAccessToken));
             isUserSignedIn.value = true;
@@ -287,7 +401,9 @@ class UserProfileScreenController extends GetxController {
             kUPhoneNo: phoneSignInNo,
             kUCountryCode: sCountryCode,
             kUWalletId: value.id,
-            kUWalletBalance: 0.0,
+            kUWalletBalance: dailyPrizeIncrement,
+            kUStreakValue: 0,
+            kULastStreakAddedOn: Timestamp.now(),
           }).then((value) {
             getUser(CookieManager.getCookie(skUserAccessToken));
             isUserSignedIn.value = true;
@@ -357,6 +473,7 @@ class UserProfileScreenController extends GetxController {
 
   void revertToGuestSession() {
     CookieManager.deleteCookie(skUserAccessToken);
+    CookieManager.deleteCookie(kULastStreakAddedOn);
     FirebaseFirestore.instance
         .collection(kUserSessionCollectionKey)
         .where(kSAccessToken, isEqualTo: CookieManager.getCookie(sKSession))
@@ -366,7 +483,7 @@ class UserProfileScreenController extends GetxController {
       if (docs.isNotEmpty) docs.first.update({kSUserId: null, kSUserType: 0});
     });
     hasUser.value = false;
-    user.value = UserModel();
+    user.value = UserModel(streakValue: 0);
     isUserSignedIn.value = false;
   }
 

@@ -117,11 +117,14 @@ class LogInSignUpScreenController extends GetxController {
                 .update({kUFirebaseUserId: value.user!.uid});
             userController.user.value = users.first;
             userController.hasUser.value = true;
+
             if (userController.user.value.name!.length > 2)
               userController.hasUserName.value = true;
             userController
                 .updateSessionToPhone(userController.user.value.docId);
             userController.checkIsWinnerListHasUser();
+            userController.addStreak();
+            userController.addTransaction();
           } else {
             userController.phoneSignInNo = value.user!.phoneNumber;
             userController.firebaseUserId = value.user!.uid;

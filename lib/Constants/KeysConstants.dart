@@ -86,6 +86,8 @@ const kUPhoneNo = 'phoneNo';
 const kUCountryCode = 'countryCode';
 const kUWalletId = 'walletId';
 const kUWalletBalance = 'walletBalance';
+const kUStreakValue = 'streakValue';
+const kULastStreakAddedOn = 'lastStreakAddedOn';
 
 // Wallet Keys
 const kWalletCreationTS = 'creationTS';
