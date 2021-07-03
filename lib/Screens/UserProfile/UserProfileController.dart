@@ -96,7 +96,7 @@ class UserProfileScreenController extends GetxController {
                 return DailyStreakAlert(
                   dailyPrizeMultiplier: dailyPrizeIncrement,
                   currentPosition:
-                      CurrentStreakPostion.values[user.value.streakValue],
+                      CurrentStreakPostion.values[user.value.streakValue % 7],
                   onClaim: () {
                     Navigator.pop(context);
                     if (hasUser.value) {

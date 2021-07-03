@@ -57,6 +57,7 @@ class FortuneWheelScreen extends StatelessWidget {
                     padding: EdgeInsets.all(context.width / 10),
                     child: Center(
                       child: FortuneWheel(
+                        selected: Stream.value(2),
                         items: controller.wheelItems,
                         // animateFirst: false,
                       ),
