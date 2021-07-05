@@ -124,7 +124,7 @@ const sKeepVisitingUs = 'Keep visiting us to win exciting prizes';
 
 const sSearch = 'Search';
 
-const sLoginToAvailOffer = 'please login\nto avail this offer';
+const sLoginToAvailOffer = 'Please Login\nto avail this offer';
 
 const sYouSure = 'Are you sure ?';
 const sLooseThisOffer = 'You will loose \nthis offer';

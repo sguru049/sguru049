@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final double kNormalFontSize = 12;
 final double kBoldFontSize = 16;
@@ -24,3 +25,6 @@ TextStyle get kBlueTextButtonTheme => TextStyle().copyWith(
 
 TextStyle get kPlaceHolderGrayTextStyle =>
     TextStyle(color: cMediumGrayColor, fontSize: 16);
+
+TextStyle get kSpinTextStyle =>
+    GoogleFonts.comfortaa().copyWith(color: cWhiteColor);

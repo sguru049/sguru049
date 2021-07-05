@@ -2,9 +2,9 @@ import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:beauty_spin/Assets/DataConstants.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
-import 'package:beauty_spin/Screens/DailyStreakAlert/DailyStreakAlert.dart';
 import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelController.dart';
-import 'package:beauty_spin/Services/HtmlEmbed.dart';
+import 'package:beauty_spin/Utilities/AppTheme.dart';
+import 'package:beauty_spin/Utilities/BorderText/BorderText.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';
@@ -52,14 +52,53 @@ class FortuneWheelScreen extends StatelessWidget {
                 Positioned.fill(
                   child: Image.asset(icSprinkle, fit: BoxFit.fill),
                 ),
+
                 Positioned.fill(
                   child: Container(
-                    padding: EdgeInsets.all(context.width / 10),
+                    margin: EdgeInsets.all(context.width / 10),
                     child: Center(
-                      child: FortuneWheel(
-                        selected: Stream.value(2),
-                        items: controller.wheelItems,
-                        // animateFirst: false,
+                      child: Theme(
+                        data: ThemeData(
+                            colorScheme: context.theme.colorScheme
+                                .copyWith(primary: cAppThemeColor)),
+                        child: FortuneWheel(
+                          selected: controller.fortuneStream,
+                          items: controller.wheelItems,
+                          animateFirst: false,
+                          duration: 3.seconds,
+                          indicators: [
+                            FortuneIndicator(
+                              child: GestureDetector(
+                                child: Center(
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(
+                                      color: cAppThemeColor,
+                                      borderRadius: BorderRadius.circular(30),
+                                      border: Border.all(
+                                        width: 5,
+                                        color: cSpinBorderColor,
+                                      ),
+                                    ),
+                                    width: 60,
+                                    height: 60,
+                                    child: BorderedText(
+                                      strokeColor: cSpinBorderColor,
+                                      child: AutoSizeText(
+                                        'Spin',
+                                        style: kSpinTextStyle.copyWith(
+                                            color: cAppThemeColor),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                onTap: () => (controller.isStreamActive)
+                                    ? {}
+                                    : controller.onSpin(),
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
