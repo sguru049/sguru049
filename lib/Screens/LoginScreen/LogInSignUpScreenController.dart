@@ -123,8 +123,31 @@ class LogInSignUpScreenController extends GetxController {
             userController
                 .updateSessionToPhone(userController.user.value.docId);
             userController.checkIsWinnerListHasUser();
-            userController.addStreak();
-            userController.addTransaction();
+
+            // Checking and updating user streak
+            if (userController.user.value.lastStreakAddedOn!
+                    .compareTo(Timestamp.now())
+                    .days
+                    .inDays >
+                1) {
+              FirebaseFirestore.instance
+                  .collection(kUserCollectionKey)
+                  .doc(users.first.docId)
+                  .update({
+                kUStreakValue: 0,
+                kULastStreakAddedOn: DateTime.now(),
+              }).then((value) {
+                userController.user.value.streakValue = 0;
+                userController.user.value.lastStreakAddedOn = Timestamp.now();
+                userController.addStreak();
+                userController.addTransaction();
+              });
+            } else {
+              userController.addStreak();
+              userController.addTransaction();
+            }
+            //
+
           } else {
             userController.phoneSignInNo = value.user!.phoneNumber;
             userController.firebaseUserId = value.user!.uid;
