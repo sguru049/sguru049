@@ -95,8 +95,11 @@ class UserProfileScreenController extends GetxController {
               builder: (BuildContext context) {
                 return DailyStreakAlert(
                   dailyPrizeMultiplier: dailyPrizeIncrement,
-                  currentPosition:
-                      CurrentStreakPostion.values[user.value.streakValue % 7],
+                  currentUserStreakValue: user.value.streakValue,
+                  currentPosition: (user.value.streakValue >=
+                          CurrentStreakPostion.values.length)
+                      ? CurrentStreakPostion.values[7]
+                      : CurrentStreakPostion.values[user.value.streakValue],
                   onClaim: () {
                     Navigator.pop(context);
                     if (hasUser.value) {
@@ -134,7 +137,9 @@ class UserProfileScreenController extends GetxController {
   }
 
   void addTransaction() {
-    final amount = (user.value.streakValue + 1) * dailyPrizeIncrement;
+    final amount =
+        ((user.value.streakValue >= 7 ? 7 : user.value.streakValue) + 1) *
+            dailyPrizeIncrement;
     // Updating user bal
     final currentUser = user.value;
     final userRef = FirebaseFirestore.instance

@@ -35,7 +35,7 @@ class CommonFunctions {
                       child: Text(sCancel,
                           style: kWhiteTextTheme.copyWith(fontSize: 14)),
                       onPressed: () {
-                        controller.currentNavigationBarIndex.value = 2;
+                        controller.currentNavigationBarIndex.value = 3;
                         Navigator.pop(context);
                       }),
                   DialogButton(
@@ -51,7 +51,7 @@ class CommonFunctions {
             child: Text(sOk, style: kWhiteTextTheme.copyWith(fontSize: 14)),
             onPressed: () {
               Get.back();
-              controller.currentNavigationBarIndex.value = 2;
+              controller.currentNavigationBarIndex.value = 3;
               // Navigator.pop(context);
             }),
       ],

@@ -20,11 +20,13 @@ class DailyStreakAlert extends StatelessWidget {
   final Function onClaim;
   final CurrentStreakPostion currentPosition;
   final int dailyPrizeMultiplier;
+  final int currentUserStreakValue;
   const DailyStreakAlert({
     Key? key,
     required this.onClaim,
     required this.currentPosition,
     required this.dailyPrizeMultiplier,
+    required this.currentUserStreakValue,
   }) : assert(currentPosition is CurrentStreakPostion);
 
   Widget build(BuildContext context) {
@@ -139,7 +141,9 @@ class DailyStreakAlert extends StatelessWidget {
                       height: 125,
                       padding: EdgeInsets.all(10),
                       child: DailyStreakItem(
-                          dayCount: 7,
+                          dayCount: (currentUserStreakValue >= 7)
+                              ? currentUserStreakValue
+                              : 7,
                           selectedIndex: currentPosition.index + 1,
                           prizeMultiplier: dailyPrizeMultiplier),
                     ),
