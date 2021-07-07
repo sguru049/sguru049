@@ -136,7 +136,13 @@ class HomeScreen extends StatelessWidget {
                         icon: Icon(Icons.list, color: cWhiteColor),
                         onPressed: () => controller.changeHomePageType())
                   ])
-                : SizedBox.shrink()
+                : (controller.currentNavigationBarIndex.value == 3)
+                    ? MaterialButton(
+                        onPressed: () {
+                          controller.userController.onLogout(context);
+                        },
+                        child: Icon(Icons.logout, color: cWhiteColor))
+                    : SizedBox.shrink()
           ],
         ),
         // ///.... To show alert for new Updated app and clear cache

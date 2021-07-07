@@ -1,10 +1,8 @@
-import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:beauty_spin/Assets/DataConstants.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelController.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
-import 'package:beauty_spin/Utilities/BorderText/BorderText.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';
@@ -15,120 +13,123 @@ class FortuneWheelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(title: Text('Forutne Wheel')),
-      // body: HtmlEmbed().getHtmlPage(controller.htmlId, (int id) {
-      //   return controller.iFrame
-      //     ..width = MediaQuery.of(context).size.width.toString()
-      //     ..height = MediaQuery.of(context).size.height.toString()
-      //     ..src = 'http://localhost:8080/spinwheel/'
-      //     ..onChange.listen((event) {
-      //       print('onChange');
-      //       print(event);
-      //     })
-      //     ..onClick.listen((event) {
-      //       print('onClick');
-      //       print(event);
-      //     })
-      //     ..onInput.listen((event) {
-      //       print('onInput');
-      //       print(event);
-      //     })
-      //     ..onError.listen((event) {
-      //       print('onError');
-      //       print(event);
-      //     })
-      //     ..onLoadedData.listen((event) {
-      //       print('onLoadedData');
-      //       print(event);
-      //     })
-      //     ..style.border = 'none';
-      // }),
-      body: Column(
-        children: [
-          Expanded(
-            flex: 2,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Image.asset(icSprinkle, fit: BoxFit.fill),
-                ),
-
-                Positioned.fill(
-                  child: Container(
-                    margin: EdgeInsets.all(context.width / 10),
+      body: Stack(children: [
+        Positioned.fill(
+          child: Image.asset(icBottomSprincle, fit: BoxFit.fill),
+        ),
+        Column(
+          children: [
+            Expanded(
+              flex: 2,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Image.asset(icSprinkle, fit: BoxFit.fill),
+                  ),
+                  Positioned.fill(
                     child: Center(
-                      child: Theme(
-                        data: ThemeData(
-                            colorScheme: context.theme.colorScheme
-                                .copyWith(primary: cAppThemeColor)),
-                        child: FortuneWheel(
-                          selected: controller.fortuneStream,
-                          items: controller.wheelItems,
-                          animateFirst: false,
-                          duration: 3.seconds,
-                          indicators: [
-                            FortuneIndicator(
-                              child: GestureDetector(
-                                child: Center(
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                      color: cAppThemeColor,
-                                      borderRadius: BorderRadius.circular(30),
-                                      border: Border.all(
-                                        width: 5,
-                                        color: cSpinBorderColor,
-                                      ),
-                                    ),
-                                    width: 60,
-                                    height: 60,
-                                    child: BorderedText(
-                                      strokeColor: cSpinBorderColor,
-                                      child: AutoSizeText(
-                                        'Spin',
-                                        style: kSpinTextStyle.copyWith(
-                                            color: cAppThemeColor),
-                                      ),
-                                    ),
-                                  ),
+                      child: Stack(children: [
+                        AspectRatio(
+                          aspectRatio: 1,
+                          child: Container(
+                            margin: EdgeInsets.all(context.width / 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(400),
+                                border: Border.all(
+                                  width: 5,
+                                  color: cSpinBorderColor,
                                 ),
-                                onTap: () => (controller.isStreamActive)
-                                    ? {}
-                                    : controller.onSpin(),
+                                boxShadow: [
+                                  BoxShadow(color: Colors.black, blurRadius: 10)
+                                ]),
+                            child: Center(
+                              child: Container(
+                                child: FortuneWheel(
+                                  selected: controller.fortuneStream,
+                                  items: controller.wheelItems,
+                                  animateFirst: false,
+                                  duration: 5.seconds,
+                                  indicators: [
+                                    FortuneIndicator(
+                                      child: GestureDetector(
+                                        child: Center(
+                                          child: Container(
+                                            margin: EdgeInsets.only(bottom: 10),
+                                            alignment: Alignment.center,
+                                            width: 70,
+                                            height: 70,
+                                            child: Stack(
+                                              children: [
+                                                Positioned.fill(
+                                                  child: Image.asset(
+                                                    icSpinCenterLogo,
+                                                    color: Color.fromRGBO(
+                                                        230, 230, 230, 1),
+                                                  ),
+                                                ),
+                                                Positioned.fill(
+                                                  left: 0,
+                                                  right: 0,
+                                                  bottom: 0,
+                                                  child: Container(
+                                                    width: 55,
+                                                    height: 60,
+                                                    margin: EdgeInsets.fromLTRB(
+                                                        5, 10, 5, 0),
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                          width: 3.5,
+                                                          color: cWhiteColor),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30),
+                                                      gradient: LinearGradient(
+                                                        colors: [
+                                                          Color.fromRGBO(
+                                                              70, 70, 70, 1),
+                                                          Color.fromRGBO(
+                                                              120, 120, 120, 1),
+                                                        ],
+                                                        begin:
+                                                            Alignment.topLeft,
+                                                        end: Alignment
+                                                            .bottomRight,
+                                                      ),
+                                                    ),
+                                                    alignment: Alignment.center,
+                                                    child: AutoSizeText(
+                                                      'SPIN',
+                                                      style: kSpinTextStyle
+                                                          .copyWith(
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w900,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        onTap: () => (controller.isStreamActive)
+                                            ? {}
+                                            : controller.onSpin(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            )
-                          ],
+                            ),
+                          ),
                         ),
-                      ),
+                      ]),
                     ),
                   ),
-                ),
-                // Positioned(
-                //   left: 20,
-                //   right: 20,
-                //   top: 10,
-                //   child: Row(
-                //     children: [
-                //       AutoSizeText(
-                //         'Spin and Win',
-                //         style: TextStyle(
-                //           fontWeight: FontWeight.w600,
-                //           backgroundColor: Colors.white.withOpacity(0.6),
-                //         ),
-                //       ),
-                //       Spacer(),
-                //       IconButton(
-                //           icon: Icon(
-                //             Icons.close,
-                //           ),
-                //           onPressed: () {}),
-                //     ],
-                //   ),
-                // ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Expanded(
+            Expanded(
               flex: 1,
               child: ListView.separated(
                   itemBuilder: (context, index) {
@@ -144,21 +145,7 @@ class FortuneWheelScreen extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            // showDialog(
-                            //     context: context,
-                            //     builder: (BuildContext context) {
-                            //       return AlertDialog(
-                            //         content: Container(
-                            //           height: context.height / 2,
-                            //           child: Text('Daily Bonus'),
-                            //         ),
-                            //       );
-                            //     });
-                            // showDialog(
-                            //     context: context,
-                            //     builder: (BuildContext context) {
-                            //       return DailyStreakAlert();
-                            //     });
+                            // TODO :
                           }),
                     );
                   },
@@ -167,9 +154,11 @@ class FortuneWheelScreen extends StatelessWidget {
                         height: 0.5,
                         color: cMediumGrayColor,
                       ),
-                  itemCount: controller.wheelScreenOptions.length))
-        ],
-      ),
+                  itemCount: controller.wheelScreenOptions.length),
+            )
+          ],
+        ),
+      ]),
     );
   }
 }

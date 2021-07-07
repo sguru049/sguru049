@@ -1,16 +1,14 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Constants/StringConstants.dart';
-import 'package:beauty_spin/Screens/HomeScreen/HomeScreenController.dart';
 import 'package:beauty_spin/Screens/LoginScreen/PhoneLoginScreen/PhoneLoginAndSignupScreen.dart';
 import 'package:beauty_spin/Screens/OfflineScreen/OfflineScreen.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
-import 'package:beauty_spin/Screens/UserProfile/WalletScreen/WalletScreen.dart';
+// import 'package:beauty_spin/Screens/UserProfile/WalletScreen/WalletScreen.dart';
 import 'package:beauty_spin/Utilities/BorderText/BorderText.dart';
 import 'package:cross_connectivity/cross_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:beauty_spin/Utilities/Toast/Toast.dart';
 // import 'package:botox_deals/Screens/LoginScreen/LogInSignUpScreen.dart';
 
@@ -158,64 +156,42 @@ class UserProfileScreen extends StatelessWidget {
                 ? controller.user.value.phoneNo!
                 : controller.user.value.email!,
             textAlign: TextAlign.center),
-        Spacer(),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   crossAxisAlignment: CrossAxisAlignment.center,
-        //   children: [
-        BorderedText(
-          child: AutoSizeText(
-            'Beauty Coins : ${controller.user.value.accountBal}',
-            style: TextStyle(
-              fontSize: 20,
-              color: cWhiteColor,
-            ),
-          ),
-        ),
-        //   ],
+        // Spacer(),
+        // // Row(
+        // //   mainAxisAlignment: MainAxisAlignment.center,
+        // //   crossAxisAlignment: CrossAxisAlignment.center,
+        // //   children: [
+        // BorderedText(
+        //   child: AutoSizeText(
+        //     'Beauty Coins : ${controller.user.value.accountBal}',
+        //     style: TextStyle(
+        //       fontSize: 20,
+        //       color: cWhiteColor,
+        //     ),
+        //   ),
         // ),
+        // //   ],
+        // // ),
         Spacer(),
-        GestureDetector(
-            child: Container(
-              alignment: Alignment.center,
-              width: MediaQuery.of(context).size.width / 2,
-              height: 40,
-              child: AutoSizeText(sLogOut,
-                  style: TextStyle(color: cWhiteColor, fontSize: 14)),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: cAppThemeColor),
-            ),
-            onTap: () {
-              Alert(
-                  context: context,
-                  title: sLogoutAlertTitle,
-                  desc: sLogoutAlertDesc,
-                  style: AlertStyle(
-                      titleStyle: TextStyle(
-                          fontSize: 20,
-                          color: cAppThemeColor,
-                          fontWeight: FontWeight.w600)),
-                  buttons: [
-                    DialogButton(
-                        child: Text(sYes,
-                            style: TextStyle(color: cWhiteColor, fontSize: 14)),
-                        onPressed: () {
-                          controller.revertToGuestSession();
-                          controller.googleSignIn.signOut();
-                          final HomeScreenController homeScreenController =
-                              Get.put(HomeScreenController());
-                          homeScreenController.isGettingData.value = true;
-                          homeScreenController.homePageData = [].obs;
-                          homeScreenController.getHomePageData();
-                          Navigator.pop(context);
-                        }),
-                    DialogButton(
-                        child: Text(sNo,
-                            style: TextStyle(color: cWhiteColor, fontSize: 14)),
-                        onPressed: () => Navigator.pop(context)),
-                  ]).show();
-            }),
+        Container(
+          alignment: Alignment.center,
+          width: MediaQuery.of(context).size.width / 2,
+          height: 40,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.account_balance_wallet,
+                  color: cWhiteColor,
+                ),
+                SizedBox(width: 10),
+                AutoSizeText(':  ${controller.user.value.accountBal}  Coins',
+                    style: TextStyle(color: cWhiteColor, fontSize: 14)),
+              ]),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20), color: cAppThemeColor),
+        ),
         Spacer(),
       ],
     );

@@ -31,7 +31,6 @@ class CookieManager {
 
   static bool isUserLoggedIn() {
     final sessionId = CookieManager.getCookie(skUserAccessToken);
-    print('sessionId = $sessionId');
     return (sessionId.isNotEmpty) ? true : false;
   }
 }

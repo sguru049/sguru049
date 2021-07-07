@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:html';
 import 'dart:math';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
@@ -17,9 +16,6 @@ class FortuneWheelListItem {
 }
 
 class FortuneWheelScreenController extends GetxController {
-  final htmlId = UniqueKey().toString();
-  final iFrame = IFrameElement();
-
   final StreamController<int> _fortuneStreamController =
       StreamController<int>.broadcast();
   Stream<int> get fortuneStream => _fortuneStreamController.stream;
@@ -27,73 +23,39 @@ class FortuneWheelScreenController extends GetxController {
   bool isStreamActive = false;
 
   List<FortuneWheelListItem> wheelScreenOptions = [
-    FortuneWheelListItem(name: 'How to play', onTap: () {}),
-    FortuneWheelListItem(name: 'Terms & conditions', onTap: () {}),
+    FortuneWheelListItem(name: 'How to Play', onTap: () {}),
+    FortuneWheelListItem(name: 'Terms & Conditions', onTap: () {}),
   ];
 
   List<FortuneItem> wheelItems = [
     FortuneItem(
-        child: Text('1%', style: kSpinTextStyle),
-        style: FortuneItemStyle(
-            color: cAppThemeColor, borderColor: cSpinBorderColor)),
+        child: Text('     1%', style: kSpinTextStyle),
+        style: FortuneItemStyle(color: spinItem1, borderWidth: 0)),
     FortuneItem(
-        child: Text('10%', style: kSpinTextStyle),
-        style: FortuneItemStyle(
-            color: cAppDullThemeColor, borderColor: cSpinBorderColor)),
+        child: Text('     10%', style: kSpinTextStyle),
+        style: FortuneItemStyle(color: spinItem2, borderWidth: 0)),
     FortuneItem(
-        child: Text('5%', style: kSpinTextStyle),
-        style: FortuneItemStyle(
-            color: cAppThemeColor, borderColor: cSpinBorderColor)),
+        child: Text('     5%', style: kSpinTextStyle),
+        style: FortuneItemStyle(color: spinItem3, borderWidth: 0)),
     FortuneItem(
-        child: Text('40%', style: kSpinTextStyle),
-        style: FortuneItemStyle(
-            color: cAppDullThemeColor, borderColor: cSpinBorderColor)),
+        child: Text('     40%', style: kSpinTextStyle),
+        style: FortuneItemStyle(color: spinItem4, borderWidth: 0)),
     FortuneItem(
-        child: Text('20%', style: kSpinTextStyle),
-        style: FortuneItemStyle(
-            color: cAppThemeColor, borderColor: cSpinBorderColor)),
+        child: Text('     20%', style: kSpinTextStyle),
+        style: FortuneItemStyle(color: spinItem5, borderWidth: 0)),
     FortuneItem(
-        child: Text('4%', style: kSpinTextStyle),
-        style: FortuneItemStyle(
-            color: cAppDullThemeColor, borderColor: cSpinBorderColor)),
+        child: Text('     4%', style: kSpinTextStyle),
+        style: FortuneItemStyle(color: spinItem6, borderWidth: 0)),
     FortuneItem(
-        child: Text('10%', style: kSpinTextStyle),
-        style: FortuneItemStyle(
-            color: cAppThemeColor, borderColor: cSpinBorderColor)),
+        child: Text('     10%', style: kSpinTextStyle),
+        style: FortuneItemStyle(color: spinItem3, borderWidth: 0)),
     FortuneItem(
-        child: Text('10%', style: kSpinTextStyle),
-        style: FortuneItemStyle(
-            color: cAppDullThemeColor, borderColor: cSpinBorderColor))
+        child: Text('     10%', style: kSpinTextStyle),
+        style: FortuneItemStyle(color: spinItem4, borderWidth: 0))
   ];
 
   @override
   void onInit() {
-    if (iFrame.contentWindow != null) {
-      iFrame.contentWindow!.addEventListener('onResult', (event) {
-        print('onResult');
-        print(event);
-      });
-      iFrame.contentWindow!.addEventListener('onGameEnd', (event) {
-        print('onGameEnd');
-        print(event);
-      });
-    }
-    iFrame.addEventListener('onResult', (e) {
-      print('onResult');
-      print(e);
-    }, true);
-    iFrame.addEventListener('onGameEnd', (e) {
-      print('onGameEnd');
-      print(e);
-    });
-    iFrame.addEventListener('onWheelPress', (e) {
-      print('onWheelPress');
-      print(e);
-    });
-    iFrame.addEventListener('onWheelDragEnd', (e) {
-      print('onWheelDragEnd');
-      print(e);
-    });
     super.onInit();
   }
 
@@ -126,7 +88,7 @@ class FortuneWheelScreenController extends GetxController {
         items.map((e) => e.name).toList().indexOf(slectionItems[random]);
 
     _fortuneStreamController.add(selecteditem);
-    3.seconds.delay().then((value) {
+    6.seconds.delay().then((value) {
       isStreamActive = false;
     });
   }

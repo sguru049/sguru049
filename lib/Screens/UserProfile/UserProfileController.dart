@@ -5,6 +5,7 @@ import 'package:beauty_spin/Models/SessionModel.dart';
 import 'package:beauty_spin/Models/UserModel.dart';
 import 'package:beauty_spin/Models/WinnerDBModel.dart';
 import 'package:beauty_spin/Screens/DailyStreakAlert/DailyStreakAlert.dart';
+import 'package:beauty_spin/Screens/HomeScreen/HomeScreenController.dart';
 import 'package:beauty_spin/Services/CookieManager.dart';
 import 'package:beauty_spin/Services/HttpServices/HttpServices.dart';
 import 'package:beauty_spin/Utilities/CommonFunctions.dart';
@@ -173,6 +174,37 @@ class UserProfileScreenController extends GetxController {
         });
       }
     });
+  }
+
+  void onLogout(BuildContext context) {
+    Alert(
+        context: context,
+        title: sLogoutAlertTitle,
+        desc: sLogoutAlertDesc,
+        style: AlertStyle(
+            titleStyle: TextStyle(
+                fontSize: 20,
+                color: cAppThemeColor,
+                fontWeight: FontWeight.w600)),
+        buttons: [
+          DialogButton(
+              child: Text(sYes,
+                  style: TextStyle(color: cWhiteColor, fontSize: 14)),
+              onPressed: () {
+                revertToGuestSession();
+                googleSignIn.signOut();
+                final HomeScreenController homeScreenController =
+                    Get.put(HomeScreenController());
+                homeScreenController.isGettingData.value = true;
+                homeScreenController.homePageData = [].obs;
+                homeScreenController.getHomePageData();
+                Navigator.pop(context);
+              }),
+          DialogButton(
+              child:
+                  Text(sNo, style: TextStyle(color: cWhiteColor, fontSize: 14)),
+              onPressed: () => Navigator.pop(context)),
+        ]).show();
   }
 
   // Temp

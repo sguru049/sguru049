@@ -293,6 +293,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.2"
+  flutter_circular_text:
+    dependency: "direct main"
+    description:
+      name: flutter_circular_text
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.1"
   flutter_fortune_wheel:
     dependency: "direct main"
     description:
