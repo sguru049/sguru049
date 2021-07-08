@@ -3,6 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:beauty_spin/Assets/DataConstants.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelController.dart';
 // import 'package:beauty_spin/Models/NotificationsModel.dart';
 import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelScreen.dart';
 import 'package:beauty_spin/Screens/HomeScreen/CitySelector/CitySelector.dart';
@@ -43,9 +44,17 @@ class HomeScreen extends StatelessWidget {
         bottomNavigationBar: BottomNavigationBar(
           items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: sHomeButtonLabel),
+              icon: Image.asset(icBeautyIcon,
+                  height: 24, fit: BoxFit.fitHeight, color: cIconColor),
+              activeIcon: Image.asset(icBeautyIcon,
+                  height: 24, fit: BoxFit.fitHeight, color: cWhiteColor),
+              label: sHomeButtonLabel,
+            ),
             BottomNavigationBarItem(
-                icon: Image.asset(icSpin2Win, width: 24, height: 24),
+                icon: Image.asset(icSpin2Win,
+                    width: 22, height: 22, color: cIconColor),
+                activeIcon: Image.asset(icSpin2Win,
+                    width: 22, height: 22, color: cWhiteColor),
                 label: sSpin2WinLabel),
             BottomNavigationBarItem(
                 icon: Stack(children: [

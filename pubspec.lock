@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  animated_rotation:
+    dependency: "direct main"
+    description:
+      name: animated_rotation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   archive:
     dependency: transitive
     description:
@@ -306,7 +313,7 @@ packages:
       name: flutter_fortune_wheel
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.0"
   flutter_hooks:
     dependency: transitive
     description:

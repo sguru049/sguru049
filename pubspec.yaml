@@ -94,9 +94,10 @@ dependencies:
   
   path_drawing: ^0.5.1
 
-  flutter_fortune_wheel: ^1.0.0
+  flutter_fortune_wheel: ^1.1.0
   
   flutter_circular_text: ^0.3.1
+  animated_rotation: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -138,6 +139,7 @@ flutter:
     - assets/Images/cneterSpinLogo.png
     - assets/Images/bottomSprincle.png
     - assets/Images/balloons.png
+    - assets/Images/BeautyIcon.png
     
     - assets/CongratsAnimation.json
     - assets/BackgroundSplash.json

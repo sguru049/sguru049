@@ -1,3 +1,5 @@
+import 'dart:math';
+import 'package:animated_rotation/animated_rotation.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:beauty_spin/Assets/DataConstants.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
@@ -32,6 +34,7 @@ class FortuneWheelScreen extends StatelessWidget {
                         AspectRatio(
                           aspectRatio: 1,
                           child: Container(
+                            alignment: Alignment.center,
                             margin: EdgeInsets.all(context.width / 10),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(400),
@@ -42,90 +45,83 @@ class FortuneWheelScreen extends StatelessWidget {
                                 boxShadow: [
                                   BoxShadow(color: Colors.black, blurRadius: 10)
                                 ]),
-                            child: Center(
-                              child: Container(
-                                child: FortuneWheel(
-                                  selected: controller.fortuneStream,
-                                  items: controller.wheelItems,
-                                  animateFirst: false,
-                                  duration: 5.seconds,
-                                  indicators: [
-                                    FortuneIndicator(
-                                      child: GestureDetector(
-                                        child: Center(
-                                          child: Container(
-                                            margin: EdgeInsets.only(bottom: 10),
-                                            alignment: Alignment.center,
-                                            width: 70,
-                                            height: 70,
-                                            child: Stack(
-                                              children: [
-                                                Positioned.fill(
-                                                  child: Image.asset(
-                                                    icSpinCenterLogo,
-                                                    color: Color.fromRGBO(
-                                                        230, 230, 230, 1),
-                                                  ),
-                                                ),
-                                                Positioned.fill(
-                                                  left: 0,
-                                                  right: 0,
-                                                  bottom: 0,
-                                                  child: Container(
-                                                    width: 55,
-                                                    height: 60,
-                                                    margin: EdgeInsets.fromLTRB(
-                                                        5, 10, 5, 0),
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                          width: 3.5,
-                                                          color: cWhiteColor),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
-                                                      gradient: LinearGradient(
-                                                        colors: [
-                                                          Color.fromRGBO(
-                                                              70, 70, 70, 1),
-                                                          Color.fromRGBO(
-                                                              120, 120, 120, 1),
-                                                        ],
-                                                        begin:
-                                                            Alignment.topLeft,
-                                                        end: Alignment
-                                                            .bottomRight,
-                                                      ),
-                                                    ),
-                                                    alignment: Alignment.center,
-                                                    child: AutoSizeText(
-                                                      'SPIN',
-                                                      style: kSpinTextStyle
-                                                          .copyWith(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w900,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ),
-                                        onTap: () => (controller.isStreamActive)
-                                            ? {}
-                                            : controller.onSpin(),
-                                      ),
-                                    ),
-                                  ],
+                            child: Obx(() {
+                              return Transform.rotate(
+                                angle: pi * 2 * 0.23,
+                                child: AnimatedRotation(
+                                  angle: controller.rotationValue.value,
+                                  child: FortuneWheel(
+                                    selected: controller.fortuneStream,
+                                    items: controller.wheelItems,
+                                    animateFirst: false,
+                                    duration: 5.seconds,
+                                    indicators: [],
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                            }),
                           ),
                         ),
                       ]),
                     ),
                   ),
+                  //
+                  Positioned.fill(
+                    child: GestureDetector(
+                      child: Center(
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 10),
+                          alignment: Alignment.center,
+                          width: 70,
+                          height: 70,
+                          child: Stack(
+                            children: [
+                              Positioned.fill(
+                                child: Image.asset(
+                                  icSpinCenterLogo,
+                                  color: Color.fromRGBO(230, 230, 230, 1),
+                                ),
+                              ),
+                              Positioned.fill(
+                                left: 0,
+                                top: 0,
+                                bottom: 0,
+                                child: Container(
+                                  width: 60,
+                                  height: 55,
+                                  margin: EdgeInsets.fromLTRB(0, 5, 10, 5),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 3.5, color: cWhiteColor),
+                                    borderRadius: BorderRadius.circular(30),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Color.fromRGBO(70, 70, 70, 1),
+                                        Color.fromRGBO(120, 120, 120, 1),
+                                      ],
+                                      begin: Alignment.topLeft,
+                                      end: Alignment.bottomRight,
+                                    ),
+                                  ),
+                                  alignment: Alignment.center,
+                                  child: AutoSizeText(
+                                    'SPIN',
+                                    style: kSpinTextStyle.copyWith(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w900,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      onTap: () {
+                        if (!controller.isStreamActive) controller.onSpin();
+                      },
+                    ),
+                  )
                 ],
               ),
             ),

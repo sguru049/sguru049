@@ -28,3 +28,6 @@ TextStyle get kPlaceHolderGrayTextStyle =>
 
 TextStyle get kSpinTextStyle =>
     GoogleFonts.comfortaa().copyWith(color: cWhiteColor);
+
+TextStyle get kSpinItemTextStyle =>
+    kSpinTextStyle.copyWith(fontWeight: FontWeight.w900, fontSize: 11);

@@ -80,7 +80,27 @@ class UserProfileScreenController extends GetxController {
           streakDate.year == DateTime.now().year) {
         print('Today\'s streak already done');
       } else {
-        showAlert();
+        if (user.value.lastStreakAddedOn != null) {
+          if (streakDate
+                  .compareTo(user.value.lastStreakAddedOn!.toDate())
+                  .days
+                  .inDays >
+              1) {
+            FirebaseFirestore.instance
+                .collection(kUserCollectionKey)
+                .doc(user.value.docId)
+                .update({
+              kUStreakValue: 0,
+              kULastStreakAddedOn: DateTime.now(),
+            }).then((value) {
+              user.value.streakValue = 0;
+              user.value.lastStreakAddedOn = Timestamp.now();
+              showAlert();
+            });
+          }
+        } else {
+          showAlert();
+        }
       }
     } else {
       showAlert();

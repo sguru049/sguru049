@@ -36,7 +36,6 @@ class MyMaterialApp extends StatelessWidget {
       enableLog: false,
       popGesture: true,
       initialRoute: HomeScreen.routeName,
-      // initialRoute: WalletScreen.routeName,
       getPages: [
         HomeScreen.getPage(),
         WalletScreen.getPage(),
