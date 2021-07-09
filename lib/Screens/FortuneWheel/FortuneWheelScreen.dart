@@ -50,6 +50,7 @@ class FortuneWheelScreen extends StatelessWidget {
                                 angle: pi * 2 * 0.23,
                                 child: AnimatedRotation(
                                   angle: controller.rotationValue.value,
+                                  duration: controller.rotationDuration,
                                   child: FortuneWheel(
                                     selected: controller.fortuneStream,
                                     items: controller.wheelItems,
@@ -70,7 +71,7 @@ class FortuneWheelScreen extends StatelessWidget {
                     child: GestureDetector(
                       child: Center(
                         child: Container(
-                          margin: EdgeInsets.only(bottom: 10),
+                          margin: EdgeInsets.only(left: 10),
                           alignment: Alignment.center,
                           width: 70,
                           height: 70,

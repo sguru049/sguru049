@@ -76,7 +76,7 @@ class LogInSignUpScreenController extends GetxController {
       final result = await auth.signInWithPhoneNumber(
           sortedPhoneNo,
           RecaptchaVerifier(
-            size: RecaptchaVerifierSize.compact,
+            // size: RecaptchaVerifierSize.compact,
             theme: RecaptchaVerifierTheme.dark,
             onSuccess: () {
               RecaptchaVerifier().clear();

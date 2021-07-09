@@ -175,7 +175,10 @@ class UserProfileScreen extends StatelessWidget {
         Spacer(),
         Container(
           alignment: Alignment.center,
-          width: MediaQuery.of(context).size.width / 2,
+          width: (MediaQuery.of(context).size.width > 350)
+              ? 350
+              : MediaQuery.of(context).size.width,
+          margin: EdgeInsets.symmetric(horizontal: 20),
           height: 40,
           child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -185,8 +188,8 @@ class UserProfileScreen extends StatelessWidget {
                   Icons.account_balance_wallet,
                   color: cWhiteColor,
                 ),
-                SizedBox(width: 10),
-                AutoSizeText(':  ${controller.user.value.accountBal}  Coins',
+                AutoSizeText(
+                    '  Wallet : ${controller.user.value.accountBal} BeautyCoins',
                     style: TextStyle(color: cWhiteColor, fontSize: 14)),
               ]),
           decoration: BoxDecoration(

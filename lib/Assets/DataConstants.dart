@@ -36,7 +36,7 @@ const icUnselectedMarker =
     'https://img.icons8.com/ultraviolet/40/000000/marker.png';
 
 const icSelectedPromoMarker =
-    'https://firebasestorage.googleapis.com/v0/b/botoxdeals.appspot.com/o/promoted_pin_icon%2Fselected_promoted_icon.png?alt=media&token=7e91d801-94e4-4a9b-9b77-1ec7d7e3b1cb';
+    'https://firebasestorage.googleapis.com/v0/b/beautyspin-1a8a7.appspot.com/o/selected_promoted_icon.png?alt=media&token=c1df6cbd-330a-4f7a-a985-a6cef598c455';
 
 const icUnselectedPromoMarker =
-    'https://firebasestorage.googleapis.com/v0/b/botoxdeals.appspot.com/o/promoted_pin_icon%2Funselected_promoted_icon.png?alt=media&token=ed8b0e99-b6a7-48b3-8a9f-f486a62dd199';
+    'https://firebasestorage.googleapis.com/v0/b/beautyspin-1a8a7.appspot.com/o/unselected_promoted_icon.png?alt=media&token=16a87703-528c-48ee-bdef-9489c3010ec2';

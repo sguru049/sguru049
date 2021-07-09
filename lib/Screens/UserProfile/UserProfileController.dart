@@ -159,7 +159,7 @@ class UserProfileScreenController extends GetxController {
 
   void addTransaction() {
     final amount =
-        ((user.value.streakValue >= 7 ? 7 : user.value.streakValue) + 1) *
+        ((user.value.streakValue >= 7 ? 6 : user.value.streakValue) + 1) *
             dailyPrizeIncrement;
     // Updating user bal
     final currentUser = user.value;

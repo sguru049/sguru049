@@ -45,16 +45,16 @@ class HomeScreen extends StatelessWidget {
           items: [
             BottomNavigationBarItem(
               icon: Image.asset(icBeautyIcon,
-                  height: 24, fit: BoxFit.fitHeight, color: cIconColor),
+                  height: 22, fit: BoxFit.fitHeight, color: cIconColor),
               activeIcon: Image.asset(icBeautyIcon,
-                  height: 24, fit: BoxFit.fitHeight, color: cWhiteColor),
+                  height: 22, fit: BoxFit.fitHeight, color: cWhiteColor),
               label: sHomeButtonLabel,
             ),
             BottomNavigationBarItem(
                 icon: Image.asset(icSpin2Win,
-                    width: 22, height: 22, color: cIconColor),
+                    height: 18, fit: BoxFit.fitHeight, color: cIconColor),
                 activeIcon: Image.asset(icSpin2Win,
-                    width: 22, height: 22, color: cWhiteColor),
+                    height: 18, fit: BoxFit.fitHeight, color: cWhiteColor),
                 label: sSpin2WinLabel),
             BottomNavigationBarItem(
                 icon: Stack(children: [
@@ -145,7 +145,8 @@ class HomeScreen extends StatelessWidget {
                         icon: Icon(Icons.list, color: cWhiteColor),
                         onPressed: () => controller.changeHomePageType())
                   ])
-                : (controller.currentNavigationBarIndex.value == 3)
+                : (controller.currentNavigationBarIndex.value == 3 &&
+                        controller.userController.user.value.name != null)
                     ? MaterialButton(
                         onPressed: () {
                           controller.userController.onLogout(context);
