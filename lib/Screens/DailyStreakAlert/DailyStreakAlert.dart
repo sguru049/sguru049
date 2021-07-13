@@ -20,16 +20,20 @@ class DailyStreakAlert extends StatelessWidget {
   final CurrentStreakPostion currentPosition;
   final int dailyPrizeMultiplier;
   final int currentUserStreakValue;
+  final bool isLoogedIn;
+
   const DailyStreakAlert({
     Key? key,
     required this.onClaim,
     required this.currentPosition,
     required this.dailyPrizeMultiplier,
     required this.currentUserStreakValue,
+    required this.isLoogedIn,
   }) : assert(currentPosition is CurrentStreakPostion);
 
   Widget build(BuildContext context) {
-    final double width = min(75, MediaQuery.of(context).size.width * 0.3);
+    final double width = min(75, MediaQuery.of(context).size.width * 0.2);
+    print(MediaQuery.of(context).size.width);
     final blackBorderColor = Colors.black54;
     return Dialog(
         shape:
@@ -53,12 +57,12 @@ class DailyStreakAlert extends StatelessWidget {
               height: min(MediaQuery.of(context).size.height * .8, 500),
               width: min(MediaQuery.of(context).size.width * .8, 400),
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 36, 10, 10),
+                padding: const EdgeInsets.fromLTRB(8, 36, 8, 8),
                 child: Column(
                   children: [
                     Container(
                         width: MediaQuery.of(context).size.width * .7,
-                        height: 125,
+                        height: 104,
                         padding: EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -90,7 +94,7 @@ class DailyStreakAlert extends StatelessWidget {
                         )),
                     Container(
                         width: MediaQuery.of(context).size.width * .7,
-                        height: 125,
+                        height: 104,
                         padding: EdgeInsets.all(10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -123,7 +127,7 @@ class DailyStreakAlert extends StatelessWidget {
 
                     Container(
                       width: 200,
-                      height: 125,
+                      height: 104,
                       padding: EdgeInsets.all(10),
                       child: DailyStreakItem(
                           dayCount: (currentUserStreakValue >= 7)
@@ -132,8 +136,9 @@ class DailyStreakAlert extends StatelessWidget {
                           selectedIndex: currentPosition.index + 1,
                           prizeMultiplier: dailyPrizeMultiplier),
                     ),
-                    Text(
+                    AutoSizeText(
                       'Come back everyday for new reward',
+                      maxLines: 1,
                     ),
                     SizedBox(
                       height: 10,
@@ -147,14 +152,14 @@ class DailyStreakAlert extends StatelessWidget {
                               EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           alignment: Alignment.center,
                           height: 36,
-                          width: 100,
+                          width: isLoogedIn ? 100 : 200,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(36 / 2),
                             border: Border.all(width: 2, color: cAppThemeColor),
                             color: cAppThemeColor,
                           ),
                           child: AutoSizeText(
-                            'Claim',
+                            isLoogedIn ? 'Claim' : 'Login to Claim',
                             maxLines: 1,
                             style: (TextStyle(color: cWhiteColor)),
                           ),
@@ -208,75 +213,78 @@ class DailyStreakItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      decoration: BoxDecoration(
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black45,
-            blurRadius: 1,
-          )
-        ],
-        borderRadius: BorderRadius.circular(10),
-        color: (selectedIndex == dayCount)
-            ? Colors.teal.shade200
-            : cAppDullThemeColor,
-      ),
-      child: Column(
-        children: [
-          SizedBox(height: 4),
-          Center(
+        width: width,
+        decoration: BoxDecoration(
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: 1,
+            )
+          ],
+          borderRadius: BorderRadius.circular(10),
+          color: (selectedIndex == dayCount)
+              ? Colors.teal.shade200
+              : cAppDullThemeColor,
+        ),
+        child: Stack(
+          children: [
+            Positioned(
+              bottom: 4,
+              left: 0,
+              right: 0,
               child: Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            padding: EdgeInsets.all(4),
-            decoration: BoxDecoration(
-              color: (selectedIndex == dayCount)
-                  ? Colors.teal.shade200
-                  : cAppDullThemeColor,
-            ),
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  AutoSizeText(
-                    'Day $dayCount',
-                    minFontSize: 8,
-                    maxLines: 1,
-                  ),
-                ]),
-          )),
-          SizedBox(height: 4),
-          Spacer(),
-          Container(
-            alignment: Alignment.center,
-            height: 30,
-            child: Image.asset(
-              icCoins,
-              fit: BoxFit.fitHeight,
-            ),
-          ),
-          Spacer(),
-          SizedBox(height: 4),
-          Center(
-              child: Container(
-            padding: EdgeInsets.all(6),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              color: (selectedIndex == dayCount)
-                  ? Colors.teal.shade200
-                  : cAppDullThemeColor,
-            ),
-            child: AutoSizeText(
-              ' +${dayCount * prizeMultiplier} ',
-              minFontSize: 8,
-              maxLines: 1,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
+                alignment: Alignment.center,
+                child: Image.asset(
+                  icCoins,
+                  height: 50,
+                  fit: BoxFit.fitHeight,
+                ),
               ),
             ),
-          )),
-          SizedBox(height: 4),
-        ],
-      ),
-    );
+            // // Center(
+            //   child:
+            Positioned(
+              bottom: 4,
+              left: 0,
+              right: 0,
+              child: Container(
+                alignment: Alignment.center,
+                height: 50,
+                width: width,
+                child: AutoSizeText(
+                  ' +${dayCount * prizeMultiplier} ',
+                  minFontSize: 8,
+                  maxLines: 1,
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
+            // ),
+            Positioned.fill(
+              child: Column(
+                children: [
+                  Center(
+                      child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    padding: EdgeInsets.all(4),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          AutoSizeText(
+                            'Day $dayCount',
+                            minFontSize: 8,
+                            maxLines: 1,
+                          ),
+                        ]),
+                  )),
+                  SizedBox(height: 4),
+                ],
+              ),
+            )
+          ],
+        ));
   }
 }

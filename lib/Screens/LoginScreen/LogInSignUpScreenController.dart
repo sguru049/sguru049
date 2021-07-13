@@ -125,29 +125,36 @@ class LogInSignUpScreenController extends GetxController {
             userController.checkIsWinnerListHasUser();
 
             // Checking and updating user streak
-            if (userController.user.value.lastStreakAddedOn!
-                    .compareTo(Timestamp.now())
-                    .days
-                    .inDays >
-                1) {
-              FirebaseFirestore.instance
-                  .collection(kUserCollectionKey)
-                  .doc(users.first.docId)
-                  .update({
-                kUStreakValue: 0,
-                kULastStreakAddedOn: DateTime.now(),
-              }).then((value) {
-                userController.user.value.streakValue = 0;
-                userController.user.value.lastStreakAddedOn = Timestamp.now();
+
+            final userDateTime =
+                userController.user.value.lastStreakAddedOn!.toDate();
+            if (userDateTime.day == DateTime.now().day &&
+                userDateTime.month == DateTime.now().month &&
+                userDateTime.year == DateTime.now().year) {
+              print('Today\'s streak already done');
+            } else {
+              if ((DateTime.now().day - userDateTime.day) > 1 ||
+                  (DateTime.now().month - userDateTime.month) >= 1 ||
+                  (DateTime.now().year - userDateTime.year) >= 1) {
+                FirebaseFirestore.instance
+                    .collection(kUserCollectionKey)
+                    .doc(users.first.docId)
+                    .update({
+                  kUStreakValue: 0,
+                  kULastStreakAddedOn: DateTime.now(),
+                }).then((value) {
+                  userController.user.value.streakValue = 0;
+                  userController.user.value.lastStreakAddedOn = Timestamp.now();
+                  userController.addStreak();
+                  userController.addTransaction();
+                });
+              } else {
                 userController.addStreak();
                 userController.addTransaction();
-              });
-            } else {
-              userController.addStreak();
-              userController.addTransaction();
-            }
-            //
+              }
+              //
 
+            }
           } else {
             userController.phoneSignInNo = value.user!.phoneNumber;
             userController.firebaseUserId = value.user!.uid;

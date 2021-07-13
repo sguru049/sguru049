@@ -67,7 +67,9 @@ class UserProfileScreenController extends GetxController {
     getDeviceDetails();
     if (isUserSignedIn.value)
       getUser(CookieManager.getCookie(skUserAccessToken));
-    hasToShowStreakAlert();
+    Future.delayed(2.seconds).then((value) {
+      hasToShowStreakAlert();
+    });
     super.onInit();
   }
 
@@ -81,11 +83,10 @@ class UserProfileScreenController extends GetxController {
         print('Today\'s streak already done');
       } else {
         if (user.value.lastStreakAddedOn != null) {
-          if (streakDate
-                  .compareTo(user.value.lastStreakAddedOn!.toDate())
-                  .days
-                  .inDays >
-              1) {
+          final userDateTime = user.value.lastStreakAddedOn!.toDate();
+          if ((DateTime.now().day - userDateTime.day) > 1 ||
+              (DateTime.now().month - userDateTime.month) >= 1 ||
+              (DateTime.now().year - userDateTime.year) >= 1) {
             FirebaseFirestore.instance
                 .collection(kUserCollectionKey)
                 .doc(user.value.docId)
@@ -115,6 +116,7 @@ class UserProfileScreenController extends GetxController {
               context: Get.context!,
               builder: (BuildContext context) {
                 return DailyStreakAlert(
+                  isLoogedIn: hasUser.value,
                   dailyPrizeMultiplier: dailyPrizeIncrement,
                   currentUserStreakValue: user.value.streakValue,
                   currentPosition: (user.value.streakValue >=
