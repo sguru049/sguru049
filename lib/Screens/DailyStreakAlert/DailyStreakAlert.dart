@@ -136,13 +136,7 @@ class DailyStreakAlert extends StatelessWidget {
                           selectedIndex: currentPosition.index + 1,
                           prizeMultiplier: dailyPrizeMultiplier),
                     ),
-                    AutoSizeText(
-                      'Come back everyday for new reward',
-                      maxLines: 1,
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
+                    Spacer(),
                     // Claim button tapped
                     Center(
                       child: MaterialButton(
@@ -165,7 +159,17 @@ class DailyStreakAlert extends StatelessWidget {
                           ),
                         ),
                       ),
-                    )
+                    ),
+                    Spacer(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    AutoSizeText(
+                      'Come back everyday for new reward',
+                      maxLines: 1,
+                      textAlign: TextAlign.center,
+                    ),
+                    Spacer(),
                   ],
                 ),
               ),

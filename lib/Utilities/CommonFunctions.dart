@@ -12,6 +12,7 @@ class CommonFunctions {
     Alert(
       context: context,
       title: sLoginToAvailOffer,
+      onWillPopActive: true,
       style: AlertStyle(
           isCloseButton: false,
           titleStyle: TextStyle(fontSize: 16, color: cAppThemeColor),

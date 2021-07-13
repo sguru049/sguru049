@@ -39,163 +39,169 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Scaffold(
-        bottomNavigationBar: BottomNavigationBar(
-          items: [
-            BottomNavigationBarItem(
-              icon: Image.asset(icBeautyIcon,
-                  height: 22, fit: BoxFit.fitHeight, color: cIconColor),
-              activeIcon: Image.asset(icBeautyIcon,
-                  height: 22, fit: BoxFit.fitHeight, color: cWhiteColor),
-              label: sHomeButtonLabel,
-            ),
-            BottomNavigationBarItem(
-                icon: Image.asset(icSpin2Win,
-                    height: 18, fit: BoxFit.fitHeight, color: cIconColor),
-                activeIcon: Image.asset(icSpin2Win,
-                    height: 18, fit: BoxFit.fitHeight, color: cWhiteColor),
-                label: sSpin2WinLabel),
-            BottomNavigationBarItem(
-                icon: Stack(children: [
-                  Icon(Icons.notifications),
-                  Obx(() {
-                    final hasNotification = (controller
-                            .notificationsScreenController
-                            .hasNotifications
-                            .value &&
-                        controller.notificationsScreenController.notifications
-                                .length !=
-                            0);
+    return WillPopScope(
+      child: Obx(() {
+        return Scaffold(
+          bottomNavigationBar: BottomNavigationBar(
+            items: [
+              BottomNavigationBarItem(
+                icon: Image.asset(icBeautyIcon,
+                    height: 22, fit: BoxFit.fitHeight, color: cIconColor),
+                activeIcon: Image.asset(icBeautyIcon,
+                    height: 22, fit: BoxFit.fitHeight, color: cWhiteColor),
+                label: sHomeButtonLabel,
+              ),
+              BottomNavigationBarItem(
+                  icon: Image.asset(icSpin2Win,
+                      height: 18, fit: BoxFit.fitHeight, color: cIconColor),
+                  activeIcon: Image.asset(icSpin2Win,
+                      height: 18, fit: BoxFit.fitHeight, color: cWhiteColor),
+                  label: sSpin2WinLabel),
+              BottomNavigationBarItem(
+                  icon: Stack(children: [
+                    Icon(Icons.notifications),
+                    Obx(() {
+                      final hasNotification = (controller
+                              .notificationsScreenController
+                              .hasNotifications
+                              .value &&
+                          controller.notificationsScreenController.notifications
+                                  .length !=
+                              0);
 
-                    int unReadNotificationsCount = 0;
+                      int unReadNotificationsCount = 0;
 
-                    for (var n in controller
-                        .notificationsScreenController.notifications) {
-                      if (!n.isRead!.value) {
-                        unReadNotificationsCount++;
+                      for (var n in controller
+                          .notificationsScreenController.notifications) {
+                        if (!n.isRead!.value) {
+                          unReadNotificationsCount++;
+                        }
                       }
-                    }
 
-                    return (hasNotification && unReadNotificationsCount != 0)
-                        ? Positioned(
-                            right: 0,
-                            top: 0,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: cDarkGrayColor),
-                                  color: cWhiteColor,
-                                  shape: BoxShape.circle),
-                              alignment: Alignment.center,
-                              width: 14,
-                              height: 14,
-                              child: AutoSizeText('$unReadNotificationsCount',
-                                  minFontSize: 6,
-                                  style: TextStyle(
-                                      color: cRedColor,
-                                      fontSize: 8,
-                                      fontWeight: FontWeight.w700)),
-                            ))
-                        : SizedBox.shrink();
-                  })
-                ]),
-                label: sNotificationsLabel),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.person), label: sProfileButtonLabel)
-          ],
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: cAppThemeColor,
-          selectedItemColor: cWhiteColor,
-          unselectedItemColor: cDarkGrayColor,
-          showSelectedLabels: true,
-          showUnselectedLabels: false,
-          currentIndex: controller.currentNavigationBarIndex.value,
+                      return (hasNotification && unReadNotificationsCount != 0)
+                          ? Positioned(
+                              right: 0,
+                              top: 0,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: cDarkGrayColor),
+                                    color: cWhiteColor,
+                                    shape: BoxShape.circle),
+                                alignment: Alignment.center,
+                                width: 14,
+                                height: 14,
+                                child: AutoSizeText('$unReadNotificationsCount',
+                                    minFontSize: 6,
+                                    style: TextStyle(
+                                        color: cRedColor,
+                                        fontSize: 8,
+                                        fontWeight: FontWeight.w700)),
+                              ))
+                          : SizedBox.shrink();
+                    })
+                  ]),
+                  label: sNotificationsLabel),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.person), label: sProfileButtonLabel)
+            ],
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: cAppThemeColor,
+            selectedItemColor: cWhiteColor,
+            unselectedItemColor: cDarkGrayColor,
+            showSelectedLabels: true,
+            showUnselectedLabels: false,
+            currentIndex: controller.currentNavigationBarIndex.value,
 
-          // /// When Profile has multiple Login Type
-          // onTap: (value) => controller.currentNavigationBarIndex.value = value,
+            // /// When Profile has multiple Login Type
+            // onTap: (value) => controller.currentNavigationBarIndex.value = value,
 
-          /// When Profile has only one Login Type
-          onTap: (value) {
-            controller.currentNavigationBarIndex.value = value;
-            if (value == 3) {
-              controller.userController.phoneNumberFocusNode.requestFocus();
-            } else {
-              controller.userController.emptyLoginScreenControllers();
-            }
-          },
-        ),
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
+            /// When Profile has only one Login Type
+            onTap: (value) {
+              controller.currentNavigationBarIndex.value = value;
+              if (value == 3) {
+                controller.userController.phoneNumberFocusNode.requestFocus();
+              } else {
+                controller.userController.emptyLoginScreenControllers();
+              }
+            },
+          ),
+          appBar: AppBar(
+            centerTitle: true,
+            title: Text(
+                (controller.currentNavigationBarIndex.value == 0)
+                    ? sHomePageTitle
+                    : (controller.currentNavigationBarIndex.value == 1)
+                        ? sSpin2WinTitle
+                        : (controller.currentNavigationBarIndex.value == 2)
+                            ? sNotificationsTitle
+                            : sMyProfileTitle,
+                style: GoogleFonts.comfortaa()),
+            actions: [
               (controller.currentNavigationBarIndex.value == 0)
-                  ? sHomePageTitle
-                  : (controller.currentNavigationBarIndex.value == 1)
-                      ? sSpin2WinTitle
-                      : (controller.currentNavigationBarIndex.value == 2)
-                          ? sNotificationsTitle
-                          : sMyProfileTitle,
-              style: GoogleFonts.comfortaa()),
-          actions: [
-            (controller.currentNavigationBarIndex.value == 0)
-                ? AnimatedIconButton(icons: [
-                    AnimatedIconItem(
-                        icon: Icon(Icons.pin_drop, color: cWhiteColor),
-                        onPressed: () => controller.changeHomePageType()),
-                    AnimatedIconItem(
-                        icon: Icon(Icons.list, color: cWhiteColor),
-                        onPressed: () => controller.changeHomePageType())
-                  ])
-                : (controller.currentNavigationBarIndex.value == 3 &&
-                        controller.userController.user.value.name != null)
-                    ? MaterialButton(
-                        onPressed: () {
-                          controller.userController.onLogout(context);
-                        },
-                        child: Icon(Icons.logout, color: cWhiteColor))
-                    : SizedBox.shrink()
-          ],
-        ),
-        // ///.... To show alert for new Updated app and clear cache
-        // body: Obx(() {
-        //     if (!controller.isUsingUpdatedVersion.value) {
-        //       Alert(
-        //           onWillPopActive: true,
-        //           style: AlertStyle(
-        //               isCloseButton: false,
-        //               titleStyle: TextStyle(fontSize: 16, color: cAppThemeColor),
-        //               descStyle: TextStyle(fontSize: 14, color: cDarkGrayColor)),
-        //           context: context,
-        //           title: 'New Version Installed',
-        //           desc: 'Please Restart',
-        //           buttons: []).show();
-        //     }
-        body: ConnectivityBuilder(builder: (context, isConnected, status) {
-          return (!isConnected!)
-              ? OfflineScreen()
-              : Obx(() {
-                  return Stack(
-                    children: [
-                      Positioned.fill(
-                        child: (controller.currentNavigationBarIndex.value == 0)
-                            ? _buildMain(context)
-                            : (controller.currentNavigationBarIndex.value == 1)
-                                ? FortuneWheelScreen()
-                                : (controller.currentNavigationBarIndex.value ==
-                                        2)
-                                    ? NotificationsScreen()
-                                    : UserProfileScreen(),
-                      ),
-                      _build100thUserNotification(context),
-                      // _buildBottomSlideNotification(
-                      //   context,
-                      //   'You’re ${controller.userController.ordinal(controller.userController.currentUserCount)} visitor',
-                      // )
-                    ],
-                  );
-                });
-        }),
-      );
-    });
+                  ? AnimatedIconButton(icons: [
+                      AnimatedIconItem(
+                          icon: Icon(Icons.pin_drop, color: cWhiteColor),
+                          onPressed: () => controller.changeHomePageType()),
+                      AnimatedIconItem(
+                          icon: Icon(Icons.list, color: cWhiteColor),
+                          onPressed: () => controller.changeHomePageType())
+                    ])
+                  : (controller.currentNavigationBarIndex.value == 3 &&
+                          controller.userController.user.value.name != null)
+                      ? MaterialButton(
+                          onPressed: () {
+                            controller.userController.onLogout(context);
+                          },
+                          child: Icon(Icons.logout, color: cWhiteColor))
+                      : SizedBox.shrink()
+            ],
+          ),
+          // ///.... To show alert for new Updated app and clear cache
+          // body: Obx(() {
+          //     if (!controller.isUsingUpdatedVersion.value) {
+          //       Alert(
+          //           onWillPopActive: true,
+          //           style: AlertStyle(
+          //               isCloseButton: false,
+          //               titleStyle: TextStyle(fontSize: 16, color: cAppThemeColor),
+          //               descStyle: TextStyle(fontSize: 14, color: cDarkGrayColor)),
+          //           context: context,
+          //           title: 'New Version Installed',
+          //           desc: 'Please Restart',
+          //           buttons: []).show();
+          //     }
+          body: ConnectivityBuilder(builder: (context, isConnected, status) {
+            return (!isConnected!)
+                ? OfflineScreen()
+                : Obx(() {
+                    return Stack(
+                      children: [
+                        Positioned.fill(
+                          child: (controller.currentNavigationBarIndex.value ==
+                                  0)
+                              ? _buildMain(context)
+                              : (controller.currentNavigationBarIndex.value ==
+                                      1)
+                                  ? FortuneWheelScreen()
+                                  : (controller.currentNavigationBarIndex
+                                              .value ==
+                                          2)
+                                      ? NotificationsScreen()
+                                      : UserProfileScreen(),
+                        ),
+                        _build100thUserNotification(context),
+                        // _buildBottomSlideNotification(
+                        //   context,
+                        //   'You’re ${controller.userController.ordinal(controller.userController.currentUserCount)} visitor',
+                        // )
+                      ],
+                    );
+                  });
+          }),
+        );
+      }),
+      onWillPop: () async => false,
+    );
   }
 
   Widget _build100thUserNotification(BuildContext context) {

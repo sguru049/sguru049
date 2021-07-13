@@ -114,6 +114,7 @@ class UserProfileScreenController extends GetxController {
         if (Get.context != null && !isAlertOpened) {
           showDialog(
               context: Get.context!,
+              barrierDismissible: false,
               builder: (BuildContext context) {
                 return DailyStreakAlert(
                   isLoogedIn: hasUser.value,
