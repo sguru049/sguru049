@@ -140,7 +140,7 @@ class DetailsScreen extends StatelessWidget {
                 controller.userController.onFavButtonWhenNotLoggedIn(context,
                     () {
                   final HomeScreenController homeController = Get.find();
-                  homeController.currentNavigationBarIndex.value = 2;
+                  homeController.currentNavigationBarIndex.value = 3;
                   // For Alert Pop
                   Navigator.pop(context);
 

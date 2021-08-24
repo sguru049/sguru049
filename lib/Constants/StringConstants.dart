@@ -11,6 +11,7 @@ const sTbFavTitle = 'Favourites';
 
 // Screens Titles
 const sHomePageTitle = 'BeautySpin';
+const sSalonsPageTitle = 'Salons and Clinics';
 const sMyProfileTitle = 'My Profile';
 const sSearchScreenTitle = 'Search';
 const sFacebookScreenTitle = 'Facebook';
@@ -21,7 +22,7 @@ const sNotificationsTitle = 'Notifications';
 const sPhoneSignUpScreenTitle = 'Connect with Phone';
 const sPhoneLoginScreenTitle = 'Login with Phone No';
 const sReferScreenTitle = 'Refer & Earn';
-const sSpin2WinTitle = 'Spin and Win';
+const sSpin2WinTitle = 'BeautySpin';
 
 // Search screen
 const sSearchScreenHintText = 'Search by name';
@@ -56,10 +57,10 @@ const sCancelButtonText = 'Cancel ';
 const sAllowButtonText = 'Allow ';
 
 // Bottom Bar Button Titles
-const sHomeButtonLabel = 'Home';
+const sHomeButtonLabel = 'Salons';
 const sNotificationsLabel = 'Notifications';
 const sProfileButtonLabel = 'Profile';
-const sSpin2WinLabel = 'Spin2Win';
+const sSpin2WinLabel = 'Home';
 
 // Http
 const sContentType = 'Content-Type';

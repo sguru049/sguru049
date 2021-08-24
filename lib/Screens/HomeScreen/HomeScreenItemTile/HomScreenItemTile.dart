@@ -111,7 +111,7 @@ class HomScreenItemTile extends StatelessWidget {
                 context,
                 () {
                   final HomeScreenController homeScreenController = Get.find();
-                  homeScreenController.currentNavigationBarIndex.value = 2;
+                  homeScreenController.currentNavigationBarIndex.value = 3;
                   Navigator.pop(context);
                 },
               ).show();

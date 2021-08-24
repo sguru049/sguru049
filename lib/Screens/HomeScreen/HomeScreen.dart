@@ -45,18 +45,18 @@ class HomeScreen extends StatelessWidget {
           bottomNavigationBar: BottomNavigationBar(
             items: [
               BottomNavigationBarItem(
+                  icon: Image.asset(icSpin2Win,
+                      height: 18, fit: BoxFit.fitHeight, color: cIconColor),
+                  activeIcon: Image.asset(icSpin2Win,
+                      height: 18, fit: BoxFit.fitHeight, color: cWhiteColor),
+                  label: sSpin2WinLabel),
+              BottomNavigationBarItem(
                 icon: Image.asset(icBeautyIcon,
                     height: 22, fit: BoxFit.fitHeight, color: cIconColor),
                 activeIcon: Image.asset(icBeautyIcon,
                     height: 22, fit: BoxFit.fitHeight, color: cWhiteColor),
                 label: sHomeButtonLabel,
               ),
-              BottomNavigationBarItem(
-                  icon: Image.asset(icSpin2Win,
-                      height: 18, fit: BoxFit.fitHeight, color: cIconColor),
-                  activeIcon: Image.asset(icSpin2Win,
-                      height: 18, fit: BoxFit.fitHeight, color: cWhiteColor),
-                  label: sSpin2WinLabel),
               BottomNavigationBarItem(
                   icon: Stack(children: [
                     Icon(Icons.notifications),
@@ -129,15 +129,15 @@ class HomeScreen extends StatelessWidget {
             centerTitle: true,
             title: Text(
                 (controller.currentNavigationBarIndex.value == 0)
-                    ? sHomePageTitle
+                    ? sSpin2WinTitle
                     : (controller.currentNavigationBarIndex.value == 1)
-                        ? sSpin2WinTitle
+                        ? sSalonsPageTitle
                         : (controller.currentNavigationBarIndex.value == 2)
                             ? sNotificationsTitle
                             : sMyProfileTitle,
                 style: GoogleFonts.comfortaa()),
             actions: [
-              (controller.currentNavigationBarIndex.value == 0)
+              (controller.currentNavigationBarIndex.value == 1)
                   ? AnimatedIconButton(icons: [
                       AnimatedIconItem(
                           icon: Icon(Icons.pin_drop, color: cWhiteColor),
@@ -179,10 +179,10 @@ class HomeScreen extends StatelessWidget {
                         Positioned.fill(
                           child: (controller.currentNavigationBarIndex.value ==
                                   0)
-                              ? _buildMain(context)
+                              ? FortuneWheelScreen()
                               : (controller.currentNavigationBarIndex.value ==
                                       1)
-                                  ? FortuneWheelScreen()
+                                  ? _buildMain(context)
                                   : (controller.currentNavigationBarIndex
                                               .value ==
                                           2)
