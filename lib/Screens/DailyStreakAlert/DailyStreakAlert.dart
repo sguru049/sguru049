@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'dart:math';
 import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -160,10 +161,20 @@ class DailyStreakAlert extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Spacer(),
-                    SizedBox(
-                      height: 10,
+                    GestureDetector(
+                      child: Padding(
+                        padding: EdgeInsets.all(10),
+                        child: Text(
+                          'Login Later',
+                          style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: cAppThemeColor,
+                          ),
+                        ),
+                      ),
+                      onTap: () => Navigator.pop(context),
                     ),
+                    Spacer(),
                     AutoSizeText(
                       'Come back everyday for new reward',
                       maxLines: 1,

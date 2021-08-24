@@ -130,7 +130,9 @@ class UserProfileScreenController extends GetxController {
                       addStreak();
                       addTransaction();
                     } else {
-                      CommonFunctions.onClaimIfUserNotLoggedIn(context);
+                      // take it on login page
+                      HomeScreenController homeScreenController = Get.find();
+                      homeScreenController.currentNavigationBarIndex.value = 3;
                     }
                   },
                 );
