@@ -32,7 +32,7 @@ class FortuneWheelScreenController extends GetxController {
   List<FortuneItem> wheelItems = [
     FortuneItem(
         child: Text(
-          '      Free Beauty\n     Treatment',
+          '       Free Beauty\n      Treatment',
           style: kSpinItemTextStyle,
           textAlign: TextAlign.center,
         ),
@@ -46,7 +46,7 @@ class FortuneWheelScreenController extends GetxController {
         style: FortuneItemStyle(color: spinItem2, borderWidth: 0)),
     FortuneItem(
         child: Text(
-          '     1000 BC',
+          '       50% off\n       on Botox',
           style: kSpinItemTextStyle,
           textAlign: TextAlign.center,
         ),
