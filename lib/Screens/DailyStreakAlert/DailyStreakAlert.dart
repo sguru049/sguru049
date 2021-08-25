@@ -146,7 +146,7 @@ class DailyStreakAlert extends StatelessWidget {
                           padding:
                               EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                           alignment: Alignment.center,
-                          height: 36,
+                          height: 30,
                           width: isLoogedIn ? 100 : 200,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(36 / 2),
@@ -163,7 +163,7 @@ class DailyStreakAlert extends StatelessWidget {
                     ),
                     GestureDetector(
                       child: Padding(
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(2),
                         child: Text(
                           'Login Later',
                           style: TextStyle(

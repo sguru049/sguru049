@@ -34,13 +34,14 @@ class FortuneWheelScreen extends StatelessWidget {
           // Positioned(
           //   child: Image.asset(icBottomSprincle, fit: BoxFit.fill),
           // ),
-          Positioned(
-            height: MediaQuery.of(context).size.height * 0.7,
+          Positioned.fill(
+            // width: MediaQuery.of(context).size.width * 0.,
             child: Center(
               child: Stack(children: [
                 AspectRatio(
                   aspectRatio: 1,
                   child: Container(
+                    // height: MediaQuery.of(context).size.height * .7,
                     alignment: Alignment.center,
                     margin: EdgeInsets.all(context.width / 10),
                     decoration: BoxDecoration(
