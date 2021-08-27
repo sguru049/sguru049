@@ -5,6 +5,7 @@ import 'package:beauty_spin/Utilities/AppTheme.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'FortuneWheelYouWonAlert/YouWonAlert.dart';
 
 class FortuneWheelListItem {
   String name;
@@ -24,9 +25,21 @@ class FortuneWheelScreenController extends GetxController {
   RxDouble rotationValue = 0.0.obs;
   Duration rotationDuration = 1000.milliseconds;
 
+  Rx<Alignment> clickButtonAlignment = Alignment.centerLeft.obs;
+  Duration clickAnimationDuration = 500.milliseconds;
+  bool haveToShowClickAnimation = true;
+
   List<FortuneWheelListItem> wheelScreenOptions = [
     FortuneWheelListItem(name: 'How to Play', onTap: () {}),
     FortuneWheelListItem(name: 'Terms & Conditions', onTap: () {}),
+  ];
+
+  List<String> wheelItemsDeals = [
+    'Free Beauty Treatment',
+    'Better luck next time',
+    '50% off on Botox',
+    '100 BC',
+    '250 BC',
   ];
 
   List<FortuneItem> wheelItems = [
@@ -76,11 +89,35 @@ class FortuneWheelScreenController extends GetxController {
 
   @override
   void onInit() {
+    startAnimateClickButton();
+    // remove this after completion
+    // Future.delayed(1.seconds).then((value) {
+    //   showDialog(
+    //     context: Get.context!,
+    //     // barrierDismissible: false,
+    //     builder: (BuildContext context) {
+    //       return YouWonAlert(
+    //         screenWidth: MediaQuery.of(context).size.width,
+    //         screenHeight: MediaQuery.of(context).size.height,
+    //         wonPrizeText: wheelItemsDeals[3],
+    //       );
+    //     },
+    //   );
+    // });
     super.onInit();
   }
 
-  void onSpin() {
+  void startAnimateClickButton() {
+    Timer.periodic(clickAnimationDuration, (timer) {
+      (clickButtonAlignment.value == Alignment.centerRight)
+          ? clickButtonAlignment.value = Alignment.centerLeft
+          : clickButtonAlignment.value = Alignment.centerRight;
+    });
+  }
+
+  void onSpin(BuildContext context) {
     isStreamActive = true;
+    haveToShowClickAnimation = false;
     rotationValue.value = 200;
     rotationDuration.delay().then((value) {
       rotationDuration = 300.milliseconds;
@@ -118,6 +155,18 @@ class FortuneWheelScreenController extends GetxController {
           5500.milliseconds.delay().then((value) {
             isStreamActive = false;
             rotationDuration = 1000.milliseconds;
+            // TODO:Have to show alert here
+            // showDialog(
+            //   context: Get.context!,
+            //   // barrierDismissible: false,
+            //   builder: (BuildContext context) {
+            //     return YouWonAlert(
+            //       screenWidth: MediaQuery.of(context).size.width,
+            //       screenHeight: MediaQuery.of(context).size.height,
+            //       wonPrizeText: wheelItemsDeals[selecteditem],
+            //     );
+            //   },
+            // );
           });
         });
       });

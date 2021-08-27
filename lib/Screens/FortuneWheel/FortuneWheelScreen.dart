@@ -14,34 +14,17 @@ class FortuneWheelScreen extends StatelessWidget {
       Get.put(FortuneWheelScreenController());
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
-      body:
-          // Stack(children: [
-          //   Positioned.fill(
-          //     child: Image.asset(icBottomSprincle, fit: BoxFit.fill),
-          //   ),
-          //   //   Column(
-          //   //     children: [
-          //   //       Expanded(
-          //   //         flex: 2,
-          //   //         child:
-          //   // Positioned(
-          //   //   child: Image.asset(icSprinkle, fit: BoxFit.fill),
-          //   // ),
-          Stack(
+      body: Stack(
         alignment: Alignment.center,
         children: [
-          // Positioned(
-          //   child: Image.asset(icBottomSprincle, fit: BoxFit.fill),
-          // ),
           Positioned.fill(
-            // width: MediaQuery.of(context).size.width * 0.,
             child: Center(
               child: Stack(children: [
                 AspectRatio(
                   aspectRatio: 1,
                   child: Container(
-                    // height: MediaQuery.of(context).size.height * .7,
                     alignment: Alignment.center,
                     margin: EdgeInsets.all(context.width / 10),
                     decoration: BoxDecoration(
@@ -78,10 +61,10 @@ class FortuneWheelScreen extends StatelessWidget {
             child: GestureDetector(
               child: Center(
                 child: Container(
-                  margin: EdgeInsets.only(left: 10),
+                  margin: EdgeInsets.only(left: (screenWidth > 500) ? 15 : 10),
                   alignment: Alignment.center,
-                  width: 70,
-                  height: 70,
+                  width: screenWidth * (screenWidth > 600 ? 0.12 : 0.2),
+                  height: screenWidth * (screenWidth > 600 ? 0.12 : 0.2),
                   child: Stack(
                     children: [
                       Positioned.fill(
@@ -97,10 +80,14 @@ class FortuneWheelScreen extends StatelessWidget {
                         child: Container(
                           width: 60,
                           height: 55,
-                          margin: EdgeInsets.fromLTRB(0, 5, 10, 5),
+                          margin: EdgeInsets.fromLTRB(
+                              0,
+                              (screenWidth > 500) ? 7.5 : 5,
+                              (screenWidth > 500) ? 15 : 10,
+                              (screenWidth > 500) ? 7.5 : 5),
                           decoration: BoxDecoration(
                             border: Border.all(width: 3.5, color: cWhiteColor),
-                            borderRadius: BorderRadius.circular(30),
+                            borderRadius: BorderRadius.circular(200),
                             gradient: LinearGradient(
                               colors: [
                                 Color.fromRGBO(70, 70, 70, 1),
@@ -125,43 +112,47 @@ class FortuneWheelScreen extends StatelessWidget {
                 ),
               ),
               onTap: () {
-                if (!controller.isStreamActive) controller.onSpin();
+                if (!controller.isStreamActive) controller.onSpin(context);
               },
             ),
-          )
+          ),
+
+          // Positioned.fill(
+          //   child: Center(
+          //     child: Container(
+          //       width: MediaQuery.of(context).size.width * 0.7,
+          //       height: 50,
+          //       child: Row(
+          //         children: [
+          //           // TODO CLick buttonwork
+          //           Expanded(
+          //             child: Obx(() {
+          //               return (controller.haveToShowClickAnimation)
+          //                   ? AnimatedContainer(
+          //                       alignment:
+          //                           controller.clickButtonAlignment.value,
+          //                       duration: controller.clickAnimationDuration,
+          //                       child: Image.asset(
+          //                         icArrow,
+          //                         width:
+          //                             MediaQuery.of(context).size.width * 0.2,
+          //                       ),
+          //                     )
+          //                   : SizedBox();
+          //             }),
+          //           ),
+          //           Container(
+          //             width: MediaQuery.of(context).size.width * 0.1,
+          //             height: 50,
+          //           ),
+          //           Expanded(child: SizedBox()),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
-      // ),
-      // Expanded(
-      //   flex: 1,
-      //   child: ListView.separated(
-      //       itemBuilder: (context, index) {
-      //         return Container(
-      //           padding: EdgeInsets.all(10),
-      //           alignment: Alignment.centerLeft,
-      //           child: MaterialButton(
-      //               child: Text(
-      //                 controller.wheelScreenOptions[index].name,
-      //                 style: TextStyle(
-      //                   color: Colors.blue,
-      //                   decoration: TextDecoration.underline,
-      //                 ),
-      //               ),
-      //               onPressed: () {
-      //                 // TODO :
-      //               }),
-      //         );
-      //       },
-      //       separatorBuilder: (context, index) => Container(
-      //             margin: EdgeInsets.fromLTRB(20, 0, 20, 0),
-      //             height: 0.5,
-      //             color: cMediumGrayColor,
-      //           ),
-      //       itemCount: controller.wheelScreenOptions.length),
-      // )
-      //   ],
-      // ),
-      // ]),
     );
   }
 }

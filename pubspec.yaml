@@ -140,6 +140,7 @@ flutter:
     - assets/Images/bottomSprincle.png
     - assets/Images/balloons.png
     - assets/Images/BeautyIcon.png
+    - assets/Images/Arrow.png
     
     - assets/CongratsAnimation.json
     - assets/BackgroundSplash.json

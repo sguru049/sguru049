@@ -26,6 +26,8 @@ const icSpin2Win = 'assets/Images/Spin2Win.png';
 const icSpinCenterLogo = 'assets/Images/cneterSpinLogo.png';
 const icBeautyIcon = 'assets/Images/BeautyIcon.png';
 
+const icArrow = 'assets/Images/Arrow.png';
+
 const jcCongratsAnimation = 'assets/CongratsAnimation.json';
 const jcBackgroundSplash = 'assets/BackgroundSplash.json';
 
