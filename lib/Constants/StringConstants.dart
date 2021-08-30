@@ -149,6 +149,11 @@ const sEnterName = 'Enter your name';
 const sLogOut = 'Log out';
 const sYes = 'Yes';
 const sNo = 'No';
+
+const sAvailable = 'Available';
+const sUsed = 'Used';
+const sExpired = 'Expired';
+
 // // Contry Code For prod
 // const sCountryCode = '+1';
 

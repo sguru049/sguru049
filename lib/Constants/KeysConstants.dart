@@ -128,5 +128,16 @@ const kWEmail = 'email';
 const kWPhone = 'phone';
 
 // Spin keys
-
 const kLastSpinTimekey = 'LastSpinRecorded';
+
+// Coupons Keys
+const kCouponTitle = 'title';
+const kCouponDesc = 'desc';
+const kCouponQrCode = 'qrCode';
+const kCouponUserId = 'userId';
+const kCouponUserSessionId = 'userSessionId';
+const kCouponStatus = 'Status';
+const kCouponCreatedAt = 'createdAt';
+const kCouponValidTill = 'validTill';
+const kCouponClincsList = 'Clinics';
+const kCouponId = 'couponId';
