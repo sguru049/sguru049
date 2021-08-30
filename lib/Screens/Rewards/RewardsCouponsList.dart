@@ -1,4 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Screens/Rewards/RewardListTile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,7 +25,8 @@ class RewardsCouponsListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Rewards')),
+      // appBar: AppBar(title: Text('Rewards')),
+      backgroundColor: cBackGroundColor,
       body: Obx(() {
         return controller.isGettingCoupons.value
             ? Center(child: CircularProgressIndicator(color: cAppThemeColor))
@@ -31,9 +35,28 @@ class RewardsCouponsListScreen extends StatelessWidget {
                   Container(
                     width: MediaQuery.of(context).size.width,
                     height: 50,
+                    margin: EdgeInsets.only(bottom: 10),
                     child: Row(
-                      children: [],
+                      children: [
+                        RewardsScreenTopBarListButton(title: sAvailable),
+                        RewardsScreenTopBarListButton(title: sUsed),
+                        RewardsScreenTopBarListButton(title: sExpired),
+                      ],
                     ),
+                  ),
+                  Expanded(
+                    child: RefreshIndicator(
+                        child: ListView.builder(
+                          itemBuilder: (context, index) {
+                            return RewardListTile(
+                                data: controller.coupons[index]);
+                          },
+                          itemCount: controller.coupons.length,
+                        ),
+                        onRefresh: () {
+                          controller.getCoupons();
+                          return Future.delayed(300.milliseconds);
+                        }),
                   )
                 ],
               );
@@ -54,10 +77,33 @@ class RewardsScreenTopBarListButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: GestureDetector(
-        child: Container(
-          alignment: Alignment.center,
-          child: Text(title),
-        ),
+        child: Obx(() {
+          bool isSelected =
+              RewardsListTypeFunctions.getRewardsListType(title) ==
+                  controller.selectedList.value;
+          return AnimatedContainer(
+            duration: 300.milliseconds,
+            curve: Curves.easeInOut,
+            alignment: Alignment.center,
+            decoration: BoxDecoration(
+              color: cWhiteColor,
+              border: Border(
+                bottom: BorderSide(
+                  color: isSelected ? cAppThemeColor : Colors.transparent,
+                  width: 4,
+                ),
+              ),
+            ),
+            child: AutoSizeText(
+              title,
+              minFontSize: 10,
+              style: TextStyle(
+                color: isSelected ? cAppThemeColor : cDarkGrayColor,
+                fontWeight: isSelected ? FontWeight.w900 : FontWeight.w700,
+              ),
+            ),
+          );
+        }),
         onTap: () => controller.onRewardListTypeChange(title),
       ),
     );

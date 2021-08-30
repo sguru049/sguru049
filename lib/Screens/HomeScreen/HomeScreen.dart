@@ -9,6 +9,7 @@ import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelScreen.dart';
 import 'package:beauty_spin/Screens/HomeScreen/CitySelector/CitySelector.dart';
 import 'package:beauty_spin/Screens/NotificationsScreen/Notifications.dart';
 import 'package:beauty_spin/Screens/OfflineScreen/OfflineScreen.dart';
+import 'package:beauty_spin/Screens/Rewards/RewardsCouponsList.dart';
 import 'package:beauty_spin/Screens/SearchScreen/SearchScreen.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfile.dart';
 import 'package:beauty_spin/Services/HttpServices/HttpServices.dart';
@@ -58,49 +59,53 @@ class HomeScreen extends StatelessWidget {
                 label: sHomeButtonLabel,
               ),
               BottomNavigationBarItem(
-                  icon: Stack(children: [
-                    Icon(Icons.notifications),
-                    Obx(() {
-                      final hasNotification = (controller
-                              .notificationsScreenController
-                              .hasNotifications
-                              .value &&
-                          controller.notificationsScreenController.notifications
-                                  .length !=
-                              0);
+                icon: Icon(Icons.card_giftcard),
+                label: sRewardButtonLabel,
+              ),
+              // BottomNavigationBarItem(
+              //     icon: Stack(children: [
+              //       Icon(Icons.notifications),
+              //       Obx(() {
+              //         final hasNotification = (controller
+              //                 .notificationsScreenController
+              //                 .hasNotifications
+              //                 .value &&
+              //             controller.notificationsScreenController.notifications
+              //                     .length !=
+              //                 0);
 
-                      int unReadNotificationsCount = 0;
+              //         int unReadNotificationsCount = 0;
 
-                      for (var n in controller
-                          .notificationsScreenController.notifications) {
-                        if (!n.isRead!.value) {
-                          unReadNotificationsCount++;
-                        }
-                      }
+              //         for (var n in controller
+              //             .notificationsScreenController.notifications) {
+              //           if (!n.isRead!.value) {
+              //             unReadNotificationsCount++;
+              //           }
+              //         }
 
-                      return (hasNotification && unReadNotificationsCount != 0)
-                          ? Positioned(
-                              right: 0,
-                              top: 0,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: cDarkGrayColor),
-                                    color: cWhiteColor,
-                                    shape: BoxShape.circle),
-                                alignment: Alignment.center,
-                                width: 14,
-                                height: 14,
-                                child: AutoSizeText('$unReadNotificationsCount',
-                                    minFontSize: 6,
-                                    style: TextStyle(
-                                        color: cRedColor,
-                                        fontSize: 8,
-                                        fontWeight: FontWeight.w700)),
-                              ))
-                          : SizedBox.shrink();
-                    })
-                  ]),
-                  label: sNotificationsLabel),
+              //         return (hasNotification && unReadNotificationsCount != 0)
+              //             ? Positioned(
+              //                 right: 0,
+              //                 top: 0,
+              //                 child: Container(
+              //                   decoration: BoxDecoration(
+              //                       border: Border.all(color: cDarkGrayColor),
+              //                       color: cWhiteColor,
+              //                       shape: BoxShape.circle),
+              //                   alignment: Alignment.center,
+              //                   width: 14,
+              //                   height: 14,
+              //                   child: AutoSizeText('$unReadNotificationsCount',
+              //                       minFontSize: 6,
+              //                       style: TextStyle(
+              //                           color: cRedColor,
+              //                           fontSize: 8,
+              //                           fontWeight: FontWeight.w700)),
+              //                 ))
+              //             : SizedBox.shrink();
+              //       })
+              //     ]),
+              //     label: sNotificationsLabel),
               BottomNavigationBarItem(
                   icon: Icon(Icons.person), label: sProfileButtonLabel)
             ],
@@ -133,7 +138,7 @@ class HomeScreen extends StatelessWidget {
                     : (controller.currentNavigationBarIndex.value == 1)
                         ? sSalonsPageTitle
                         : (controller.currentNavigationBarIndex.value == 2)
-                            ? sNotificationsTitle
+                            ? sRewardsPageTitle
                             : sMyProfileTitle,
                 style: GoogleFonts.comfortaa()),
             actions: [
@@ -186,7 +191,8 @@ class HomeScreen extends StatelessWidget {
                                   : (controller.currentNavigationBarIndex
                                               .value ==
                                           2)
-                                      ? NotificationsScreen()
+                                      // ? NotificationsScreen()
+                                      ? RewardsCouponsListScreen.create()
                                       : UserProfileScreen(),
                         ),
                         _build100thUserNotification(context),

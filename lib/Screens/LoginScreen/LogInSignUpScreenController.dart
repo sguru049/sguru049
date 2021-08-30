@@ -102,6 +102,21 @@ class LogInSignUpScreenController extends GetxController {
           smsCode: userController.otpController.text);
       auth.signInWithCredential(credentials).then((value) {
         CookieManager.addToCookie(skUserAccessToken, value.user!.uid);
+        //
+
+        // Adding user id for all coupons related to user
+        FirebaseFirestore.instance
+            .collection(kCouponsCollectionKey)
+            .where(kCouponUserSessionId,
+                isEqualTo: CookieManager.getCookie(sKSession))
+            .get()
+            .then((docsSnap) {
+          docsSnap.docs.forEach((doc) {
+            doc.reference.update({kCouponUserId: value.user!.uid});
+          });
+        });
+
+        /// adding last spin time and getting user
         FirebaseFirestore.instance
             .collection(kUserCollectionKey)
             .where(kUPhoneNo, isEqualTo: value.user!.phoneNumber)

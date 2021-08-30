@@ -23,6 +23,7 @@ const sPhoneSignUpScreenTitle = 'Connect with Phone';
 const sPhoneLoginScreenTitle = 'Login with Phone No';
 const sReferScreenTitle = 'Refer & Earn';
 const sSpin2WinTitle = 'BeautySpin';
+const sRewardsPageTitle = 'Rewards';
 
 // Search screen
 const sSearchScreenHintText = 'Search by name';
@@ -61,6 +62,7 @@ const sHomeButtonLabel = 'Salons';
 const sNotificationsLabel = 'Notifications';
 const sProfileButtonLabel = 'Profile';
 const sSpin2WinLabel = 'Home';
+const sRewardButtonLabel = 'Rewards';
 
 // Http
 const sContentType = 'Content-Type';
@@ -156,6 +158,8 @@ const sExpired = 'Expired';
 
 // // Contry Code For prod
 // const sCountryCode = '+1';
+// const sCouponPrefix = 'https://beautyspin.app/#/mycoupons/';
 
 // Contry Code For Dev
 const sCountryCode = '+91';
+const sCouponPrefix = 'https://devbeautyspin.web.app/#/mycoupons/';

@@ -279,7 +279,7 @@ class FortuneWheelScreen extends StatelessWidget {
                     )
                   : SizedBox();
             }),
-          )
+          ),
         ],
       ),
     );

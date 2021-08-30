@@ -99,6 +99,7 @@ dependencies:
   animated_rotation: ^2.0.0
 
   custom_timer: ^0.0.6
+  barcode_widget: ^2.0.1
  
 dev_dependencies:
   flutter_test:

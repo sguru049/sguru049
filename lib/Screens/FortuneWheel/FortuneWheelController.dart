@@ -2,6 +2,8 @@ import 'dart:async';
 import 'dart:math';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Constants/StringConstants.dart';
+import 'package:beauty_spin/Models/CouponModel.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
 import 'package:beauty_spin/Services/CookieManager.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
@@ -148,6 +150,20 @@ class FortuneWheelScreenController extends GetxController {
           final int selecteditem =
               items.map((e) => e.name).toList().indexOf(slectionItems[random]);
 
+          if (selecteditem != 1) {
+            // TODO : Have to save data in collection with sessionId
+            CouponModel.saveCouponInFirebase(
+              userId: (userController.hasUser.value)
+                  ? userController.user.value.firebaseUserId!
+                  : '',
+              sessionId: CookieManager.getCookie(sKSession),
+              title: wheelItemsDeals[selecteditem],
+              desc: '',
+              status: 0,
+              validTill: DateTime.now().add(30.days),
+            );
+          }
+
           print(selecteditem);
 
           _fortuneStreamController.add(selecteditem);
@@ -205,14 +221,27 @@ class FortuneWheelScreenController extends GetxController {
     if (lastSpinTimeString != '') {
       DateTime previousLastSpinTime = DateTime.parse(lastSpinTimeString);
 
+      print(lastSpinTimeString);
+
       lastSpinTime = previousLastSpinTime;
       // Checking has same year or not
       if (lastSpinTime.year == DateTime.now().year &&
           lastSpinTime.month == DateTime.now().month) {
         // Checking same day or not
-        if (lastSpinTime.day == DateTime.now().day ||
-            lastSpinTime.add(4.hours).day == DateTime.now().day) {
+        if (lastSpinTime.day == DateTime.now().day) {
           if ((lastSpinTime.hour + 4) - DateTime.now().hour > 0) {
+            isCloseButtonTap.value = true;
+            haveToShowClickAnimation = false;
+          } else {
+            // show spin
+          }
+        } else if (lastSpinTime.add(4.hours).day == DateTime.now().day) {
+          //
+          if (((lastSpinTime.hour + 4) >= 24
+                      ? (lastSpinTime.hour + 4) - 24
+                      : lastSpinTime.hour + 4) -
+                  DateTime.now().hour >
+              0) {
             isCloseButtonTap.value = true;
             haveToShowClickAnimation = false;
           } else {

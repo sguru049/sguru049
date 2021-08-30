@@ -160,19 +160,21 @@ class DailyStreakAlert extends StatelessWidget {
                         ),
                       ),
                     ),
-                    GestureDetector(
-                      child: Padding(
-                        padding: EdgeInsets.all(2),
-                        child: Text(
-                          'Login Later',
-                          style: TextStyle(
-                            decoration: TextDecoration.underline,
-                            color: cAppThemeColor,
+                    (isLoogedIn)
+                        ? SizedBox()
+                        : GestureDetector(
+                            child: Padding(
+                              padding: EdgeInsets.all(2),
+                              child: Text(
+                                'Login Later',
+                                style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  color: cAppThemeColor,
+                                ),
+                              ),
+                            ),
+                            onTap: () => Navigator.pop(context),
                           ),
-                        ),
-                      ),
-                      onTap: () => Navigator.pop(context),
-                    ),
                     Spacer(),
                     AutoSizeText(
                       'Come back everyday for new reward',

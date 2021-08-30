@@ -26,6 +26,8 @@ const kNotifyOnCount = 'notifyOnCount';
 
 const kWalletListKey = 'usersWallets';
 
+const kCouponsCollectionKey = 'usersCoupons';
+
 // Promotion Queue FireBaseKeys
 const kpId = 'id';
 const kpQueued = 'queued';

@@ -1,5 +1,7 @@
 import 'package:beauty_spin/Screens/LoginScreen/PhoneLoginScreen/PhoneLoginAndSignupScreen.dart';
 import 'package:beauty_spin/Screens/ReferralsScreen/Referrals.dart';
+import 'package:beauty_spin/Screens/Rewards/RewardsCouponsList.dart';
+import 'package:beauty_spin/Screens/Rewards/RewardsReedemScreen.dart';
 import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
 import 'package:beauty_spin/Screens/DetailsScreen/DetailsScreen.dart';
 import 'package:beauty_spin/Screens/HomeScreen/HomeScreen.dart';
@@ -43,6 +45,8 @@ class MyMaterialApp extends StatelessWidget {
         Referrals.getPage(),
         PageNotFound.getPage(),
         PhoneLoginAndSignupScreen.getPage(),
+        RewardsCouponsListScreen.getPage(),
+        RewardsReedemScreen.getPage(),
       ],
       unknownRoute: PageNotFound.getPage(),
     );
