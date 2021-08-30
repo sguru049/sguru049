@@ -17,6 +17,7 @@ class UserModel {
   // it can be null
   int streakValue;
   Timestamp? lastStreakAddedOn;
+  String? lastSpinDateTimeString;
 
   UserModel({
     this.docId,
@@ -32,6 +33,7 @@ class UserModel {
     this.walletId,
     required this.streakValue,
     this.lastStreakAddedOn,
+    this.lastSpinDateTimeString,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -48,6 +50,7 @@ class UserModel {
         walletId: json[kUWalletId],
         streakValue: json[kUStreakValue] ?? 0,
         lastStreakAddedOn: json[kULastStreakAddedOn] ?? DateTime.now(),
+        lastSpinDateTimeString: json[kLastSpinTimekey] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -64,5 +67,6 @@ class UserModel {
         kUWalletId: walletId,
         kUStreakValue: streakValue,
         kULastStreakAddedOn: lastStreakAddedOn,
+        kLastSpinTimekey: lastSpinDateTimeString,
       };
 }

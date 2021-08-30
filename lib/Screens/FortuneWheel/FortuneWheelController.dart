@@ -1,7 +1,11 @@
 import 'dart:async';
 import 'dart:math';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
+import 'package:beauty_spin/Constants/KeysConstants.dart';
+import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
+import 'package:beauty_spin/Services/CookieManager.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +21,8 @@ class FortuneWheelListItem {
 }
 
 class FortuneWheelScreenController extends GetxController {
+  final UserProfileScreenController userController = Get.find();
+  //
   final StreamController<int> _fortuneStreamController =
       StreamController<int>.broadcast();
   Stream<int> get fortuneStream => _fortuneStreamController.stream;
@@ -29,6 +35,9 @@ class FortuneWheelScreenController extends GetxController {
   Duration clickAnimationDuration = 500.milliseconds;
   bool haveToShowClickAnimation = true;
 
+  RxBool isCloseButtonTap = false.obs;
+  DateTime lastSpinTime = DateTime(0);
+
   List<FortuneWheelListItem> wheelScreenOptions = [
     FortuneWheelListItem(name: 'How to Play', onTap: () {}),
     FortuneWheelListItem(name: 'Terms & Conditions', onTap: () {}),
@@ -39,6 +48,7 @@ class FortuneWheelScreenController extends GetxController {
     'Better luck next time',
     '50% off on Botox',
     '100 BC',
+    '500 BC',
     '250 BC',
   ];
 
@@ -90,20 +100,9 @@ class FortuneWheelScreenController extends GetxController {
   @override
   void onInit() {
     startAnimateClickButton();
-    // remove this after completion
-    // Future.delayed(1.seconds).then((value) {
-    //   showDialog(
-    //     context: Get.context!,
-    //     // barrierDismissible: false,
-    //     builder: (BuildContext context) {
-    //       return YouWonAlert(
-    //         screenWidth: MediaQuery.of(context).size.width,
-    //         screenHeight: MediaQuery.of(context).size.height,
-    //         wonPrizeText: wheelItemsDeals[3],
-    //       );
-    //     },
-    //   );
-    // });
+    Future.delayed(1.seconds).then((value) {
+      checkTimerAndSet();
+    });
     super.onInit();
   }
 
@@ -149,28 +148,83 @@ class FortuneWheelScreenController extends GetxController {
           final int selecteditem =
               items.map((e) => e.name).toList().indexOf(slectionItems[random]);
 
+          print(selecteditem);
+
           _fortuneStreamController.add(selecteditem);
           rotationDuration = 10.milliseconds;
           rotationValue.value = 0.0;
           5500.milliseconds.delay().then((value) {
             isStreamActive = false;
             rotationDuration = 1000.milliseconds;
-            // TODO:Have to show alert here
-            // showDialog(
-            //   context: Get.context!,
-            //   // barrierDismissible: false,
-            //   builder: (BuildContext context) {
-            //     return YouWonAlert(
-            //       screenWidth: MediaQuery.of(context).size.width,
-            //       screenHeight: MediaQuery.of(context).size.height,
-            //       wonPrizeText: wheelItemsDeals[selecteditem],
-            //     );
-            //   },
-            // );
+            // Save time to local
+            // if login then save time to firebase
+            if (userController.hasUser.value) {
+              FirebaseFirestore.instance
+                  .collection(kUserCollectionKey)
+                  .doc(userController.user.value.docId)
+                  .update({
+                kLastSpinTimekey: DateTime.now().toString(),
+              });
+            }
+            // save time to local
+            CookieManager.addToCookie(
+                kLastSpinTimekey, '${new DateTime.now().toString()}');
+            lastSpinTime = DateTime.now();
+
+            // Alert
+            showDialog(
+              context: context,
+              barrierDismissible: false,
+              builder: (BuildContext context) {
+                return YouWonAlert(
+                  screenWidth: MediaQuery.of(context).size.width,
+                  screenHeight: MediaQuery.of(context).size.height,
+                  wonPrizeText: wheelItemsDeals[selecteditem],
+                  onCloseButton: () {
+                    isCloseButtonTap.value = true;
+                    Navigator.pop(context);
+                  },
+                );
+              },
+            );
           });
         });
       });
     });
+  }
+
+  void checkTimerAndSet() {
+    String lastSpinTimeString = '';
+
+    if (userController.hasUser.value) {
+      lastSpinTimeString = userController.user.value.lastSpinDateTimeString!;
+    } else {
+      lastSpinTimeString = CookieManager.getCookie(kLastSpinTimekey);
+    }
+
+    if (lastSpinTimeString != '') {
+      DateTime previousLastSpinTime = DateTime.parse(lastSpinTimeString);
+
+      lastSpinTime = previousLastSpinTime;
+      // Checking has same year or not
+      if (lastSpinTime.year == DateTime.now().year &&
+          lastSpinTime.month == DateTime.now().month) {
+        // Checking same day or not
+        if (lastSpinTime.day == DateTime.now().day ||
+            lastSpinTime.add(4.hours).day == DateTime.now().day) {
+          if ((lastSpinTime.hour + 4) - DateTime.now().hour > 0) {
+            isCloseButtonTap.value = true;
+            haveToShowClickAnimation = false;
+          } else {
+            // show spin
+          }
+        } else {
+          // show spin
+        }
+      }
+    }
+
+    // print('lastSpinTimeString $lastSpinTimeString');
   }
 
   @override

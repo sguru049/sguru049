@@ -39,7 +39,6 @@ dependencies:
 
   # network image
   cached_network_image: ^3.0.0
-  
   # Firestore
   firebase_auth: ^2.0.0
   firebase_core: ^1.3.0
@@ -99,6 +98,8 @@ dependencies:
   flutter_circular_text: ^0.3.1
   animated_rotation: ^2.0.0
 
+  custom_timer: ^0.0.6
+ 
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -134,6 +135,7 @@ flutter:
     - assets/Images/WhatsappIconImage.png
     - assets/Images/Sprinkles.png
     - assets/Images/Coins.png
+    - assets/Images/Coin.png
     - assets/Images/BackgroundShine.png
     - assets/Images/Spin2Win.png
     - assets/Images/cneterSpinLogo.png
@@ -141,6 +143,8 @@ flutter:
     - assets/Images/balloons.png
     - assets/Images/BeautyIcon.png
     - assets/Images/Arrow.png
+    - assets/Images/shine.jpeg
+    - assets/Images/Gift.png
     
     - assets/CongratsAnimation.json
     - assets/BackgroundSplash.json

@@ -466,6 +466,7 @@ class UserProfileScreenController extends GetxController {
             kUWalletBalance: dailyPrizeIncrement,
             kUStreakValue: 0,
             kULastStreakAddedOn: Timestamp.now(),
+            kLastSpinTimekey: CookieManager.getCookie(kLastSpinTimekey),
           }).then((value) {
             getUser(CookieManager.getCookie(skUserAccessToken));
             isUserSignedIn.value = true;

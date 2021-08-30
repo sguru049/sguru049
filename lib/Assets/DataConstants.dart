@@ -20,13 +20,17 @@ const icWhatsappIconImage = 'assets/Images/WhatsappIconImage.png';
 const icSprinkle = 'assets/Images/Sprinkles.png';
 const icBottomSprincle = 'assets/Images/bottomSprincle.png';
 const icBalloons = 'assets/Images/balloons.png';
+const icCoin = 'assets/Images/Coin.png';
+const icGift = 'assets/Images/Gift.png';
 const icCoins = 'assets/Images/Coins.png';
+
 const icBackgroundShine = 'assets/Images/BackgroundShine.png';
 const icSpin2Win = 'assets/Images/Spin2Win.png';
 const icSpinCenterLogo = 'assets/Images/cneterSpinLogo.png';
 const icBeautyIcon = 'assets/Images/BeautyIcon.png';
 
 const icArrow = 'assets/Images/Arrow.png';
+const icShine = 'assets/Images/shine.jpeg';
 
 const jcCongratsAnimation = 'assets/CongratsAnimation.json';
 const jcBackgroundSplash = 'assets/BackgroundSplash.json';

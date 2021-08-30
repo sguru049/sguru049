@@ -26,6 +26,8 @@ TextStyle get kBlueTextButtonTheme => TextStyle().copyWith(
 TextStyle get kPlaceHolderGrayTextStyle =>
     TextStyle(color: cMediumGrayColor, fontSize: 16);
 
+TextStyle get kArial => GoogleFonts.averiaLibre();
+
 TextStyle get kSpinTextStyle => GoogleFonts.saira()
     //
     .copyWith(color: cWhiteColor);

@@ -1,4 +1,3 @@
-import 'dart:html';
 import 'dart:math';
 import 'dart:ui';
 import 'package:auto_size_text/auto_size_text.dart';
@@ -250,7 +249,7 @@ class DailyStreakItem extends StatelessWidget {
               child: Container(
                 alignment: Alignment.center,
                 child: Image.asset(
-                  icCoins,
+                  icCoin,
                   height: 50,
                   fit: BoxFit.fitHeight,
                 ),

@@ -5,6 +5,8 @@ import 'package:beauty_spin/Assets/DataConstants.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Screens/FortuneWheel/FortuneWheelController.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
+import 'package:beauty_spin/Utilities/BorderText/BorderText.dart';
+import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,7 @@ class FortuneWheelScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: Stack(
         alignment: Alignment.center,
@@ -116,41 +119,179 @@ class FortuneWheelScreen extends StatelessWidget {
               },
             ),
           ),
+          Positioned.fill(
+            child: Center(
+              child: Container(
+                width: MediaQuery.of(context).size.width * 0.7,
+                height: 50,
+                child: Row(
+                  children: [
+                    // TODO CLick buttonwork
+                    Expanded(
+                      child: Obx(() {
+                        return (controller.haveToShowClickAnimation)
+                            ? AnimatedContainer(
+                                alignment:
+                                    controller.clickButtonAlignment.value,
+                                duration: controller.clickAnimationDuration,
+                                child: Image.asset(
+                                  icArrow,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.2,
+                                ),
+                              )
+                            : SizedBox();
+                      }),
+                    ),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.1,
+                      height: 50,
+                    ),
+                    Expanded(child: SizedBox()),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Positioned.fill(
+            child: Obx(() {
+              return (controller.isCloseButtonTap.value)
+                  ? Container(
+                      color: Colors.black.withOpacity(0.5),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Center(
+                              child: AutoSizeText(
+                                'Congratulation'.toUpperCase(),
+                                maxLines: 1,
+                                style: kArial.copyWith(
+                                    color: Colors.amber,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 30,
+                                    shadows: [
+                                      Shadow(
+                                        offset: Offset(1.0, 1.0),
+                                        blurRadius: 2.0,
+                                        color: Colors.amber.shade900,
+                                      ),
+                                    ]),
+                              ),
+                            ),
+                          ),
+                          Expanded(
+                              child: Container(
+                            alignment: Alignment.bottomCenter,
+                            margin: EdgeInsets.all(10),
+                            child: Container(
+                              width: screenWidth * 0.5 > 350
+                                  ? 200
+                                  : screenWidth * 0.44,
+                              height: screenHeight * 0.5 > 400
+                                  ? 50
+                                  : screenHeight * 0.07,
+                              decoration: BoxDecoration(
+                                  border:
+                                      Border.all(width: 4, color: Colors.amber),
+                                  borderRadius: BorderRadius.circular(100),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: cAppThemeColor, blurRadius: 5.0),
+                                  ]),
+                              alignment: Alignment.center,
+                              child: BorderedText(
+                                child: AutoSizeText(
+                                  'Spin Again!',
+                                  maxLines: 1,
+                                  style: kArial.copyWith(
+                                      color: cWhiteColor, letterSpacing: 2),
+                                ),
+                              ),
+                            ),
+                          )),
+                          Expanded(
+                            child: Container(
+                              alignment: Alignment.topCenter,
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                width: screenWidth * 0.5 > 350
+                                    ? 300
+                                    : screenWidth * 0.7,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  border:
+                                      Border.all(width: 4, color: Colors.amber),
+                                  borderRadius: BorderRadius.circular(100),
+                                  gradient: LinearGradient(
+                                    colors: [
+                                      Colors.pink.shade900,
+                                      cAppThemeColor,
+                                      Colors.pink.shade900,
+                                    ],
+                                  ),
+                                  color: cAppDullThemeColor,
+                                ),
+                                child: CustomTimer(
+                                  from: Duration(
+                                    hours: ((controller.lastSpinTime.hour + 3) -
+                                                DateTime.now().hour <
+                                            0)
+                                        ? 0
+                                        : (controller.lastSpinTime.hour + 3) -
+                                            DateTime.now().hour,
+                                    minutes:
+                                        ((controller.lastSpinTime.minute + 59) -
+                                                    DateTime.now().minute <
+                                                0)
+                                            ? 0
+                                            : (controller.lastSpinTime.minute +
+                                                    59) -
+                                                DateTime.now().minute,
+                                    seconds:
+                                        ((controller.lastSpinTime.second + 59) -
+                                                    DateTime.now().second <
+                                                0)
+                                            ? 0
+                                            : (controller.lastSpinTime.second +
+                                                    59) -
+                                                DateTime.now().second,
+                                  ),
+                                  to: Duration(hours: 0),
+                                  onBuildAction: CustomTimerAction.auto_start,
+                                  builder:
+                                      (CustomTimerRemainingTime remaining) {
+                                    if (remaining.hours == '00' &&
+                                        remaining.minutes == '00' &&
+                                        remaining.seconds == '00') {
+                                      controller.isCloseButtonTap.value = false;
+                                      controller.haveToShowClickAnimation =
+                                          true;
+                                    }
 
-          // Positioned.fill(
-          //   child: Center(
-          //     child: Container(
-          //       width: MediaQuery.of(context).size.width * 0.7,
-          //       height: 50,
-          //       child: Row(
-          //         children: [
-          //           // TODO CLick buttonwork
-          //           Expanded(
-          //             child: Obx(() {
-          //               return (controller.haveToShowClickAnimation)
-          //                   ? AnimatedContainer(
-          //                       alignment:
-          //                           controller.clickButtonAlignment.value,
-          //                       duration: controller.clickAnimationDuration,
-          //                       child: Image.asset(
-          //                         icArrow,
-          //                         width:
-          //                             MediaQuery.of(context).size.width * 0.2,
-          //                       ),
-          //                     )
-          //                   : SizedBox();
-          //             }),
-          //           ),
-          //           Container(
-          //             width: MediaQuery.of(context).size.width * 0.1,
-          //             height: 50,
-          //           ),
-          //           Expanded(child: SizedBox()),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          // ),
+                                    return BorderedText(
+                                      child: AutoSizeText(
+                                        'Next Spin  ${remaining.hours}:${remaining.minutes}:${remaining.seconds}',
+                                        maxLines: 1,
+                                        style: kArial.copyWith(
+                                          color: cWhiteColor,
+                                          fontWeight: FontWeight.w900,
+                                          fontSize: 30,
+                                          letterSpacing: 2,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  : SizedBox();
+            }),
+          )
         ],
       ),
     );

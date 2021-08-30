@@ -111,11 +111,37 @@ class LogInSignUpScreenController extends GetxController {
           print('UserLength');
           print(users.length);
           if (users.isNotEmpty) {
+            // Checking last recorded spin and adding in firebase
+            String lastSpinTimeString = '';
+
+            if (users.first.lastSpinDateTimeString != '') {
+              DateTime lastSpinDateTime =
+                  DateTime.parse(users.first.lastSpinDateTimeString!);
+
+              if (lastSpinDateTime.year == DateTime.now().year &&
+                  lastSpinDateTime.month == DateTime.now().month &&
+                  (lastSpinDateTime.day == DateTime.now().day ||
+                      lastSpinDateTime.add(4.hours).day ==
+                          DateTime.now().day)) {
+                lastSpinTimeString = users.first.lastSpinDateTimeString!;
+              } else {
+                lastSpinTimeString = CookieManager.getCookie(kLastSpinTimekey);
+              }
+            } else {
+              lastSpinTimeString = CookieManager.getCookie(kLastSpinTimekey);
+            }
+
             FirebaseFirestore.instance
                 .collection(kUserCollectionKey)
                 .doc(users.first.docId)
-                .update({kUFirebaseUserId: value.user!.uid});
+                .update({
+              kUFirebaseUserId: value.user!.uid,
+              kLastSpinTimekey: lastSpinTimeString,
+            });
             userController.user.value = users.first;
+            userController.user.value.lastSpinDateTimeString =
+                lastSpinTimeString;
+            CookieManager.addToCookie(kLastSpinTimekey, lastSpinTimeString);
             userController.hasUser.value = true;
 
             if (userController.user.value.name!.length > 2)

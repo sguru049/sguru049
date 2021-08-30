@@ -126,3 +126,7 @@ const kWVisitorCount = 'visitorCount';
 const kWIsMailSent = 'isMailSent';
 const kWEmail = 'email';
 const kWPhone = 'phone';
+
+// Spin keys
+
+const kLastSpinTimekey = 'LastSpinRecorded';
