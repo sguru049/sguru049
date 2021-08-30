@@ -126,7 +126,6 @@ class FortuneWheelScreen extends StatelessWidget {
                 height: 50,
                 child: Row(
                   children: [
-                    // TODO CLick buttonwork
                     Expanded(
                       child: Obx(() {
                         return (controller.haveToShowClickAnimation)
@@ -161,55 +160,44 @@ class FortuneWheelScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Expanded(
-                            flex: 2,
-                            child: Center(
-                              child: AutoSizeText(
-                                'Congratulation'.toUpperCase(),
-                                maxLines: 1,
-                                style: kArial.copyWith(
-                                    color: Colors.amber,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 30,
-                                    shadows: [
-                                      Shadow(
-                                        offset: Offset(1.0, 1.0),
-                                        blurRadius: 2.0,
-                                        color: Colors.amber.shade900,
-                                      ),
-                                    ]),
-                              ),
-                            ),
-                          ),
-                          Expanded(
-                              child: Container(
-                            alignment: Alignment.bottomCenter,
-                            margin: EdgeInsets.all(10),
                             child: Container(
-                              width: screenWidth * 0.5 > 350
-                                  ? 200
-                                  : screenWidth * 0.44,
-                              height: screenHeight * 0.5 > 400
-                                  ? 50
-                                  : screenHeight * 0.07,
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(width: 4, color: Colors.amber),
-                                  borderRadius: BorderRadius.circular(100),
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: cAppThemeColor, blurRadius: 5.0),
-                                  ]),
-                              alignment: Alignment.center,
-                              child: BorderedText(
-                                child: AutoSizeText(
-                                  'Spin Again!',
-                                  maxLines: 1,
-                                  style: kArial.copyWith(
-                                      color: cWhiteColor, letterSpacing: 2),
+                              alignment: Alignment.bottomCenter,
+                              margin: EdgeInsets.all(10),
+                              child: Container(
+                                width: screenWidth * 0.5 > 350
+                                    ? 200
+                                    : screenWidth * 0.44,
+                                height: screenHeight * 0.5 > 400
+                                    ? 50
+                                    : screenHeight * 0.07,
+                                decoration: BoxDecoration(
+                                    border: Border.all(
+                                        width: 4, color: Colors.amber),
+                                    borderRadius: BorderRadius.circular(100),
+                                    gradient: LinearGradient(
+                                      colors: [
+                                        Colors.pink.shade900,
+                                        cAppThemeColor,
+                                        Colors.pink.shade900,
+                                      ],
+                                    ),
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: cAppThemeColor,
+                                          blurRadius: 5.0),
+                                    ]),
+                                alignment: Alignment.center,
+                                child: BorderedText(
+                                  child: AutoSizeText(
+                                    'Spin Again!',
+                                    maxLines: 1,
+                                    style: kArial.copyWith(
+                                        color: cWhiteColor, letterSpacing: 2),
+                                  ),
                                 ),
                               ),
                             ),
-                          )),
+                          ),
                           Expanded(
                             child: Container(
                               alignment: Alignment.topCenter,
