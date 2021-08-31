@@ -8,6 +8,7 @@ import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
 import 'package:beauty_spin/Services/CookieManager.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -150,8 +151,9 @@ class FortuneWheelScreenController extends GetxController {
           final int selecteditem =
               items.map((e) => e.name).toList().indexOf(slectionItems[random]);
 
-          if (selecteditem != 1) {
-            // TODO : Have to save data in collection with sessionId
+          // if selected item is a coupon
+          if (selecteditem == 0 || selecteditem == 2) {
+            //  Have to save data in collection with sessionId
             CouponModel.saveCouponInFirebase(
               userId: (userController.hasUser.value)
                   ? userController.user.value.firebaseUserId!
@@ -162,6 +164,16 @@ class FortuneWheelScreenController extends GetxController {
               status: 0,
               validTill: DateTime.now().add(30.days),
             );
+            // if selected item is not better luck nexttime
+          } else if (selecteditem != 1) {
+            //
+            if (CookieManager.isUserLoggedIn()) {
+              addTransaction((wheelItemsDeals[selecteditem] == '100 BC')
+                  ? 100
+                  : (wheelItemsDeals[selecteditem] == '500 BC')
+                      ? 500
+                      : 250);
+            }
           }
 
           print(selecteditem);
@@ -206,6 +218,41 @@ class FortuneWheelScreenController extends GetxController {
           });
         });
       });
+    });
+  }
+
+  void addTransaction(int amount) {
+    // Updating user bal
+    final currentUser = userController.user.value;
+    final userRef = FirebaseFirestore.instance
+        .collection(kUserCollectionKey)
+        .doc(currentUser.docId);
+    userRef.get().then((user) {
+      if (user.data() != null) {
+        final double currentBal = user.data()![kUWalletBalance];
+        currentUser.accountBal!.value = currentBal + amount;
+        userRef.update({kUWalletBalance: currentBal + amount});
+      }
+    });
+
+    // Updating transaction history
+    final docRef = FirebaseFirestore.instance
+        .collection(kWalletListKey)
+        .doc(currentUser.walletId);
+    docRef.get().then((doc) {
+      if (doc.data() != null) {
+        List<dynamic> list = doc.data()![kWalletTransactions];
+        list.add({
+          kWalletTransactionAmount: amount,
+          kWalletTransactionType: 0,
+          kWalletTransactionOn: Timestamp.now()
+        });
+        final double currentBal = doc.data()![kWalletBalance];
+        docRef.update({
+          kWalletTransactions: list,
+          kWalletBalance: currentBal + amount,
+        });
+      }
     });
   }
 

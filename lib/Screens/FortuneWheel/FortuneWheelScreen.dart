@@ -208,9 +208,12 @@ class FortuneWheelScreen extends StatelessWidget {
                                     : screenWidth * 0.7,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  border:
-                                      Border.all(width: 4, color: Colors.amber),
-                                  borderRadius: BorderRadius.circular(100),
+                                  // border:
+                                  //     Border.all(width: 4, color: Colors.amber),
+                                  // borderRadius: BorderRadius.circular(100),
+                                  boxShadow: [
+                                    BoxShadow(spreadRadius: 2, blurRadius: 4)
+                                  ],
                                   gradient: LinearGradient(
                                     colors: [
                                       Colors.pink.shade900,
