@@ -2,6 +2,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:beauty_spin/Constants/ColorConstants.dart';
 import 'package:beauty_spin/Constants/StringConstants.dart';
 import 'package:beauty_spin/Screens/Rewards/RewardListTile.dart';
+import 'package:beauty_spin/Utilities/AppTheme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -45,18 +46,33 @@ class RewardsCouponsListScreen extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: RefreshIndicator(
-                        child: ListView.builder(
-                          itemBuilder: (context, index) {
-                            return RewardListTile(
-                                data: controller.coupons[index]);
-                          },
-                          itemCount: controller.coupons.length,
-                        ),
-                        onRefresh: () {
-                          controller.getCoupons();
-                          return Future.delayed(300.milliseconds);
-                        }),
+                    child: controller.coupons.length == 0
+                        ? Center(
+                            child: Container(
+                              alignment: Alignment.center,
+                              padding: EdgeInsets.all(20),
+                              width: MediaQuery.of(context).size.width,
+                              child: AutoSizeText(
+                                'No\n${RewardsListTypeFunctions.getStringValue(controller.selectedList.value)}\nRewards',
+                                maxLines: 3,
+                                style: kArial.copyWith(
+                                    color: cLightGrayColor, fontSize: 40),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          )
+                        : RefreshIndicator(
+                            child: ListView.builder(
+                              itemBuilder: (context, index) {
+                                return RewardListTile(
+                                    data: controller.coupons[index]);
+                              },
+                              itemCount: controller.coupons.length,
+                            ),
+                            onRefresh: () {
+                              controller.getCoupons();
+                              return Future.delayed(300.milliseconds);
+                            }),
                   )
                 ],
               );

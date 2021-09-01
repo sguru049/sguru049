@@ -246,7 +246,7 @@ class YouWonAlert extends StatelessWidget {
                     color: cAppDullThemeColor,
                   ),
                   child: CustomTimer(
-                    from: Duration(hours: 4),
+                    from: Duration(hours: 6),
                     to: Duration(hours: 0),
                     onBuildAction: CustomTimerAction.auto_start,
                     builder: (CustomTimerRemainingTime remaining) {

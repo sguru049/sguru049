@@ -164,6 +164,7 @@ class FortuneWheelScreen extends StatelessWidget {
                               alignment: Alignment.bottomCenter,
                               margin: EdgeInsets.all(10),
                               child: Container(
+                                padding: EdgeInsets.all(6),
                                 width: screenWidth * 0.5 > 350
                                     ? 200
                                     : screenWidth * 0.44,
@@ -190,9 +191,14 @@ class FortuneWheelScreen extends StatelessWidget {
                                 child: BorderedText(
                                   child: AutoSizeText(
                                     'Spin Again!',
+                                    minFontSize: 10,
                                     maxLines: 1,
                                     style: kArial.copyWith(
-                                        color: cWhiteColor, letterSpacing: 2),
+                                      color: cWhiteColor,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 20,
+                                      letterSpacing: 2,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -206,7 +212,9 @@ class FortuneWheelScreen extends StatelessWidget {
                                 width: screenWidth * 0.5 > 350
                                     ? 300
                                     : screenWidth * 0.7,
-                                height: 50,
+                                height: screenHeight * 0.5 > 400
+                                    ? 50
+                                    : screenHeight * 0.07,
                                 decoration: BoxDecoration(
                                   // border:
                                   //     Border.all(width: 4, color: Colors.amber),
@@ -225,11 +233,11 @@ class FortuneWheelScreen extends StatelessWidget {
                                 ),
                                 child: CustomTimer(
                                   from: Duration(
-                                    hours: ((controller.lastSpinTime.hour + 3) -
+                                    hours: ((controller.lastSpinTime.hour + 5) -
                                                 DateTime.now().hour <
                                             0)
                                         ? 0
-                                        : (controller.lastSpinTime.hour + 3) -
+                                        : (controller.lastSpinTime.hour + 5) -
                                             DateTime.now().hour,
                                     minutes:
                                         ((controller.lastSpinTime.minute + 59) -

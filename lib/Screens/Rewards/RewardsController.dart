@@ -25,18 +25,18 @@ extension RewardsListTypeFunctions on RewardsListType {
     }
   }
 
-  // static String getStringValue(RewardsListType value) {
-  //   switch (value) {
-  //     case RewardsListType.Available:
-  //       return sAvailable;
-  //     case RewardsListType.Used:
-  //       return sUsed;
-  //     case RewardsListType.Expired:
-  //       return sExpired;
-  //     default:
-  //       return sAvailable;
-  //   }
-  // }
+  static String getStringValue(RewardsListType value) {
+    switch (value) {
+      case RewardsListType.Available:
+        return sAvailable;
+      case RewardsListType.Used:
+        return sUsed;
+      case RewardsListType.Expired:
+        return sExpired;
+      default:
+        return sAvailable;
+    }
+  }
 }
 
 /// This controller is used for all reedem process

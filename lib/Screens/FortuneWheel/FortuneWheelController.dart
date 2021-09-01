@@ -8,7 +8,6 @@ import 'package:beauty_spin/Screens/UserProfile/UserProfileController.dart';
 import 'package:beauty_spin/Services/CookieManager.dart';
 import 'package:beauty_spin/Utilities/AppTheme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_fortune_wheel/flutter_fortune_wheel.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
@@ -168,7 +167,7 @@ class FortuneWheelScreenController extends GetxController {
           } else if (selecteditem != 1) {
             //
             if (CookieManager.isUserLoggedIn()) {
-              addTransaction((wheelItemsDeals[selecteditem] == '100 BC')
+              addTransactionIfLogin((wheelItemsDeals[selecteditem] == '100 BC')
                   ? 100
                   : (wheelItemsDeals[selecteditem] == '500 BC')
                       ? 500
@@ -221,7 +220,7 @@ class FortuneWheelScreenController extends GetxController {
     });
   }
 
-  void addTransaction(int amount) {
+  void addTransactionIfLogin(int amount) {
     // Updating user bal
     final currentUser = userController.user.value;
     final userRef = FirebaseFirestore.instance
@@ -256,6 +255,41 @@ class FortuneWheelScreenController extends GetxController {
     });
   }
 
+  // void addTransactionIfNotLogin(int amount) {
+  //   // Updating user bal
+  //   final currentSession = CookieManager.getCookie(sKSession);
+  //   final userRef = FirebaseFirestore.instance
+  //       .collection(kUserCollectionKey)
+  //       .doc(currentUser.docId);
+  //   userRef.get().then((user) {
+  //     if (user.data() != null) {
+  //       final double currentBal = user.data()![kUWalletBalance];
+  //       currentUser.accountBal!.value = currentBal + amount;
+  //       userRef.update({kUWalletBalance: currentBal + amount});
+  //     }
+  //   });
+
+  //   // Updating transaction history
+  //   final docRef = FirebaseFirestore.instance
+  //       .collection(kWalletListKey)
+  //       .doc(currentUser.walletId);
+  //   docRef.get().then((doc) {
+  //     if (doc.data() != null) {
+  //       List<dynamic> list = doc.data()![kWalletTransactions];
+  //       list.add({
+  //         kWalletTransactionAmount: amount,
+  //         kWalletTransactionType: 0,
+  //         kWalletTransactionOn: Timestamp.now()
+  //       });
+  //       final double currentBal = doc.data()![kWalletBalance];
+  //       docRef.update({
+  //         kWalletTransactions: list,
+  //         kWalletBalance: currentBal + amount,
+  //       });
+  //     }
+  //   });
+  // }
+
   void checkTimerAndSet() {
     String lastSpinTimeString = '';
 
@@ -276,17 +310,17 @@ class FortuneWheelScreenController extends GetxController {
           lastSpinTime.month == DateTime.now().month) {
         // Checking same day or not
         if (lastSpinTime.day == DateTime.now().day) {
-          if ((lastSpinTime.hour + 4) - DateTime.now().hour > 0) {
+          if ((lastSpinTime.hour + 6) - DateTime.now().hour > 0) {
             isCloseButtonTap.value = true;
             haveToShowClickAnimation = false;
           } else {
             // show spin
           }
-        } else if (lastSpinTime.add(4.hours).day == DateTime.now().day) {
+        } else if (lastSpinTime.add(6.hours).day == DateTime.now().day) {
           //
-          if (((lastSpinTime.hour + 4) >= 24
-                      ? (lastSpinTime.hour + 4) - 24
-                      : lastSpinTime.hour + 4) -
+          if (((lastSpinTime.hour + 6) >= 24
+                      ? (lastSpinTime.hour + 6) - 24
+                      : lastSpinTime.hour + 6) -
                   DateTime.now().hour >
               0) {
             isCloseButtonTap.value = true;
